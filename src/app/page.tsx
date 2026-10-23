@@ -476,10 +476,31 @@ export default function HomePage() {
 
 
       {/* =========================================================================
-          HERBAL HAIR & SCALP SPOTLIGHT (CORE HERO #2)
+          HERBAL HAIR & SCALP SPOTLIGHT (CORE HERO #2 - PIXEL MATCH TO REFERENCE)
           ========================================================================= */}
-      <section className="py-20 lg:py-28 bg-[#F6F8F5] border-b border-[#E3E8E1]">
-        <Container>
+      <section className="relative py-20 lg:py-28 bg-[#F6F3EC] border-b border-[#E8E2D5] overflow-hidden select-none">
+        
+        {/* Subtle Decorative Botanical Line-Art Branches (Bottom Left and Right) */}
+        <div className="absolute -bottom-6 -left-8 w-64 h-64 pointer-events-none opacity-25 z-0">
+          <svg className="w-full h-full text-[#485642]" viewBox="0 0 200 200" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M20 180 C40 140, 80 110, 140 70" />
+            <path d="M45 150 C35 135, 30 115, 42 105 C55 112, 58 132, 45 150 Z" />
+            <path d="M72 125 C88 115, 102 118, 106 130 C90 138, 78 132, 72 125 Z" />
+            <path d="M95 100 C82 88, 80 72, 92 65 C102 74, 100 90, 95 100 Z" />
+            <path d="M118 78 C135 68, 148 70, 150 82 C135 88, 124 84, 118 78 Z" />
+          </svg>
+        </div>
+        <div className="absolute -bottom-6 -right-8 w-72 h-72 pointer-events-none opacity-25 z-0">
+          <svg className="w-full h-full text-[#485642]" viewBox="0 0 200 200" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M180 180 C160 140, 120 110, 60 70" />
+            <path d="M155 150 C165 135, 170 115, 158 105 C145 112, 142 132, 155 150 Z" />
+            <path d="M128 125 C112 115, 98 118, 94 130 C110 138, 122 132, 128 125 Z" />
+            <path d="M105 100 C118 88, 120 72, 108 65 C98 74, 100 90, 105 100 Z" />
+            <path d="M82 78 C65 68, 52 70, 50 82 C65 88, 76 84, 82 78 Z" />
+          </svg>
+        </div>
+
+        <Container className="relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             
             {/* Visual Column */}
@@ -490,37 +511,47 @@ export default function HomePage() {
               transition={{ duration: 0.6 }}
               className="lg:col-span-6 relative"
             >
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-[#DCE3DB] aspect-[4/3] bg-white group">
+              <div className="relative rounded-[24px] sm:rounded-[28px] overflow-hidden shadow-2xl border border-[#DCE2D6] aspect-[4/3] bg-[#E8E4DA] group">
                 <img
-                  src="https://images.unsplash.com/photo-1608248597359-5613521b38f8?auto=format&fit=crop&w=1200&q=80"
-                  alt="Cold-Pressed Herbal Hair Oil Bottle"
+                  src="/images/hair-oil-hero.jpg"
+                  alt="Pavishna Signature Scalp Nectar Rosemary & Bhringraj"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
                 
-                <div className="absolute top-4 left-4">
-                  <span className="px-3 py-1 rounded-full bg-white/95 backdrop-blur-md text-[#0D3B2E] text-xs font-bold uppercase tracking-wider shadow-sm">
+                {/* Top Left Pill */}
+                <div className="absolute top-4 left-4 z-10">
+                  <span className="px-3.5 py-1.5 rounded-full bg-[#FAF7F0]/95 backdrop-blur-md text-[#283226] text-[9.5px] sm:text-[10px] font-bold uppercase tracking-wider shadow-2xs">
                     Ayurvedic Formulation
                   </span>
                 </div>
 
-                <div className="absolute bottom-5 inset-x-5 text-white">
-                  <span className="text-xs uppercase tracking-widest text-[#E0C097] font-bold block mb-1">
+                {/* Bottom Card Overlay */}
+                <div className="absolute bottom-5 inset-x-5 text-white z-10">
+                  <span className="text-[10px] sm:text-[10.5px] uppercase tracking-[0.2em] text-[#E0C097] font-bold block mb-1">
                     Signature Scalp Nectar
                   </span>
-                  <h3 className="font-display text-2xl font-bold">Rosemary &amp; Bhringraj Scalp Nectar</h3>
-                  <p className="text-xs text-white/80 mt-1 max-w-md">Slow-milled cold extraction with 18 rare Indian scalp-stimulating herbs.</p>
+                  <h3 className="font-display text-xl sm:text-2xl font-medium tracking-tight text-white leading-tight">
+                    Rosemary &amp; Bhringraj Scalp Nectar
+                  </h3>
+                  <p className="text-xs text-white/85 mt-1 max-w-sm font-normal">
+                    Slow-milled cold extraction with 18 rare Indian scalp-stimulating herbs.
+                  </p>
                 </div>
               </div>
 
-              {/* Floating Pill Spec */}
-              <div className="absolute -bottom-6 -right-4 sm:right-6 bg-white p-4 rounded-xl shadow-lg border border-[#DCE3DB] flex items-center gap-3.5">
-                <div className="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-800">
-                  <Droplets className="w-5 h-5" />
+              {/* Floating Extraction Pill Badge */}
+              <div className="absolute -bottom-5 -right-3 sm:-right-4 sm:bottom-4 bg-white/98 backdrop-blur-md py-3 px-4.5 rounded-2xl shadow-xl border border-[#DCE3DB] flex items-center gap-3.5 z-20">
+                <div className="w-9 h-9 rounded-full bg-[#E5F3EB] flex items-center justify-center text-[#1E5638] shrink-0">
+                  <Droplets className="w-4.5 h-4.5" />
                 </div>
                 <div>
-                  <span className="text-[11px] uppercase tracking-wider text-neutral-500 font-bold block">Extraction</span>
-                  <span className="text-xs font-bold text-[#0D3B2E]">Zero-Heat Cold Pressing</span>
+                  <span className="text-[9.5px] uppercase tracking-[0.16em] text-[#556350] font-bold block">
+                    Extraction
+                  </span>
+                  <span className="text-xs font-bold text-[#142E20] block mt-0.5">
+                    Zero-Heat Cold Pressing
+                  </span>
                 </div>
               </div>
             </motion.div>
@@ -533,39 +564,66 @@ export default function HomePage() {
               transition={{ duration: 0.6 }}
               className="lg:col-span-6 space-y-6"
             >
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-900/5 text-emerald-900 text-[11px] font-bold tracking-widest uppercase border border-emerald-900/15">
-                <Sparkles className="w-3.5 h-3.5 text-emerald-700" />
+              {/* Eyebrow Pill */}
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E6EFE4] text-[#1D4A34] text-[10.5px] font-bold tracking-widest uppercase border border-[#CBDBC8]">
+                <Sparkles className="w-3.5 h-3.5 text-[#1D4A34]" />
                 <span>Hair &amp; Follicle Vitality</span>
               </span>
 
-              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl text-[#0D3B2E] font-bold tracking-tight leading-tight">
-                Slow-pressed scalp elixirs for profound root strength.
+              {/* Main Headline with Leaf Flourish */}
+              <h2 className="font-display text-[32px] sm:text-[40px] lg:text-[46px] text-[#19231A] font-medium tracking-tight leading-[1.12]">
+                Slow-pressed{" "}
+                <span className="italic font-normal text-[#1E4A38] inline-flex items-center">
+                  scalp elixirs
+                  <svg
+                    className="w-7 h-7 sm:w-8 sm:h-8 text-[#1E4A38] inline-block -mt-1 ml-2 shrink-0"
+                    viewBox="0 0 36 36"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M5 31 C12 24, 18 18, 31 6" />
+                    <path d="M14 22 C11 18, 11 14, 15 12 C18 15, 17 19, 14 22 Z" fill="currentColor" fillOpacity="0.25" />
+                    <path d="M22 14 C25 10, 29 11, 29 14 C27 18, 23 17, 22 14 Z" fill="currentColor" fillOpacity="0.25" />
+                    <path d="M23 21 C20 25, 22 29, 25 28 C27 25, 26 22, 23 21 Z" fill="currentColor" fillOpacity="0.25" />
+                    <path d="M29 8 C33 7, 35 10, 33 12 C31 11, 29 9, 29 8 Z" fill="currentColor" fillOpacity="0.3" />
+                  </svg>
+                </span>
+                <br />
+                for profound root strength.
               </h2>
 
-              <p className="text-base text-[#374151] leading-relaxed font-normal">
+              <p className="text-[14px] sm:text-[15px] text-[#424A40] leading-relaxed font-normal max-w-xl">
                 Conventional hair oils rely on cheap mineral oils, liquid paraffin, and chemical fragrances that clog hair follicles. Pavishna Scalp Elixirs are made with pure cold-pressed Sesame and Virgin Coconut oils infused for 21 days with hand-plucked Rosemary, Bhringraj, Brahmi, and Amla.
               </p>
 
-              <div className="grid grid-cols-2 gap-4 pt-2">
-                <div className="p-4 rounded-xl bg-white border border-[#E3E8E1]">
-                  <span className="text-xl font-bold text-[#0D3B2E] block">18 Rare Herbs</span>
-                  <span className="text-xs text-[#4A5568] mt-1 block">Authentic Ayurvedic Kashayam infusion</span>
+              {/* Feature Cards matching reference styling */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+                <div className="p-4.5 rounded-2xl bg-[#EFECE5] border border-[#DDD7C8] shadow-2xs">
+                  <span className="text-xl sm:text-[22px] font-bold text-[#142E20] block tracking-tight">18 Rare Herbs</span>
+                  <span className="text-xs text-[#525B50] mt-1 block font-medium">Authentic Ayurvedic Kashayam infusion</span>
                 </div>
-                <div className="p-4 rounded-xl bg-white border border-[#E3E8E1]">
-                  <span className="text-xl font-bold text-[#0D3B2E] block">0% Mineral Oil</span>
-                  <span className="text-xs text-[#4A5568] mt-1 block">Lightweight, non-sticky pure bio-lipids</span>
+                <div className="p-4.5 rounded-2xl bg-[#EFECE5] border border-[#DDD7C8] shadow-2xs">
+                  <span className="text-xl sm:text-[22px] font-bold text-[#142E20] block tracking-tight">0% Mineral Oil</span>
+                  <span className="text-xs text-[#525B50] mt-1 block font-medium">Lightweight, non-sticky pure bio-lipids</span>
                 </div>
               </div>
 
-              <div className="pt-2 flex items-center gap-4">
+              {/* Actions */}
+              <div className="pt-2 flex flex-wrap items-center gap-6">
                 <Link href="/products/rosemary-bhringraj-scalp-nectar">
-                  <Button variant="primary" className="rounded-full bg-[#0D3B2E] hover:bg-emerald-900 text-white px-7 py-3 text-xs uppercase tracking-widest font-bold">
+                  <Button
+                    variant="primary"
+                    className="rounded-full bg-[#133829] hover:bg-[#0E281D] text-white px-7 py-3.5 text-[11px] uppercase tracking-[0.16em] font-bold shadow-sm transition-all hover:scale-102 cursor-pointer"
+                  >
                     Shop Hair Oil Ritual (₹680)
                   </Button>
                 </Link>
                 <Link
                   href="/shop?category=hair-care"
-                  className="text-xs uppercase tracking-wider font-bold text-[#0D3B2E] hover:underline"
+                  className="text-[11.5px] uppercase tracking-[0.16em] font-bold text-[#133829] hover:text-[#0E281D] transition-colors"
                 >
                   View All Hair Care →
                 </Link>
