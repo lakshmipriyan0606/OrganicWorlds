@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {"darkMode": "class", "theme": {"extend": {"colors": {"secondary-fixed": "#d5e8cc", "secondary-container": "#d2e5c9", "border": "#E6E1D7", "on-primary": "#ffffff", "on-error-container": "#93000a", "primary-fixed-dim": "#b2cdbd", "neutral-400": "#AAA99F", "primary-container": "#263d32", "outline": "#727974", "on-surface": "#1a1c18", "forest-900": "#263D32", "on-primary-fixed": "#082016", "surface": "#fafaf3", "on-tertiary": "#ffffff", "primary-fixed": "#cee9d9", "forest-800": "#345343", "surface-container-lowest": "#ffffff", "surface-container-low": "#f4f4ed", "sand-300": "#D7C8B2", "forest-700": "#476653", "surface-container": "#eeeee8", "on-secondary-fixed-variant": "#3b4b36", "on-surface-variant": "#424844", "secondary-fixed-dim": "#b9ccb1", "charcoal-900": "#292B27", "error": "#A4423B", "charcoal-600": "#66685F", "on-tertiary-fixed-variant": "#4c463a", "on-tertiary-fixed": "#1f1b11", "surface-container-high": "#e8e9e2", "warning": "#956C29", "inverse-primary": "#b2cdbd", "surface-dim": "#dadad4", "sage-100": "#E8EDE4", "outline-variant": "#c2c8c3", "tertiary-container": "#3d382d", "on-secondary-container": "#566751", "white": "#FFFFFF", "primary": "#10271d", "inverse-on-surface": "#f1f1eb", "on-background": "#1a1c18", "sage-500": "#82947B", "surface-tint": "#4c6457", "background": "#fafaf3", "surface-bright": "#fafaf3", "secondary": "#52634d", "on-primary-container": "#8ea899", "error-container": "#ffdad6", "tertiary-fixed": "#ebe1d1", "on-secondary-fixed": "#101f0e", "on-error": "#ffffff", "surface-variant": "#e3e3dd", "tertiary": "#272318", "tertiary-fixed-dim": "#cfc5b6", "ivory-100": "#F8F5ED", "on-primary-fixed-variant": "#344c40", "success": "#426B50", "inverse-surface": "#2f312d", "sand-200": "#E7DDCD", "on-secondary": "#ffffff", "on-tertiary-container": "#a9a192", "ivory-50": "#FDFBF6", "surface-container-highest": "#e3e3dd"}, "borderRadius": {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"}, "spacing": {"space-md": "16px", "margin": "64px", "space-lg": "32px", "gutter": "24px", "space-sm": "8px", "space-xs": "4px", "space-xl": "64px"}, "fontFamily": {"body-regular": ["DM Sans"], "section-heading-mobile": ["Cormorant Garamond"], "product-price": ["DM Sans"], "section-heading": ["Cormorant Garamond"], "navigation": ["DM Sans"], "admin-table": ["DM Sans"], "button": ["DM Sans"], "card-heading-mobile": ["Cormorant Garamond"], "hero-display": ["Cormorant Garamond"], "body-lg-mobile": ["DM Sans"], "hero-display-mobile": ["Cormorant Garamond"], "caption": ["DM Sans"], "page-title-mobile": ["Cormorant Garamond"], "page-title": ["Cormorant Garamond"], "body-lg": ["DM Sans"], "card-heading": ["Cormorant Garamond"]}, "fontSize": {"body-regular": ["15px", {"lineHeight": "1.6", "fontWeight": "400"}], "section-heading-mobile": ["28px", {"lineHeight": "1.1", "fontWeight": "500"}], "product-price": ["17px", {"lineHeight": "normal", "fontWeight": "600"}], "section-heading": ["36px", {"lineHeight": "1.1", "fontWeight": "500"}], "navigation": ["13px", {"lineHeight": "normal", "fontWeight": "500"}], "admin-table": ["14px", {"lineHeight": "normal", "fontWeight": "400"}], "button": ["13px", {"lineHeight": "normal", "fontWeight": "600"}], "card-heading-mobile": ["20px", {"lineHeight": "1.1", "fontWeight": "500"}], "hero-display": ["64px", {"lineHeight": "1.1", "fontWeight": "500"}], "body-lg-mobile": ["17px", {"lineHeight": "1.6", "fontWeight": "400"}], "hero-display-mobile": ["42px", {"lineHeight": "1.1", "fontWeight": "500"}], "caption": ["12px", {"lineHeight": "normal", "fontWeight": "400"}], "page-title-mobile": ["34px", {"lineHeight": "1.1", "fontWeight": "500"}], "page-title": ["48px", {"lineHeight": "1.1", "fontWeight": "500"}], "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}], "card-heading": ["23px", {"lineHeight": "1.1", "fontWeight": "500"}]}}}};</script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@100..900&display=swap" rel="stylesheet"/></head><body class="bg-surface font-body-regular text-on-surface"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl"><div class="w-full bg-primary text-on-primary text-caption py-2 text-center tracking-wide">Thoughtfully made. Beautifully lived.</div><div class="h-20 max-w-[1440px] mx-auto px-margin flex items-center justify-between"><div class="flex items-center gap-3"><img alt="Earth & Essence Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0EvcNbMZp9yCnBb38WNyX0PRv47fC4DPVrAFDBDZJxXIpH4VkVBusrYC2Pl2pjuUbHRZDwWwOdJGMyquuckz2nyezhBwXrw_2ns01Heu9XMOXzv30puznWgmnY4bs7kJIUhRz2FaotX9F5HSz4bbvMPBXz4FUwoLVLKGrmL3CHGNcGA0Z1qwM4ZqKqNoDkkbYgGIRDxk1NwMM1iDK1SUXzTuQeNZSg8xORbn-RcuHUGIa1AeUQw_5"/><span class="font-section-heading text-2xl tracking-tight text-primary">Earth & Essence</span></div><nav class="hidden lg:flex items-center gap-8" data-active-classes="text-primary font-bold"><a class="font-navigation text-navigation text-on-surface-variant hover:text-on-surface transition-colors" data-path="shop" href="#">Shop</a><a class="font-navigation text-navigation text-on-surface-variant hover:text-on-surface transition-colors" data-path="candles" href="#">Candles</a><a aria-current="page" class="transition-colors text-primary font-bold" data-path="hair-care" href="#">Hair Care</a><a class="font-navigation text-navigation text-on-surface-variant hover:text-on-surface transition-colors" data-path="collections" href="#">Collections</a><a class="font-navigation text-navigation text-on-surface-variant hover:text-on-surface transition-colors" data-path="our-story" href="#">Our Story</a></nav><div class="flex items-center gap-6"><button aria-label="Search" class="text-on-surface-variant hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">search</span></button><button aria-label="Wishlist" class="text-on-surface-variant hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">favorite</span></button><button aria-label="Cart" class="text-on-surface-variant hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">shopping_bag</span></button><a aria-label="Customer Account" class="text-on-surface-variant hover:text-on-surface transition-colors" data-path="account" href="#"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></a></div></div></header><main class="w-full pt-28 bg-surface"><div class="flex flex-col w-full">
+<!-- Hero Section -->
+<section class="relative w-full bg-surface-container-low py-16 lg:py-24 px-margin overflow-hidden">
+<div class="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-7 flex flex-col gap-6 z-10">
+<div class="flex items-center gap-3">
+<span class="h-[1px] w-12 bg-primary"></span>
+<span class="font-navigation text-navigation uppercase tracking-wider text-primary">Botanical Rituals</span>
+</div>
+<h1 class="font-hero-display text-hero-display-mobile lg:text-hero-display text-primary tracking-tight">
+          Hair & Scalp Wellness
+        </h1>
+<p class="font-body-lg text-body-lg-mobile lg:text-body-lg text-on-surface-variant max-w-xl">
+          Nourishing formulations designed to balance, restore, and strengthen naturally. Rooted in ancient botanical traditions and refined through modern clean science.
+        </p>
+<div class="flex items-center gap-4 pt-4">
+<a class="bg-primary text-on-primary font-button text-button px-8 py-4 rounded hover:bg-forest-800 transition-colors inline-flex items-center gap-2" href="#products-grid">
+            Explore Collection
+            <span class="material-symbols-outlined text-[18px]">arrow_downward</span>
+</a>
+<a class="border border-border text-on-surface font-button text-button px-8 py-4 rounded hover:bg-surface-container transition-colors" href="#editorial">
+            Our Philosophy
+          </a>
+</div>
+</div>
+<div class="lg:col-span-5 relative">
+<div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden shadow-xl">
+<div class="bg-cover bg-center w-full h-full" data-alt="An ethereal close-up shot of rich botanical hair oil being dropped onto fresh green sage and rosemary leaves, with soft, natural morning light filtering through linen curtains, warm ivory and forest green color tones, editorial high-end wellness aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCHFXz_eXkMc3Y1u1QuBKAuMZQVePrW6GY-6b1q0Um-VTz1gUqabcGpeVdw_Rejno2JM0uWxROsKVSwL_afLrTbybQRCVGs3Y-3IhqYlDR2bxyf9LAsLrahWZyrmIPpZFLR6O6isr-PO5-9S99potCwE78nH0FUAMmV_dWJlmReXDcqJGVV-HtAqy4VHG9gA6ef9L-48Ij4bkwia-1Vct8WDLf3XqrGSWGQon-fgTa0N2sAclF3l1lh')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/40 via-transparent to-transparent"></div>
+<div class="absolute bottom-6 left-6 right-6 p-6 bg-surface/90 backdrop-blur-md rounded-lg border border-border/50">
+<span class="font-caption text-caption text-primary uppercase tracking-wider">Featured Elixir</span>
+<h3 class="font-card-heading text-card-heading text-on-surface mt-1">Restorative Scalp Nectar</h3>
+<p class="font-body-regular text-body-regular text-on-surface-variant text-sm mt-1">Infused with wild rosemary and cold-pressed argan.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Filter & Sorting Bar -->
+<div class="sticky top-[108px] z-40 bg-surface/95 backdrop-blur-md border-b border-border" id="products-grid">
+<div class="max-w-[1440px] mx-auto px-margin py-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<!-- Hair Concern Filters -->
+<div class="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 no-scrollbar">
+<span class="font-navigation text-navigation text-on-surface-variant mr-2 shrink-0">Filter by:</span>
+<button class="px-4 py-2 rounded-full bg-sage-100 text-primary font-button text-button shrink-0 transition-colors active-filter" data-filter="all">All Formulas</button>
+<button class="px-4 py-2 rounded-full bg-surface-container hover:bg-sage-100 text-on-surface font-button text-button shrink-0 transition-colors" data-filter="scalp">Scalp Health</button>
+<button class="px-4 py-2 rounded-full bg-surface-container hover:bg-sage-100 text-on-surface font-button text-button shrink-0 transition-colors" data-filter="hydration">Hydration</button>
+<button class="px-4 py-2 rounded-full bg-surface-container hover:bg-sage-100 text-on-surface font-button text-button shrink-0 transition-colors" data-filter="repair">Repair</button>
+<button class="px-4 py-2 rounded-full bg-surface-container hover:bg-sage-100 text-on-surface font-button text-button shrink-0 transition-colors" data-filter="volume">Volume</button>
+</div>
+<!-- Sorting Controls -->
+<div class="flex items-center gap-3 w-full md:w-auto justify-between md:justify-end">
+<span class="font-caption text-caption text-on-surface-variant">Showing 6 products</span>
+<div class="relative">
+<select class="bg-surface border border-border text-on-surface font-button text-button px-4 py-2 rounded focus:outline-none focus:ring-1 focus:ring-primary appearance-none pr-10 cursor-pointer">
+<option>Featured Curations</option>
+<option>Price: Low to High</option>
+<option>Price: High to Low</option>
+<option>Most Effective</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-[18px]">expand_more</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Ingredient Highlights Strip -->
+<section class="w-full bg-ivory-100 py-12 px-margin border-b border-border">
+<div class="max-w-[1440px] mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8">
+<div>
+<span class="font-navigation text-navigation text-primary uppercase tracking-wider">Purity Standards</span>
+<h2 class="font-section-heading text-section-heading-mobile lg:text-section-heading text-primary mt-1">Key Botanical Actives</h2>
+</div>
+<p class="font-body-regular text-body-regular text-on-surface-variant max-w-md mt-2 md:mt-0">Every ingredient is ethically harvested, cold-pressed, and formulated without synthetic sulfates or parabens.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<div class="bg-surface p-6 rounded-xl flex flex-col gap-3 border border-border/60 hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-primary text-[32px]">eco</span>
+<h3 class="font-card-heading text-card-heading text-primary">Wild Rosemary</h3>
+<p class="font-body-regular text-body-regular text-on-surface-variant text-sm">Stimulates microcirculation in follicles to encourage healthy, resilient hair growth.</p>
+</div>
+<div class="bg-surface p-6 rounded-xl flex flex-col gap-3 border border-border/60 hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-primary text-[32px]">water_drop</span>
+<h3 class="font-card-heading text-card-heading text-primary">Cold-Pressed Argan</h3>
+<p class="font-body-regular text-body-regular text-on-surface-variant text-sm">Rich in Vitamin E and essential fatty acids to deeply hydrate and smooth cuticle frizz.</p>
+</div>
+<div class="bg-surface p-6 rounded-xl flex flex-col gap-3 border border-border/60 hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-primary text-[32px]">spa</span>
+<h3 class="font-card-heading text-card-heading text-primary">Camellia Seed Oil</h3>
+<p class="font-body-regular text-body-regular text-on-surface-variant text-sm">A lightweight Japanese botanical that imparts glossy shine without weighing hair down.</p>
+</div>
+<div class="bg-surface p-6 rounded-xl flex flex-col gap-3 border border-border/60 hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-primary text-[32px]">psychology_alt</span>
+<h3 class="font-card-heading text-card-heading text-primary">White Tea Extract</h3>
+<p class="font-body-regular text-body-regular text-on-surface-variant text-sm">Powerful antioxidant protection against environmental stressors and UV damage.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Product Grid -->
+<section class="w-full py-16 lg:py-24 px-margin">
+<div class="max-w-[1440px] mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
+<!-- Product 1 -->
+<div class="flex flex-col group">
+<div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden bg-surface-container mb-4">
+<div class="bg-cover bg-center w-full h-full group-hover:scale-105 transition-transform duration-700" data-alt="An amber glass dropper bottle of botanical hair oil resting on smooth river stones with sprigs of fresh rosemary beside it, soft neutral background, earthy color palette, commercial product photography." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDMf_hsZSxc1IyG4JCNIR2N-Sl59bDmSHw6IqujdQi_l4EqZIApX8SBGBg9TPyrS6G8wB6ouercCcz77ribQan_TqgFxMGkiGp9Q6zvGqzfgFA-NKTqIYjqTtcFVT1_luHY4OLdptA7EWscU5Q2eg8slPxg5AZedQOhRXnfHoF96ifhuv-BIhsFWJnmaA7Oxgg9Z4z4TBFXF0CPW3KVl3cQjXt-f-40CAue9T8DLR7bI52lUmvfSB1G')"></div>
+<span class="absolute top-4 left-4 bg-surface/90 backdrop-blur-md px-3 py-1 rounded text-caption font-caption text-primary">Best Seller</span>
+<button aria-label="Add to Wishlist" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-surface/90 backdrop-blur-md flex items-center justify-center text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+<div class="absolute inset-x-0 bottom-4 px-4 opacity-0 group-hover:opacity-100 transition-opacity flex gap-2">
+<button class="flex-1 bg-primary text-on-primary py-3 rounded font-button text-button hover:bg-forest-800 transition-colors shadow-lg">Quick Add</button>
+</div>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<span class="font-caption text-caption text-on-surface-variant uppercase tracking-wider">Scalp Treatment Oil</span>
+<h3 class="font-card-heading text-card-heading text-on-surface mt-1 group-hover:text-primary transition-colors">Botanical Root Nectar</h3>
+</div>
+<span class="font-product-price text-product-price text-primary">$48.00</span>
+</div>
+<p class="font-body-regular text-body-regular text-on-surface-variant text-sm mt-1">100ml / 3.4 fl oz • Scalp Health & Volume</p>
+</div>
+<!-- Product 2 -->
+<div class="flex flex-col group">
+<div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden bg-surface-container mb-4">
+<div class="bg-cover bg-center w-full h-full group-hover:scale-105 transition-transform duration-700" data-alt="A matte ceramic jar of rich hair mask with a wooden spatula resting on its lid, surrounded by green leaves and soft morning sunlight, minimalist clean beauty editorial style." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAnltLYg88a3SABsPiOe281O1-XBpmHsQfWKDc7ZywNg8oAc4lvS4ruFvUJMH2og5xrDRKTcfwOeaUsIoWToKp08SzRVibuE8XNCALKUgk1eSsgwyUiDLkCgMN2CPrzqu0atwAtCDkiG1gEzzXnp8EtbeW1O5mH-T1FWJU1y8OMWW_QaA5RRrb8a8RaUF8rJ7UaOPCw-iaxHsfSoGzluN4SSP0d7klyUHGcC3XYoMofS69B8hXTixe6')"></div>
+<span class="absolute top-4 left-4 bg-sage-100 text-primary px-3 py-1 rounded text-caption font-caption">Deep Repair</span>
+<button aria-label="Add to Wishlist" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-surface/90 backdrop-blur-md flex items-center justify-center text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+<div class="absolute inset-x-0 bottom-4 px-4 opacity-0 group-hover:opacity-100 transition-opacity flex gap-2">
+<button class="flex-1 bg-primary text-on-primary py-3 rounded font-button text-button hover:bg-forest-800 transition-colors shadow-lg">Quick Add</button>
+</div>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<span class="font-caption text-caption text-on-surface-variant uppercase tracking-wider">Restorative Mask</span>
+<h3 class="font-card-heading text-card-heading text-on-surface mt-1 group-hover:text-primary transition-colors">Camellia & Honey Repair Masque</h3>
+</div>
+<span class="font-product-price text-product-price text-primary">$62.00</span>
+</div>
+<p class="font-body-regular text-body-regular text-on-surface-variant text-sm mt-1">200ml / 6.8 fl oz • Intense Hydration</p>
+</div>
+<!-- Product 3 -->
+<div class="flex flex-col group">
+<div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden bg-surface-container mb-4">
+<div class="bg-cover bg-center w-full h-full group-hover:scale-105 transition-transform duration-700" data-alt="A sleek frosted glass spray bottle with gold pump resting on raw linen fabric, golden hour lighting highlighting botanical hair essence, luxury aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCIJzHfvt9ZW-Ge0A2jzu7QzsBBNvwTBMDSkWf104Bfu-LUB40J_LW_6881sCmmRh1OPnVo_r3GbAOoBLF6ELAsTO_hkJsuOM4FYsu6QqH5Srbicpa4Ytan8wszyjUM0R4-IUl4Y90SPy151oaYKEKBE0yg0UyX5LXmJV8UoS-Mbj4dMXLnCrxLbbzTLaR9q6CHg6hRGeQzriR056irgELKk5LsqjL4fhLVQUxG1ClCW0Q3AyxcniOT')"></div>
+<button aria-label="Add to Wishlist" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-surface/90 backdrop-blur-md flex items-center justify-center text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+<div class="absolute inset-x-0 bottom-4 px-4 opacity-0 group-hover:opacity-100 transition-opacity flex gap-2">
+<button class="flex-1 bg-primary text-on-primary py-3 rounded font-button text-button hover:bg-forest-800 transition-colors shadow-lg">Quick Add</button>
+</div>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<span class="font-caption text-caption text-on-surface-variant uppercase tracking-wider">Daily Hydrating Mist</span>
+<h3 class="font-card-heading text-card-heading text-on-surface mt-1 group-hover:text-primary transition-colors">White Tea & Aloe Hair Elixir</h3>
+</div>
+<span class="font-product-price text-product-price text-primary">$42.00</span>
+</div>
+<p class="font-body-regular text-body-regular text-on-surface-variant text-sm mt-1">150ml / 5.1 fl oz • Lightweight Moisture</p>
+</div>
+<!-- Product 4 -->
+<div class="flex flex-col group">
+<div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden bg-surface-container mb-4">
+<div class="bg-cover bg-center w-full h-full group-hover:scale-105 transition-transform duration-700" data-alt="An amber glass bottle with pipette filled with golden hair treatment oil, set against dark textured slate and green eucalyptus leaves, elegant clean skincare photography." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB3Q4goUpAuVjBhT61fD9qroJ96IeRTJbNbx7uDkEBWdua7W2XTZjlI0OpEUTwSY6NvwSJU4-k5zwDfmYXNqsy9tXAXpOYtP8M2zgpDfqG3gurCXBx3JJ2-rgENzFSQy8QjkEyl7i3gnJcysT9WPtBIoa20SEHPl5B5qPEqOV--g1aaneJqby0KrnTsSBa--0gtFNrZQ-RvW_gfIyZax-j-4FPwYW9CEtE4vP5nPGMMW6Pafjtu7FG7')"></div>
+<span class="absolute top-4 left-4 bg-surface/90 backdrop-blur-md px-3 py-1 rounded text-caption font-caption text-primary">Award Winner</span>
+<button aria-label="Add to Wishlist" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-surface/90 backdrop-blur-md flex items-center justify-center text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+<div class="absolute inset-x-0 bottom-4 px-4 opacity-0 group-hover:opacity-100 transition-opacity flex gap-2">
+<button class="flex-1 bg-primary text-on-primary py-3 rounded font-button text-button hover:bg-forest-800 transition-colors shadow-lg">Quick Add</button>
+</div>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<span class="font-caption text-caption text-on-surface-variant uppercase tracking-wider">Overnight Serum</span>
+<h3 class="font-card-heading text-card-heading text-on-surface mt-1 group-hover:text-primary transition-colors">Nocturnal Scalp Renewal Serum</h3>
+</div>
+<span class="font-product-price text-product-price text-primary">$54.00</span>
+</div>
+<p class="font-body-regular text-body-regular text-on-surface-variant text-sm mt-1">75ml / 2.5 fl oz • Scalp Rejuvenation</p>
+</div>
+<!-- Product 5 -->
+<div class="flex flex-col group">
+<div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden bg-surface-container mb-4">
+<div class="bg-cover bg-center w-full h-full group-hover:scale-105 transition-transform duration-700" data-alt="A sleek minimalist bottle of botanical hair wash and matching treatment oil styled on a marble countertop with natural morning light and soft shadows." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAn4if0_5fgWVGFrSNnXrDBzZSv8no_0aHzUmirxLptodJ391Dx2BDDrV_xlvGrcaqtwITlGZYa1f4Ec9tFsiXC3Q6aBK88AXKBSFC852nbWSZGY6iGDta_u5O-EAMO1i6bEe5B0vMXEwoi3xPLFONB2QzYoA7WERRa5rdm4U_8430obI0jmVRlfvsWT7g8ktd4KRKEQ5AuRfQmSmWWavod7HZaCn9WZofJHdSb0v0mY-sZGpHWujl1')"></div>
+<button aria-label="Add to Wishlist" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-surface/90 backdrop-blur-md flex items-center justify-center text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+<div class="absolute inset-x-0 bottom-4 px-4 opacity-0 group-hover:opacity-100 transition-opacity flex gap-2">
+<button class="flex-1 bg-primary text-on-primary py-3 rounded font-button text-button hover:bg-forest-800 transition-colors shadow-lg">Quick Add</button>
+</div>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<span class="font-caption text-caption text-on-surface-variant uppercase tracking-wider">Balancing Cleanser</span>
+<h3 class="font-card-heading text-card-heading text-on-surface mt-1 group-hover:text-primary transition-colors">Sage & Birch Scalp Bath</h3>
+</div>
+<span class="font-product-price text-product-price text-primary">$38.00</span>
+</div>
+<p class="font-body-regular text-body-regular text-on-surface-variant text-sm mt-1">250ml / 8.4 fl oz • Clarifying & Volume</p>
+</div>
+<!-- Product 6 -->
+<div class="flex flex-col group">
+<div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden bg-surface-container mb-4">
+<div class="bg-cover bg-center w-full h-full group-hover:scale-105 transition-transform duration-700" data-alt="A dark glass jar of strengthening hair butter accented with fresh botanicals on a rustic wooden table, cinematic lighting, editorial wellness design." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDGZx4HPl3wAtYWSbfTe2yhbG9BKLcWnhBqYpuukNN92dbPuXq4Feyrq18QZ_LeMnIDf89lQfCscfMdYbyQ1r9BtA22YGrd83lYielEPGH4cyh22dK64Gp416Xc5B_HGZart0Fu0dE1V7lsIy87AyCSjQ4wE7cWFygI1dexq6kxGZTgbhY_b34x8lD32LOtFiNCWBiVW5XRh93hX_rsejvh-QuQmWeLhOmfAG_SXCjnxOYUBNl4ulHe')"></div>
+<span class="absolute top-4 left-4 bg-sage-100 text-primary px-3 py-1 rounded text-caption font-caption">Limited Batch</span>
+<button aria-label="Add to Wishlist" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-surface/90 backdrop-blur-md flex items-center justify-center text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+<div class="absolute inset-x-0 bottom-4 px-4 opacity-0 group-hover:opacity-100 transition-opacity flex gap-2">
+<button class="flex-1 bg-primary text-on-primary py-3 rounded font-button text-button hover:bg-forest-800 transition-colors shadow-lg">Quick Add</button>
+</div>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<span class="font-caption text-caption text-on-surface-variant uppercase tracking-wider">Fortifying Butter</span>
+<h3 class="font-card-heading text-card-heading text-on-surface mt-1 group-hover:text-primary transition-colors">Shea & Rosemary End Balm</h3>
+</div>
+<span class="font-product-price text-product-price text-primary">$46.00</span>
+</div>
+<p class="font-body-regular text-body-regular text-on-surface-variant text-sm mt-1">120ml / 4.0 fl oz • Split End Repair</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Editorial Content Section -->
+<section class="w-full bg-forest-900 text-on-primary py-24 px-margin relative overflow-hidden" id="editorial">
+<div class="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+<div class="lg:col-span-6 flex flex-col gap-6">
+<span class="font-navigation text-navigation uppercase tracking-widest text-primary-fixed">The Earth & Essence Ritual</span>
+<h2 class="font-section-heading text-section-heading-mobile lg:text-section-heading text-on-primary">
+          Restoring the Connection Between Scalp Health and Vital Hair
+        </h2>
+<p class="font-body-lg text-body-lg text-primary-fixed-dim leading-relaxed">
+          True hair wellness begins at the root. In modern routines, the scalp is often treated as an afterthought—subject to synthetic residues and artificial surfactants that disrupt its natural microbiome.
+        </p>
+<p class="font-body-regular text-body-regular text-primary-fixed-dim/90">
+          Our botanical hair care line is formulated with unrefined plant oils, living floral waters, and wild-harvested adaptogens. By honoring the skin of the scalp with the same intentional care as facial skincare, we foster an environment where hair grows naturally stronger, shinier, and more vibrant.
+        </p>
+<div class="flex items-center gap-6 pt-4">
+<div class="flex flex-col">
+<span class="font-hero-display text-4xl text-on-primary">100%</span>
+<span class="font-caption text-caption text-primary-fixed-dim uppercase tracking-wider mt-1">Natural Actives</span>
+</div>
+<div class="h-12 w-[1px] bg-forest-800"></div>
+<div class="flex flex-col">
+<span class="font-hero-display text-4xl text-on-primary">0%</span>
+<span class="font-caption text-caption text-primary-fixed-dim uppercase tracking-wider mt-1">Synthetic Sulfates</span>
+</div>
+<div class="h-12 w-[1px] bg-forest-800"></div>
+<div class="flex flex-col">
+<span class="font-hero-display text-4xl text-on-primary">Wild</span>
+<span class="font-caption text-caption text-primary-fixed-dim uppercase tracking-wider mt-1">Harvested Herbs</span>
+</div>
+</div>
+</div>
+<div class="lg:col-span-6">
+<div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
+<div class="bg-cover bg-center w-full h-full" data-alt="An expansive, serene view of a botanical greenhouse with rows of lush green medicinal herbs and plants growing under diffused natural light, soft mist in the air, tranquil wellness atmosphere." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD--4pojWEuZMFj4loNVvmHJUpHkhTBgTcIZJxHlgsNrf-pSiCzI6m3VhxfFvzoWzJO_RJu10ymxVsRMqwKGwaBsc9gN7WvldN-Ik3NHv8Hg6tQZtbxy8u76pgTJOemmnRjHwucOdWg9oGQS4To75v2WJgoWEU1Kf5yqOBwCQCO4T5D66xqsXrUzVg8H4dZY7nQgXpVWZ19H9I2vfvbmOnLgyS7J0frETHz5R5R5TBimQNXvc-9BaEN')"></div>
+<div class="absolute inset-0 bg-primary/20"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive Filter Client Script -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const filterButtons = document.querySelectorAll('[data-filter]');
+      filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterButtons.forEach(b => {
+            b.classList.remove('bg-sage-100', 'text-primary', 'active-filter');
+            b.classList.add('bg-surface-container', 'text-on-surface');
+          });
+          btn.classList.remove('bg-surface-container', 'text-on-surface');
+          btn.classList.add('bg-sage-100', 'text-primary', 'active-filter');
+        });
+      });
+    });
+  </script>
+</div></main><footer class="w-full bg-forest-900 text-on-primary py-space-xl"><div class="max-w-[1440px] mx-auto px-margin grid grid-cols-1 md:grid-cols-4 gap-space-lg mb-space-xl"><div class="flex flex-col gap-space-md"><span class="font-section-heading text-2xl tracking-tight">Earth & Essence</span><p class="text-body-regular text-primary-fixed-dim max-w-sm">Botanical wellness and quiet luxury, curated for conscious living and mindful spaces.</p></div><div class="flex flex-col gap-space-sm"><span class="font-navigation text-navigation tracking-wider uppercase text-primary-fixed">Navigation</span><a class="text-body-regular text-primary-fixed-dim hover:text-on-primary transition-colors" href="#">Shop All</a><a class="text-body-regular text-primary-fixed-dim hover:text-on-primary transition-colors" href="#">Candles & Home</a><a class="text-body-regular text-primary-fixed-dim hover:text-on-primary transition-colors" href="#">Hair & Body Care</a><a class="text-body-regular text-primary-fixed-dim hover:text-on-primary transition-colors" href="#">Editorial Collections</a></div><div class="flex flex-col gap-space-sm"><span class="font-navigation text-navigation tracking-wider uppercase text-primary-fixed">Customer Care</span><a class="text-body-regular text-primary-fixed-dim hover:text-on-primary transition-colors" href="#">Shipping & Returns</a><a class="text-body-regular text-primary-fixed-dim hover:text-on-primary transition-colors" href="#">Sustainability</a><a class="text-body-regular text-primary-fixed-dim hover:text-on-primary transition-colors" href="#">Stockists</a><a class="text-body-regular text-primary-fixed-dim hover:text-on-primary transition-colors" href="#">Contact Us</a></div><div class="flex flex-col gap-space-md"><span class="font-navigation text-navigation tracking-wider uppercase text-primary-fixed">Newsletter</span><p class="text-body-regular text-primary-fixed-dim">Receive editorial notes, early access, and seasonal releases.</p><form class="flex gap-2"><input class="bg-forest-800 text-on-primary px-space-md py-3 rounded text-body-regular focus:outline-none focus:ring-1 focus:ring-primary-fixed-dim flex-1" placeholder="Enter your email" type="email"/><button class="bg-surface text-primary px-space-md py-3 rounded font-button text-button hover:bg-surface-container-low transition-colors" type="submit">Join</button></form></div></div><div class="max-w-[1440px] mx-auto px-margin pt-space-md border-t border-forest-800 flex flex-col md:flex-row justify-between items-center text-caption text-primary-fixed-dim"><p>© 2024 Earth & Essence. All rights reserved.</p><div class="flex gap-space-md mt-space-sm md:mt-0"><a class="hover:text-on-primary transition-colors" href="#">Privacy Policy</a><a class="hover:text-on-primary transition-colors" href="#">Terms of Service</a></div></div></footer></body></html>

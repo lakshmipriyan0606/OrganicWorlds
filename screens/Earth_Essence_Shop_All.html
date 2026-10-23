@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {"darkMode": "class", "theme": {"extend": {"colors": {"secondary-fixed": "#d5e8cc", "secondary-container": "#d2e5c9", "border": "#E6E1D7", "on-primary": "#ffffff", "on-error-container": "#93000a", "primary-fixed-dim": "#b2cdbd", "neutral-400": "#AAA99F", "primary-container": "#263d32", "outline": "#727974", "on-surface": "#1a1c18", "forest-900": "#263D32", "on-primary-fixed": "#082016", "surface": "#fafaf3", "on-tertiary": "#ffffff", "primary-fixed": "#cee9d9", "forest-800": "#345343", "surface-container-lowest": "#ffffff", "surface-container-low": "#f4f4ed", "sand-300": "#D7C8B2", "forest-700": "#476653", "surface-container": "#eeeee8", "on-secondary-fixed-variant": "#3b4b36", "on-surface-variant": "#424844", "secondary-fixed-dim": "#b9ccb1", "charcoal-900": "#292B27", "error": "#A4423B", "charcoal-600": "#66685F", "on-tertiary-fixed-variant": "#4c463a", "on-tertiary-fixed": "#1f1b11", "surface-container-high": "#e8e9e2", "warning": "#956C29", "inverse-primary": "#b2cdbd", "surface-dim": "#dadad4", "sage-100": "#E8EDE4", "outline-variant": "#c2c8c3", "tertiary-container": "#3d382d", "on-secondary-container": "#566751", "white": "#FFFFFF", "primary": "#10271d", "inverse-on-surface": "#f1f1eb", "on-background": "#1a1c18", "sage-500": "#82947B", "surface-tint": "#4c6457", "background": "#fafaf3", "surface-bright": "#fafaf3", "secondary": "#52634d", "on-primary-container": "#8ea899", "error-container": "#ffdad6", "tertiary-fixed": "#ebe1d1", "on-secondary-fixed": "#101f0e", "on-error": "#ffffff", "surface-variant": "#e3e3dd", "tertiary": "#272318", "tertiary-fixed-dim": "#cfc5b6", "ivory-100": "#F8F5ED", "on-primary-fixed-variant": "#344c40", "success": "#426B50", "inverse-surface": "#2f312d", "sand-200": "#E7DDCD", "on-secondary": "#ffffff", "on-tertiary-container": "#a9a192", "ivory-50": "#FDFBF6", "surface-container-highest": "#e3e3dd"}, "borderRadius": {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"}, "spacing": {"space-md": "16px", "margin": "64px", "space-lg": "32px", "gutter": "24px", "space-sm": "8px", "space-xs": "4px", "space-xl": "64px"}, "fontFamily": {"body-regular": ["DM Sans"], "section-heading-mobile": ["Cormorant Garamond"], "product-price": ["DM Sans"], "section-heading": ["Cormorant Garamond"], "navigation": ["DM Sans"], "admin-table": ["DM Sans"], "button": ["DM Sans"], "card-heading-mobile": ["Cormorant Garamond"], "hero-display": ["Cormorant Garamond"], "body-lg-mobile": ["DM Sans"], "hero-display-mobile": ["Cormorant Garamond"], "caption": ["DM Sans"], "page-title-mobile": ["Cormorant Garamond"], "page-title": ["Cormorant Garamond"], "body-lg": ["DM Sans"], "card-heading": ["Cormorant Garamond"]}, "fontSize": {"body-regular": ["15px", {"lineHeight": "1.6", "fontWeight": "400"}], "section-heading-mobile": ["28px", {"lineHeight": "1.1", "fontWeight": "500"}], "product-price": ["17px", {"lineHeight": "normal", "fontWeight": "600"}], "section-heading": ["36px", {"lineHeight": "1.1", "fontWeight": "500"}], "navigation": ["13px", {"lineHeight": "normal", "fontWeight": "500"}], "admin-table": ["14px", {"lineHeight": "normal", "fontWeight": "400"}], "button": ["13px", {"lineHeight": "normal", "fontWeight": "600"}], "card-heading-mobile": ["20px", {"lineHeight": "1.1", "fontWeight": "500"}], "hero-display": ["64px", {"lineHeight": "1.1", "fontWeight": "500"}], "body-lg-mobile": ["17px", {"lineHeight": "1.6", "fontWeight": "400"}], "hero-display-mobile": ["42px", {"lineHeight": "1.1", "fontWeight": "500"}], "caption": ["12px", {"lineHeight": "normal", "fontWeight": "400"}], "page-title-mobile": ["34px", {"lineHeight": "1.1", "fontWeight": "500"}], "page-title": ["48px", {"lineHeight": "1.1", "fontWeight": "500"}], "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}], "card-heading": ["23px", {"lineHeight": "1.1", "fontWeight": "500"}]}}}};</script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@100..900&display=swap" rel="stylesheet"/></head><body class="bg-surface font-body-regular text-on-surface"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl"><div class="w-full bg-primary text-on-primary text-caption py-2 text-center tracking-wide">Thoughtfully made. Beautifully lived.</div><div class="h-20 max-w-[1440px] mx-auto px-margin flex items-center justify-between"><div class="flex items-center gap-3"><img alt="Earth & Essence Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0EvcNbMZp9yCnBb38WNyX0PRv47fC4DPVrAFDBDZJxXIpH4VkVBusrYC2Pl2pjuUbHRZDwWwOdJGMyquuckz2nyezhBwXrw_2ns01Heu9XMOXzv30puznWgmnY4bs7kJIUhRz2FaotX9F5HSz4bbvMPBXz4FUwoLVLKGrmL3CHGNcGA0Z1qwM4ZqKqNoDkkbYgGIRDxk1NwMM1iDK1SUXzTuQeNZSg8xORbn-RcuHUGIa1AeUQw_5"/><span class="font-section-heading text-2xl tracking-tight text-primary">Earth & Essence</span></div><nav class="hidden lg:flex items-center gap-8" data-active-classes="text-primary font-bold"><a aria-current="page" class="transition-colors text-primary font-bold" data-path="shop" href="#">Shop</a><a class="font-navigation text-navigation text-on-surface-variant hover:text-on-surface transition-colors" data-path="candles" href="#">Candles</a><a class="font-navigation text-navigation text-on-surface-variant hover:text-on-surface transition-colors" data-path="hair-care" href="#">Hair Care</a><a class="font-navigation text-navigation text-on-surface-variant hover:text-on-surface transition-colors" data-path="collections" href="#">Collections</a><a class="font-navigation text-navigation text-on-surface-variant hover:text-on-surface transition-colors" data-path="our-story" href="#">Our Story</a></nav><div class="flex items-center gap-6"><button aria-label="Search" class="text-on-surface-variant hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">search</span></button><button aria-label="Wishlist" class="text-on-surface-variant hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">favorite</span></button><button aria-label="Cart" class="text-on-surface-variant hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">shopping_bag</span></button><a aria-label="Customer Account" class="text-on-surface-variant hover:text-on-surface transition-colors" data-path="account" href="#"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></a></div></div></header><main class="w-full pt-28 bg-surface"><div class="flex flex-col w-full">
+<div class="max-w-[1440px] mx-auto px-margin w-full pt-8 pb-16">
+<!-- Breadcrumbs & Title Section -->
+<div class="flex flex-col gap-space-sm mb-12">
+<nav class="flex items-center gap-2 text-caption text-charcoal-600">
+<a class="hover:text-on-surface transition-colors" href="#">Home</a>
+<span>/</span>
+<span class="text-on-surface font-medium">Shop All</span>
+</nav>
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-border pb-8">
+<div>
+<h1 class="font-page-title text-page-title text-primary mb-3">All Products</h1>
+<p class="text-body-regular text-charcoal-600 max-w-xl">
+            Immerse your daily rituals in pure botanical luxury. Hand-poured soy candles, nutrient-rich hair elixirs, and atmospheric mist sprays crafted for mindful living.
+          </p>
+</div>
+<div class="flex items-center gap-4 justify-between md:justify-end">
+<span class="text-caption text-charcoal-600 font-medium whitespace-nowrap">Showing 24 botanical essentials</span>
+<div class="relative">
+<select aria-label="Sort products by" class="appearance-none bg-surface-container-low text-body-regular text-on-surface py-2.5 pl-4 pr-10 rounded border border-border focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer">
+<option>Featured</option>
+<option>Price: Low to High</option>
+<option>Price: High to Low</option>
+<option>Newest</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-charcoal-600 pointer-events-none text-[18px]">expand_more</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Active Filter Chips -->
+<div class="flex flex-wrap items-center gap-2 mb-8">
+<span class="text-caption text-charcoal-600 mr-2">Active Filters:</span>
+<div class="inline-flex items-center gap-1.5 bg-sage-100 text-on-surface text-caption px-3 py-1.5 rounded-full">
+<span>Soy Candles</span>
+<button aria-label="Remove Soy Candles filter" class="hover:text-primary transition-colors flex items-center"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</div>
+<div class="inline-flex items-center gap-1.5 bg-sage-100 text-on-surface text-caption px-3 py-1.5 rounded-full">
+<span>In Stock</span>
+<button aria-label="Remove In Stock filter" class="hover:text-primary transition-colors flex items-center"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</div>
+<button class="text-caption text-primary underline hover:text-forest-800 ml-2 font-medium">Clear All</button>
+</div>
+<!-- Main Layout Grid: Sidebar + Product Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-10 items-start">
+<!-- 240px Left Filter Sidebar -->
+<aside class="hidden lg:flex flex-col gap-8 bg-surface-container-low p-6 rounded-lg border border-border sticky top-36">
+<div class="flex items-center justify-between pb-4 border-b border-border">
+<span class="font-navigation text-navigation uppercase tracking-wider text-primary font-bold">Filters</span>
+<span class="material-symbols-outlined text-charcoal-600 text-[20px]">tune</span>
+</div>
+<!-- Categories -->
+<div class="flex flex-col gap-3">
+<span class="font-navigation text-navigation font-bold text-on-surface">Categories</span>
+<div class="flex flex-col gap-2.5 text-body-regular text-charcoal-600">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="w-4 h-4 rounded border-border text-primary focus:ring-0 accent-primary cursor-pointer" type="checkbox"/>
+<span class="group-hover:text-on-surface transition-colors">Soy Candles (8)</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-4 h-4 rounded border-border text-primary focus:ring-0 accent-primary cursor-pointer" type="checkbox"/>
+<span class="group-hover:text-on-surface transition-colors">Botanical Hair Oils (6)</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-4 h-4 rounded border-border text-primary focus:ring-0 accent-primary cursor-pointer" type="checkbox"/>
+<span class="group-hover:text-on-surface transition-colors">Mist Sprays (6)</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-4 h-4 rounded border-border text-primary focus:ring-0 accent-primary cursor-pointer" type="checkbox"/>
+<span class="group-hover:text-on-surface transition-colors">Bath Salts & Soaps (4)</span>
+</label>
+</div>
+</div>
+<!-- Price Range -->
+<div class="flex flex-col gap-3 pt-6 border-t border-border">
+<span class="font-navigation text-navigation font-bold text-on-surface">Price Range</span>
+<div class="flex flex-col gap-3">
+<input class="w-full accent-primary cursor-pointer" max="120" min="10" type="range" value="90"/>
+<div class="flex items-center justify-between text-caption text-charcoal-600">
+<span>$10</span>
+<span>$120</span>
+</div>
+</div>
+</div>
+<!-- Fragrance Notes -->
+<div class="flex flex-col gap-3 pt-6 border-t border-border">
+<span class="font-navigation text-navigation font-bold text-on-surface">Fragrance Notes</span>
+<div class="flex flex-col gap-2.5 text-body-regular text-charcoal-600">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-4 h-4 rounded border-border text-primary focus:ring-0 accent-primary cursor-pointer" type="checkbox"/>
+<span class="group-hover:text-on-surface transition-colors">Cedarwood & Moss</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-4 h-4 rounded border-border text-primary focus:ring-0 accent-primary cursor-pointer" type="checkbox"/>
+<span class="group-hover:text-on-surface transition-colors">White Jasmine</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-4 h-4 rounded border-border text-primary focus:ring-0 accent-primary cursor-pointer" type="checkbox"/>
+<span class="group-hover:text-on-surface transition-colors">Eucalyptus & Sage</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-4 h-4 rounded border-border text-primary focus:ring-0 accent-primary cursor-pointer" type="checkbox"/>
+<span class="group-hover:text-on-surface transition-colors">Bergamot & Amber</span>
+</label>
+</div>
+</div>
+<!-- Availability -->
+<div class="flex flex-col gap-3 pt-6 border-t border-border">
+<span class="font-navigation text-navigation font-bold text-on-surface">Availability</span>
+<div class="flex flex-col gap-2.5 text-body-regular text-charcoal-600">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="w-4 h-4 rounded border-border text-primary focus:ring-0 accent-primary cursor-pointer" type="checkbox"/>
+<span class="group-hover:text-on-surface transition-colors">In Stock (22)</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-4 h-4 rounded border-border text-primary focus:ring-0 accent-primary cursor-pointer" type="checkbox"/>
+<span class="group-hover:text-on-surface transition-colors">Pre-Order (2)</span>
+</label>
+</div>
+</div>
+</aside>
+<!-- Responsive 4-Column Product Grid -->
+<div class="flex flex-col gap-12">
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-x-6 gap-y-10">
+<!-- Product Item 1 -->
+<div class="group flex flex-col gap-3">
+<div class="relative aspect-[4/5] bg-surface-container rounded overflow-hidden border border-border">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Minimalist amber glass jar soy candle with white minimal label on a textured limestone surface, surrounded by dried eucalyptus leaves, soft natural morning window light, high-end botanical product photography, warm ivory and sage tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAarLE1GfqYrRDoRkRnv6P8pInHlogLpQeSnrdokDs1i0JoKRXGEFfBS53aATVP18ke4adsTyPquioRhLsG27nbUYAW76w9jEI8d8NSOnuvCkFmiU0q0D_JW-YQ5Gj-ZvpoAr8lZcx3TXrIdRumyUMFrsZ5e5Pc_N1THGM7COSkyQJrdUxbeh6WC_MiXyryPIKDaVYDTcI0xpvO0fwSlWP2RtJxkdBlrsYXVG2QM_GQMlPbWGhE4eg-"/>
+<div class="absolute top-3 left-3 bg-surface/90 backdrop-blur-sm text-caption text-primary px-2.5 py-1 rounded">Bestseller</div>
+<button aria-label="Add to wishlist" class="absolute top-3 right-3 w-9 h-9 rounded-full bg-surface/90 backdrop-blur-sm flex items-center justify-center text-charcoal-600 hover:text-error transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+<div class="absolute inset-x-3 bottom-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<button class="w-full bg-primary text-on-primary py-2.5 rounded font-button text-button hover:bg-forest-800 transition-colors shadow-md">Quick Add</button>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-caption text-charcoal-600 uppercase tracking-wider">Soy Candle</span>
+<a class="font-card-heading text-card-heading text-on-surface hover:text-primary transition-colors" href="#">Amber Woods & Moss</a>
+<span class="font-product-price text-product-price text-primary">$38.00</span>
+</div>
+</div>
+<!-- Product Item 2 -->
+<div class="group flex flex-col gap-3">
+<div class="relative aspect-[4/5] bg-surface-container rounded overflow-hidden border border-border">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Elegant frosted glass dropper bottle filled with golden botanical hair oil, resting on a rustic wooden board with green herbs, soft editorial lighting, serene minimalist wellness aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4zzzs7_dsTAFKlAASczbf0fmrhtLEITcmCTA3egbBSYrLg5O2JM1al9vEdZlsKSHR2V2oMVpwyicyQ_02PYLss7urkszlJKVBzmvBcos7ehdmOXydbGiu3dQqKkMBhTj_ZbxAX8TYUyNRwT54wZ9RTLqL9zyIraZFopeQfkSss7csU1Jzrc2f_tuuEmw4It2vwfOukR-6GvLtLbxXTYn-tyDCakoe59KxJJBtMtp3T3w5PbYxDuCs"/>
+<button aria-label="Add to wishlist" class="absolute top-3 right-3 w-9 h-9 rounded-full bg-surface/90 backdrop-blur-sm flex items-center justify-center text-charcoal-600 hover:text-error transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+<div class="absolute inset-x-3 bottom-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<button class="w-full bg-primary text-on-primary py-2.5 rounded font-button text-button hover:bg-forest-800 transition-colors shadow-md">Quick Add</button>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-caption text-charcoal-600 uppercase tracking-wider">Hair Care</span>
+<a class="font-card-heading text-card-heading text-on-surface hover:text-primary transition-colors" href="#">Botanical Scalp & Hair Elixir</a>
+<span class="font-product-price text-product-price text-primary">$46.00</span>
+</div>
+</div>
+<!-- Product Item 3 -->
+<div class="group flex flex-col gap-3">
+<div class="relative aspect-[4/5] bg-surface-container rounded overflow-hidden border border-border">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Clear glass mist spray bottle with fine black pump on linen fabric background, morning sun filtering through leaves, clean luxury wellness product shot." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUpJ3mZUJ9wgR_3cp9piY6VRmZMGyQRKMGXNa5N8rSOD7OC9iw9IW5JZGwiByjH7PhmJ_vM4Nwd-mEvkEQX_1QoUe0cAa3WvrnSvgi5nvEipaUUm88P9Qwv0w3g4A9JoxfAxPW_fZmazPbyiWjI7rFsR-meDSK01URWOkcHk3ym02XVUIrPf8WnEYrLvq7Aihvf0zcaQNBJeI9CsC26B01cHA1vx5Mz8ThiNoCt7eaeOCVe9rJTOXX"/>
+<div class="absolute top-3 left-3 bg-sage-100 text-on-surface text-caption px-2.5 py-1 rounded">New</div>
+<button aria-label="Add to wishlist" class="absolute top-3 right-3 w-9 h-9 rounded-full bg-surface/90 backdrop-blur-sm flex items-center justify-center text-charcoal-600 hover:text-error transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+<div class="absolute inset-x-3 bottom-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<button class="w-full bg-primary text-on-primary py-2.5 rounded font-button text-button hover:bg-forest-800 transition-colors shadow-md">Quick Add</button>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-caption text-charcoal-600 uppercase tracking-wider">Mist Spray</span>
+<a class="font-card-heading text-card-heading text-on-surface hover:text-primary transition-colors" href="#">Eucalyptus Dew Atmosphere Mist</a>
+<span class="font-product-price text-product-price text-primary">$32.00</span>
+</div>
+</div>
+<!-- Product Item 4 -->
+<div class="group flex flex-col gap-3">
+<div class="relative aspect-[4/5] bg-surface-container rounded overflow-hidden border border-border">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Hand-poured ceramic vessel soy candle with subtle cream glaze, placed next to smooth river stones on a dark slate background, moody elegant lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRVrSZ6wkmGBN5uGkdEMu10CVly2rZliYyVkAO6JBJOJyW4LVTjE5Y5WdpazXTA3X1s89Fp63EdZNX8tgB_98pRK_xI9YXkMKPBhTAzdw2biMUYUQiij2VuwbnFC7oYFEFByQR6gkKlhbLfTagJmzYfj_z72jzKKgQtq9jYBTorhcQhfLyd1_EnAmqisqCfnaBGYa9aP4epU6hkoWqCezArxNZ-89ruQ7GYsVJjkXrAc4kPSPD2vvw"/>
+<button aria-label="Add to wishlist" class="absolute top-3 right-3 w-9 h-9 rounded-full bg-surface/90 backdrop-blur-sm flex items-center justify-center text-charcoal-600 hover:text-error transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+<div class="absolute inset-x-3 bottom-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<button class="w-full bg-primary text-on-primary py-2.5 rounded font-button text-button hover:bg-forest-800 transition-colors shadow-md">Quick Add</button>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-caption text-charcoal-600 uppercase tracking-wider">Soy Candle</span>
+<a class="font-card-heading text-card-heading text-on-surface hover:text-primary transition-colors" href="#">Wild Sage & Fig Ceramic Candle</a>
+<span class="font-product-price text-product-price text-primary">$52.00</span>
+</div>
+</div>
+<!-- Product Item 5 -->
+<div class="group flex flex-col gap-3">
+<div class="relative aspect-[4/5] bg-surface-container rounded overflow-hidden border border-border">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Dark glass bottle of nourishing botanical hair treatment oil with minimalist label, resting on an oak shelf with dried wildflowers." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMeiHHA1OL1XhKemVwsi2QHM3yPFneUJPFKG4cVwSK8mETwm4zFaGYRKagc5BOVzkbvj-wkfkLAUlDJ61FftBZJguTHP4bgwkL6v_xEoHPyuEPQaaoQsLBFCOgwx_7y6ubCS1cI27sGEwTw_RdkwZN2Wv6S1-L0MNez2BQv-QLqwx0Sfqp9WP5HB2vEuCLmoLqtCbZCGYsrLOHIktsREsNN8PIyBu_RxWQG5u7hqk6eA_95CCTgYe1"/>
+<button aria-label="Add to wishlist" class="absolute top-3 right-3 w-9 h-9 rounded-full bg-surface/90 backdrop-blur-sm flex items-center justify-center text-charcoal-600 hover:text-error transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+<div class="absolute inset-x-3 bottom-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<button class="w-full bg-primary text-on-primary py-2.5 rounded font-button text-button hover:bg-forest-800 transition-colors shadow-md">Quick Add</button>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-caption text-charcoal-600 uppercase tracking-wider">Hair Care</span>
+<a class="font-card-heading text-card-heading text-on-surface hover:text-primary transition-colors" href="#">Camellia & Jasmine Lustre Hair Oil</a>
+<span class="font-product-price text-product-price text-primary">$48.00</span>
+</div>
+</div>
+<!-- Product Item 6 -->
+<div class="group flex flex-col gap-3">
+<div class="relative aspect-[4/5] bg-surface-container rounded overflow-hidden border border-border">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Amber glass spray bottle for linen and room freshener, minimalist aesthetic with soft morning shadows on a white wall." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnjJaNRnO3ZFHYr6hnrZNDjK7m66ifc_3VhCeuEqLxsJtS6XqIyDJiG2qSt9kd5Lm7qDWlgcomr5slsK2LRxvgN2seF3Wnd-0rrEDX4XRK8Ae7QWYweY6cnUTJcOkkGTHFJW__0JSpKT88s8Az8JVXtb-t2ZO9SqpXpRMTX5P66o-n37SYKDXX9czqSxFvPzk5_hSzn2UAxC3fkF7qr8yfs3RMnIXF7ikOBXqlEXB9C4f5VThy0bCY"/>
+<button aria-label="Add to wishlist" class="absolute top-3 right-3 w-9 h-9 rounded-full bg-surface/90 backdrop-blur-sm flex items-center justify-center text-charcoal-600 hover:text-error transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+<div class="absolute inset-x-3 bottom-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<button class="w-full bg-primary text-on-primary py-2.5 rounded font-button text-button hover:bg-forest-800 transition-colors shadow-md">Quick Add</button>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-caption text-charcoal-600 uppercase tracking-wider">Mist Spray</span>
+<a class="font-card-heading text-card-heading text-on-surface hover:text-primary transition-colors" href="#">Lavender & Cedarwood Linen Mist</a>
+<span class="font-product-price text-product-price text-primary">$28.00</span>
+</div>
+</div>
+<!-- Product Item 7 -->
+<div class="group flex flex-col gap-3">
+<div class="relative aspect-[4/5] bg-surface-container rounded overflow-hidden border border-border">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Large soy wax candle in matte green vessel with brass lid, photographed on a calm minimalist wooden table with soft diffused lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkE6kPeT2key_sSw0QpCbqCCQjYB7zjym9SiBF7v5s64pRy0BhJhWQrPYXh11GlncrMMv8noHjenzIkw6euqEaLxL6zd86KUFeFR1Sl6mlZ_83UBSzShNBWE4XUGQi2Fe05vmAugPkQ1Y_rzkSPT6hN-Z9Qv6ffvfXEHMC-sgSEQ29laqCDSteB5Z4cNw-ROPEokBe0RRXtZR2E_x93So7f9XQz_C55TfqSiXCJ7UlNVLX7dgtX2Gm"/>
+<button aria-label="Add to wishlist" class="absolute top-3 right-3 w-9 h-9 rounded-full bg-surface/90 backdrop-blur-sm flex items-center justify-center text-charcoal-600 hover:text-error transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+<div class="absolute inset-x-3 bottom-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<button class="w-full bg-primary text-on-primary py-2.5 rounded font-button text-button hover:bg-forest-800 transition-colors shadow-md">Quick Add</button>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-caption text-charcoal-600 uppercase tracking-wider">Soy Candle</span>
+<a class="font-card-heading text-card-heading text-on-surface hover:text-primary transition-colors" href="#">Hinoki Forest & Smoke Candle</a>
+<span class="font-product-price text-product-price text-primary">$42.00</span>
+</div>
+</div>
+<!-- Product Item 8 -->
+<div class="group flex flex-col gap-3">
+<div class="relative aspect-[4/5] bg-surface-container rounded overflow-hidden border border-border">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Minimal glass bottle with rosemary hair infusion oil, sitting on green botanical leaves under soft daylight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4VFT4KW2brA3oNrdLaSO5QnaKV1pXqGMd1vAyqu-aw00W3brx6L1bmwhiiPMjQfBY1ccg7BZFLY9eUEXC0c9Jop2819q9JSEYfkTFCXctAAFQQrZ0kl1FT910C4PDCJHDIVDH36mGVkRDd7gcMlo8YegFJ5GDqODZMnmFbwj87yGQ8jQoOx8prhOQQnMYnd6v-C1VpiTjgXYdzmjcKzkDZ7ghC9SxUBHUOOQ3JpnOsWmCOehOXnTz"/>
+<div class="absolute top-3 left-3 bg-surface/90 backdrop-blur-sm text-caption text-primary px-2.5 py-1 rounded">Limited</div>
+<button aria-label="Add to wishlist" class="absolute top-3 right-3 w-9 h-9 rounded-full bg-surface/90 backdrop-blur-sm flex items-center justify-center text-charcoal-600 hover:text-error transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+<div class="absolute inset-x-3 bottom-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<button class="w-full bg-primary text-on-primary py-2.5 rounded font-button text-button hover:bg-forest-800 transition-colors shadow-md">Quick Add</button>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-caption text-charcoal-600 uppercase tracking-wider">Hair Care</span>
+<a class="font-card-heading text-card-heading text-on-surface hover:text-primary transition-colors" href="#">Rosemary & Mint Follicle Serum</a>
+<span class="font-product-price text-product-price text-primary">$44.00</span>
+</div>
+</div>
+<!-- Product Item 9 -->
+<div class="group flex flex-col gap-3">
+<div class="relative aspect-[4/5] bg-surface-container rounded overflow-hidden border border-border">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Citrus blossom room mist spray in sleek amber bottle next to fresh orange slices and green foliage." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6OCBuW8xlzf9fMJxlCxwqRoDpJD8cwYyP_Yh7l2o7rF_pVd4pTKpbK1G0BTIKVHNitpkNncJRGJezqDbfGgGBfDFi6ntJf5hg_yC8r1VFK7dMWvkD0hI-8Ja8AXHunRda15Wtva6MJQLrh74yHOtM3io-Q3SFTqHi-NpXPwxsiScatg1MeXwcKp35AK_3GkzsvKaqlCRXaVCzYTJ8ClPLFDe7leK25kgjYPoPf9Dys0Jo7tUItKG1"/>
+<button aria-label="Add to wishlist" class="absolute top-3 right-3 w-9 h-9 rounded-full bg-surface/90 backdrop-blur-sm flex items-center justify-center text-charcoal-600 hover:text-error transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+<div class="absolute inset-x-3 bottom-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<button class="w-full bg-primary text-on-primary py-2.5 rounded font-button text-button hover:bg-forest-800 transition-colors shadow-md">Quick Add</button>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-caption text-charcoal-600 uppercase tracking-wider">Mist Spray</span>
+<a class="font-card-heading text-card-heading text-on-surface hover:text-primary transition-colors" href="#">Neroli & Bitter Orange Mist</a>
+<span class="font-product-price text-product-price text-primary">$30.00</span>
+</div>
+</div>
+<!-- Product Item 10 -->
+<div class="group flex flex-col gap-3">
+<div class="relative aspect-[4/5] bg-surface-container rounded overflow-hidden border border-border">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Minimalist candle in tin container with botanical label, styled with pine sprigs and warm neutral tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXJ8mkLFKOSwQ1E3tD9pj9-MnrRG9gscXgwPNsOa6azNlnSx9za1QQpkSaOlYJc62bK8-DPSq85TBJoVtidiJH-aZLTC5f2e4TOYtDf60CEEI78ORAhS033OiHBLDfQlib8tnLp0IfaNG2KR0Mc84dPpXbHTD907uvLNi2iQh4lo3yhpFn4WGnl_HJC2X7R1Xaj537GoqF7874YI6jjYVRhV8smT5x2lN2JQmiKWQCXo4-ViimD6rx"/>
+<button aria-label="Add to wishlist" class="absolute top-3 right-3 w-9 h-9 rounded-full bg-surface/90 backdrop-blur-sm flex items-center justify-center text-charcoal-600 hover:text-error transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+<div class="absolute inset-x-3 bottom-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<button class="w-full bg-primary text-on-primary py-2.5 rounded font-button text-button hover:bg-forest-800 transition-colors shadow-md">Quick Add</button>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-caption text-charcoal-600 uppercase tracking-wider">Soy Candle</span>
+<a class="font-card-heading text-card-heading text-on-surface hover:text-primary transition-colors" href="#">Golden Pine & Amber Tin Candle</a>
+<span class="font-product-price text-product-price text-primary">$24.00</span>
+</div>
+</div>
+<!-- Product Item 11 -->
+<div class="group flex flex-col gap-3">
+<div class="relative aspect-[4/5] bg-surface-container rounded overflow-hidden border border-border">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Deep conditioning hair oil bottle with gold pipette on minimalist neutral background with soft shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEZwVGXTN98DV4Hooudrklfl6j1lqTjmgv2vtxUEiB-H1Ts5jTukbZsBdkMMmjACVIcub4Qo1lEWsP1CS2WzjXOdZzQx4eY6yK6GabFRXvUforozWj5V4Zyhaq9Thwi8z2x_v2ncs0rpriH05m5X4CGx-e4lEiNraS9V96OiJ9vhN1TiJAV57oFdYzia9DJOxVUb_pBEoHQ90_HHHxjRyGlUl9BEWzLns_H-f0drhqnh_tfhzRyLuu"/>
+<button aria-label="Add to wishlist" class="absolute top-3 right-3 w-9 h-9 rounded-full bg-surface/90 backdrop-blur-sm flex items-center justify-center text-charcoal-600 hover:text-error transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+<div class="absolute inset-x-3 bottom-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<button class="w-full bg-primary text-on-primary py-2.5 rounded font-button text-button hover:bg-forest-800 transition-colors shadow-md">Quick Add</button>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-caption text-charcoal-600 uppercase tracking-wider">Hair Care</span>
+<a class="font-card-heading text-card-heading text-on-surface hover:text-primary transition-colors" href="#">Argan & Vetiver Overnight Hair Mask</a>
+<span class="font-product-price text-product-price text-primary">$50.00</span>
+</div>
+</div>
+<!-- Product Item 12 -->
+<div class="group flex flex-col gap-3">
+<div class="relative aspect-[4/5] bg-surface-container rounded overflow-hidden border border-border">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Sandalwood mist spray bottle with botanical illustrations on label, staged with wood blocks and soft morning sun." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB77FUMlErhZyBDL70EG03-Bb_RW5HBmE1HW-xUS3fQ5aOV1h-zdkPQEYDvedmOmRTDolNMkeBABBp-5kW8wwEme3lESTGWLQEjzjS4KQOZDnyzz0cqgzKfiPFsgg83hlzUBEOD0oAxQM9ubRcJxOxeg2ECDWjCypNciFDQiqgFzyqPJrJnMlgLLfWCnNouZW-4eLtYYVldSUtMHxVqwkF8X14mCGqSZLcMSW-lNURjLej8zLcai-pB"/>
+<button aria-label="Add to wishlist" class="absolute top-3 right-3 w-9 h-9 rounded-full bg-surface/90 backdrop-blur-sm flex items-center justify-center text-charcoal-600 hover:text-error transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+<div class="absolute inset-x-3 bottom-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<button class="w-full bg-primary text-on-primary py-2.5 rounded font-button text-button hover:bg-forest-800 transition-colors shadow-md">Quick Add</button>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-caption text-charcoal-600 uppercase tracking-wider">Mist Spray</span>
+<a class="font-card-heading text-card-heading text-on-surface hover:text-primary transition-colors" href="#">Sacred Sandalwood Sanctuary Mist</a>
+<span class="font-product-price text-product-price text-primary">$34.00</span>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="flex items-center justify-center gap-2 pt-8 border-t border-border">
+<button aria-label="Previous Page" class="w-10 h-10 rounded border border-border flex items-center justify-center text-charcoal-600 hover:border-primary hover:text-primary transition-colors disabled:opacity-40" disabled="">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="w-10 h-10 rounded bg-primary text-on-primary font-button text-button">1</button>
+<button class="w-10 h-10 rounded border border-border text-on-surface font-button text-button hover:border-primary transition-colors">2</button>
+<button class="w-10 h-10 rounded border border-border text-on-surface font-button text-button hover:border-primary transition-colors">3</button>
+<button aria-label="Next Page" class="w-10 h-10 rounded border border-border flex items-center justify-center text-on-surface hover:border-primary hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div></main><footer class="w-full bg-forest-900 text-on-primary py-space-xl"><div class="max-w-[1440px] mx-auto px-margin grid grid-cols-1 md:grid-cols-4 gap-space-lg mb-space-xl"><div class="flex flex-col gap-space-md"><span class="font-section-heading text-2xl tracking-tight">Earth & Essence</span><p class="text-body-regular text-primary-fixed-dim max-w-sm">Botanical wellness and quiet luxury, curated for conscious living and mindful spaces.</p></div><div class="flex flex-col gap-space-sm"><span class="font-navigation text-navigation tracking-wider uppercase text-primary-fixed">Navigation</span><a class="text-body-regular text-primary-fixed-dim hover:text-on-primary transition-colors" href="#">Shop All</a><a class="text-body-regular text-primary-fixed-dim hover:text-on-primary transition-colors" href="#">Candles & Home</a><a class="text-body-regular text-primary-fixed-dim hover:text-on-primary transition-colors" href="#">Hair & Body Care</a><a class="text-body-regular text-primary-fixed-dim hover:text-on-primary transition-colors" href="#">Editorial Collections</a></div><div class="flex flex-col gap-space-sm"><span class="font-navigation text-navigation tracking-wider uppercase text-primary-fixed">Customer Care</span><a class="text-body-regular text-primary-fixed-dim hover:text-on-primary transition-colors" href="#">Shipping & Returns</a><a class="text-body-regular text-primary-fixed-dim hover:text-on-primary transition-colors" href="#">Sustainability</a><a class="text-body-regular text-primary-fixed-dim hover:text-on-primary transition-colors" href="#">Stockists</a><a class="text-body-regular text-primary-fixed-dim hover:text-on-primary transition-colors" href="#">Contact Us</a></div><div class="flex flex-col gap-space-md"><span class="font-navigation text-navigation tracking-wider uppercase text-primary-fixed">Newsletter</span><p class="text-body-regular text-primary-fixed-dim">Receive editorial notes, early access, and seasonal releases.</p><form class="flex gap-2"><input class="bg-forest-800 text-on-primary px-space-md py-3 rounded text-body-regular focus:outline-none focus:ring-1 focus:ring-primary-fixed-dim flex-1" placeholder="Enter your email" type="email"/><button class="bg-surface text-primary px-space-md py-3 rounded font-button text-button hover:bg-surface-container-low transition-colors" type="submit">Join</button></form></div></div><div class="max-w-[1440px] mx-auto px-margin pt-space-md border-t border-forest-800 flex flex-col md:flex-row justify-between items-center text-caption text-primary-fixed-dim"><p>© 2024 Earth & Essence. All rights reserved.</p><div class="flex gap-space-md mt-space-sm md:mt-0"><a class="hover:text-on-primary transition-colors" href="#">Privacy Policy</a><a class="hover:text-on-primary transition-colors" href="#">Terms of Service</a></div></div></footer></body></html>

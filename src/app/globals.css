@@ -1,0 +1,151 @@
+@import "tailwindcss";
+
+:root {
+  /* Earth & Essence Stitch-Verified Botanical Color Palette */
+  --color-forest-900: #0E231C;
+  --color-forest-800: #1B352B;
+  --color-forest-700: #294A3D;
+  --color-sage-500: #536345;
+  --color-sage-100: #E6EDE2;
+  --color-ivory-50: #F6F3EC;
+  --color-ivory-100: #EFECE4;
+  --color-sand-200: #E6E1D5;
+  --color-sand-300: #C2BAAA;
+  --color-charcoal-900: #1B1C19;
+  --color-charcoal-600: #3E4640;
+  --color-neutral-400: #8E968F;
+  --color-white: #FFFFFF;
+  --color-border: #E2DDD2;
+  --color-success: #2E5C3E;
+  --color-warning: #B87A28;
+  --color-error: #9E2A2B;
+
+  /* Spacing Scale (4px base) */
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-48: 48px;
+  --space-64: 64px;
+
+  /* Layout Widths */
+  --container-max: 1440px;
+  --container-content: 1320px;
+
+  /* Radii */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
+  --radius-xl: 12px;
+  --radius-full: 9999px;
+}
+
+@theme {
+  --color-forest-900: var(--color-forest-900);
+  --color-forest-800: var(--color-forest-800);
+  --color-forest-700: var(--color-forest-700);
+  --color-sage-500: var(--color-sage-500);
+  --color-sage-100: var(--color-sage-100);
+  --color-ivory-50: var(--color-ivory-50);
+  --color-ivory-100: var(--color-ivory-100);
+  --color-sand-200: var(--color-sand-200);
+  --color-sand-300: var(--color-sand-300);
+  --color-charcoal-900: var(--color-charcoal-900);
+  --color-charcoal-600: var(--color-charcoal-600);
+  --color-neutral-400: var(--color-neutral-400);
+  --color-white: var(--color-white);
+  --color-border: var(--color-border);
+  --color-success: var(--color-success);
+  --color-warning: var(--color-warning);
+  --color-error: var(--color-error);
+
+  --font-display: var(--font-display, "Bodoni Moda", "Cormorant Garamond", Georgia, serif);
+  --font-body: var(--font-body, "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+}
+
+/* Base resets & typography */
+html, body {
+  background-color: var(--color-ivory-50);
+  color: var(--color-charcoal-900);
+  font-family: var(--font-body, "Manrope", -apple-system, BlinkMacSystemFont, sans-serif);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display, "Bodoni Moda", Georgia, serif);
+  font-weight: 500;
+  color: var(--color-charcoal-900);
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+}
+
+/* High-Contrast Eyebrow Text */
+.eyebrow {
+  font-family: var(--font-body, "Manrope", sans-serif);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-forest-700);
+  display: block;
+}
+
+/* Container Utility */
+.site-container {
+  max-width: var(--container-content);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+@media (min-width: 768px) {
+  .site-container {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .site-container {
+    padding-left: 64px;
+    padding-right: 64px;
+  }
+}
+
+/* Image transitions */
+img {
+  transition: opacity 0.3s ease;
+}
+
+/* Micro animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-ivory-100);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-sand-300);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-sage-500);
+}

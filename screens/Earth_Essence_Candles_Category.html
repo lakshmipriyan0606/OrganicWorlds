@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {"darkMode": "class", "theme": {"extend": {"colors": {"secondary-fixed": "#d5e8cc", "secondary-container": "#d2e5c9", "border": "#E6E1D7", "on-primary": "#ffffff", "on-error-container": "#93000a", "primary-fixed-dim": "#b2cdbd", "neutral-400": "#AAA99F", "primary-container": "#263d32", "outline": "#727974", "on-surface": "#1a1c18", "forest-900": "#263D32", "on-primary-fixed": "#082016", "surface": "#fafaf3", "on-tertiary": "#ffffff", "primary-fixed": "#cee9d9", "forest-800": "#345343", "surface-container-lowest": "#ffffff", "surface-container-low": "#f4f4ed", "sand-300": "#D7C8B2", "forest-700": "#476653", "surface-container": "#eeeee8", "on-secondary-fixed-variant": "#3b4b36", "on-surface-variant": "#424844", "secondary-fixed-dim": "#b9ccb1", "charcoal-900": "#292B27", "error": "#A4423B", "charcoal-600": "#66685F", "on-tertiary-fixed-variant": "#4c463a", "on-tertiary-fixed": "#1f1b11", "surface-container-high": "#e8e9e2", "warning": "#956C29", "inverse-primary": "#b2cdbd", "surface-dim": "#dadad4", "sage-100": "#E8EDE4", "outline-variant": "#c2c8c3", "tertiary-container": "#3d382d", "on-secondary-container": "#566751", "white": "#FFFFFF", "primary": "#10271d", "inverse-on-surface": "#f1f1eb", "on-background": "#1a1c18", "sage-500": "#82947B", "surface-tint": "#4c6457", "background": "#fafaf3", "surface-bright": "#fafaf3", "secondary": "#52634d", "on-primary-container": "#8ea899", "error-container": "#ffdad6", "tertiary-fixed": "#ebe1d1", "on-secondary-fixed": "#101f0e", "on-error": "#ffffff", "surface-variant": "#e3e3dd", "tertiary": "#272318", "tertiary-fixed-dim": "#cfc5b6", "ivory-100": "#F8F5ED", "on-primary-fixed-variant": "#344c40", "success": "#426B50", "inverse-surface": "#2f312d", "sand-200": "#E7DDCD", "on-secondary": "#ffffff", "on-tertiary-container": "#a9a192", "ivory-50": "#FDFBF6", "surface-container-highest": "#e3e3dd"}, "borderRadius": {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"}, "spacing": {"space-md": "16px", "margin": "64px", "space-lg": "32px", "gutter": "24px", "space-sm": "8px", "space-xs": "4px", "space-xl": "64px"}, "fontFamily": {"body-regular": ["DM Sans"], "section-heading-mobile": ["Cormorant Garamond"], "product-price": ["DM Sans"], "section-heading": ["Cormorant Garamond"], "navigation": ["DM Sans"], "admin-table": ["DM Sans"], "button": ["DM Sans"], "card-heading-mobile": ["Cormorant Garamond"], "hero-display": ["Cormorant Garamond"], "body-lg-mobile": ["DM Sans"], "hero-display-mobile": ["Cormorant Garamond"], "caption": ["DM Sans"], "page-title-mobile": ["Cormorant Garamond"], "page-title": ["Cormorant Garamond"], "body-lg": ["DM Sans"], "card-heading": ["Cormorant Garamond"]}, "fontSize": {"body-regular": ["15px", {"lineHeight": "1.6", "fontWeight": "400"}], "section-heading-mobile": ["28px", {"lineHeight": "1.1", "fontWeight": "500"}], "product-price": ["17px", {"lineHeight": "normal", "fontWeight": "600"}], "section-heading": ["36px", {"lineHeight": "1.1", "fontWeight": "500"}], "navigation": ["13px", {"lineHeight": "normal", "fontWeight": "500"}], "admin-table": ["14px", {"lineHeight": "normal", "fontWeight": "400"}], "button": ["13px", {"lineHeight": "normal", "fontWeight": "600"}], "card-heading-mobile": ["20px", {"lineHeight": "1.1", "fontWeight": "500"}], "hero-display": ["64px", {"lineHeight": "1.1", "fontWeight": "500"}], "body-lg-mobile": ["17px", {"lineHeight": "1.6", "fontWeight": "400"}], "hero-display-mobile": ["42px", {"lineHeight": "1.1", "fontWeight": "500"}], "caption": ["12px", {"lineHeight": "normal", "fontWeight": "400"}], "page-title-mobile": ["34px", {"lineHeight": "1.1", "fontWeight": "500"}], "page-title": ["48px", {"lineHeight": "1.1", "fontWeight": "500"}], "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}], "card-heading": ["23px", {"lineHeight": "1.1", "fontWeight": "500"}]}}}};</script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@100..900&display=swap" rel="stylesheet"/></head><body class="bg-surface font-body-regular text-on-surface"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl"><div class="w-full bg-primary text-on-primary text-caption py-2 text-center tracking-wide">Thoughtfully made. Beautifully lived.</div><div class="h-20 max-w-[1440px] mx-auto px-margin flex items-center justify-between"><div class="flex items-center gap-3"><img alt="Earth & Essence Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0EvcNbMZp9yCnBb38WNyX0PRv47fC4DPVrAFDBDZJxXIpH4VkVBusrYC2Pl2pjuUbHRZDwWwOdJGMyquuckz2nyezhBwXrw_2ns01Heu9XMOXzv30puznWgmnY4bs7kJIUhRz2FaotX9F5HSz4bbvMPBXz4FUwoLVLKGrmL3CHGNcGA0Z1qwM4ZqKqNoDkkbYgGIRDxk1NwMM1iDK1SUXzTuQeNZSg8xORbn-RcuHUGIa1AeUQw_5"/><span class="font-section-heading text-2xl tracking-tight text-primary">Earth & Essence</span></div><nav class="hidden lg:flex items-center gap-8" data-active-classes="text-primary font-bold"><a class="font-navigation text-navigation text-on-surface-variant hover:text-on-surface transition-colors" data-path="shop" href="#">Shop</a><a aria-current="page" class="transition-colors text-primary font-bold" data-path="candles" href="#">Candles</a><a class="font-navigation text-navigation text-on-surface-variant hover:text-on-surface transition-colors" data-path="hair-care" href="#">Hair Care</a><a class="font-navigation text-navigation text-on-surface-variant hover:text-on-surface transition-colors" data-path="collections" href="#">Collections</a><a class="font-navigation text-navigation text-on-surface-variant hover:text-on-surface transition-colors" data-path="our-story" href="#">Our Story</a></nav><div class="flex items-center gap-6"><button aria-label="Search" class="text-on-surface-variant hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">search</span></button><button aria-label="Wishlist" class="text-on-surface-variant hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">favorite</span></button><button aria-label="Cart" class="text-on-surface-variant hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">shopping_bag</span></button><a aria-label="Customer Account" class="text-on-surface-variant hover:text-on-surface transition-colors" data-path="account" href="#"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></a></div></div></header><main class="w-full pt-28 bg-surface"><div class="flex flex-col w-full">
+<!-- Hero Section -->
+<section class="relative w-full bg-surface-container-low py-16 lg:py-24 px-margin overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent pointer-events-none"></div>
+<div class="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+<div class="lg:col-span-7 flex flex-col gap-6">
+<div class="flex items-center gap-3">
+<span class="w-12 h-[1px] bg-primary"></span>
+<span class="font-navigation text-navigation uppercase tracking-widest text-primary">Home Collection</span>
+</div>
+<h1 class="font-hero-display text-hero-display-mobile lg:text-hero-display text-primary tracking-tight">
+          Candles & Ambiance
+        </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+          Clean-burning soy and sustainably harvested coconut wax candles, meticulously hand-poured and infused with rare botanical extracts, earthy resins, and pure essential oils to transform your daily rituals.
+        </p>
+<div class="flex items-center gap-4 pt-2">
+<a class="bg-forest-900 text-on-primary px-8 py-4 rounded font-button text-button hover:bg-forest-800 transition-colors inline-flex items-center gap-2" href="#product-grid">
+            Explore Collection
+            <span class="material-symbols-outlined text-[18px]">arrow_downward</span>
+</a>
+</div>
+</div>
+<div class="lg:col-span-5 relative">
+<div class="aspect-[4/5] rounded-xl overflow-hidden shadow-xl bg-surface-container-high">
+<div class="w-full h-full bg-cover bg-center" data-alt="A luxurious hand-poured soy wax candle in an amber glass jar resting on a rustic linen cloth next to freshly cut cedar branches and dried moss, soft warm morning light casting gentle shadows, editorial lifestyle photography style, muted botanical color palette of sage, cream, and forest green." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA7t9NgT3gHnb85AwqYhjqkHhnfv5SYFzFK5OPlHHrnD4tvx2nea-tqrSO3A3-goelIgE01mxZJ5d2xpmSW2Qekx1PU4y1iK-5pOvEw5Pr14pQpOfK__jwlt628kTHbRFMYDF_kqSxnVQx4iViS8xR_jy3o3RQtpbIgY42GPQO3QOXeBQlET4P-5YXwbZXC4UEBphhoi5-Ena95bLfOnHuxluNosubXelCaX0cxoNOCQ_ATH58f4LOV')"></div>
+</div>
+<div class="absolute -bottom-6 -left-6 bg-surface p-6 rounded-xl shadow-lg border border-border hidden sm:block max-w-xs">
+<p class="font-section-heading text-xl text-primary mb-1">60+ Hours</p>
+<p class="font-caption text-caption text-on-surface-variant">Of clean, soot-free burn time with 100% cotton wicks.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Subcategory Navigation -->
+<div class="w-full bg-surface border-b border-border sticky top-[108px] z-40 backdrop-blur-xl bg-surface/90">
+<div class="max-w-[1440px] mx-auto px-margin overflow-x-auto scrollbar-none">
+<div class="flex items-center gap-8 py-4 min-w-max">
+<a class="font-navigation text-navigation text-primary font-bold border-b-2 border-primary pb-1" href="#">All Candles</a>
+<a class="font-navigation text-navigation text-on-surface-variant hover:text-primary transition-colors pb-1" href="#">Botanical Poured</a>
+<a class="font-navigation text-navigation text-on-surface-variant hover:text-primary transition-colors pb-1" href="#">Travel Tins</a>
+<a class="font-navigation text-navigation text-on-surface-variant hover:text-primary transition-colors pb-1" href="#">Apothecary Vessels</a>
+<a class="font-navigation text-navigation text-on-surface-variant hover:text-primary transition-colors pb-1" href="#">Incense & Ritual</a>
+</div>
+</div>
+</div>
+<!-- Main Content Layout with Sidebar & Product Grid -->
+<section class="max-w-[1440px] mx-auto px-margin py-16 w-full">
+<div class="flex flex-col lg:flex-row gap-12">
+<!-- Filter Sidebar -->
+<aside class="w-full lg:w-80 flex-shrink-0 flex flex-col gap-8">
+<div class="flex items-center justify-between pb-4 border-b border-border">
+<span class="font-section-heading text-xl text-primary">Filters</span>
+<button class="font-caption text-caption text-on-surface-variant hover:text-primary underline transition-colors">Clear All</button>
+</div>
+<!-- Fragrance Notes Filter -->
+<div class="flex flex-col gap-4">
+<span class="font-navigation text-navigation uppercase tracking-wider text-primary font-bold">Fragrance Notes</span>
+<div class="flex flex-col gap-3">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-4 h-4 rounded border-border text-primary focus:ring-0 accent-forest-900" type="checkbox"/>
+<span class="font-body-regular text-on-surface group-hover:text-primary transition-colors">Cedarwood & Moss</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-4 h-4 rounded border-border text-primary focus:ring-0 accent-forest-900" type="checkbox"/>
+<span class="font-body-regular text-on-surface group-hover:text-primary transition-colors">White Pine & Smoke</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-4 h-4 rounded border-border text-primary focus:ring-0 accent-forest-900" type="checkbox"/>
+<span class="font-body-regular text-on-surface group-hover:text-primary transition-colors">Bergamot & Amber</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-4 h-4 rounded border-border text-primary focus:ring-0 accent-forest-900" type="checkbox"/>
+<span class="font-body-regular text-on-surface group-hover:text-primary transition-colors">Eucalyptus & Vetiver</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-4 h-4 rounded border-border text-primary focus:ring-0 accent-forest-900" type="checkbox"/>
+<span class="font-body-regular text-on-surface group-hover:text-primary transition-colors">Sandalwood & Fig</span>
+</label>
+</div>
+</div>
+<!-- Burn-time Filter -->
+<div class="flex flex-col gap-4 pt-4 border-t border-border">
+<span class="font-navigation text-navigation uppercase tracking-wider text-primary font-bold">Burn Time</span>
+<div class="flex flex-col gap-3">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-4 h-4 rounded border-border text-primary focus:ring-0 accent-forest-900" type="checkbox"/>
+<span class="font-body-regular text-on-surface group-hover:text-primary transition-colors">30 - 45 Hours (Travel)</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-4 h-4 rounded border-border text-primary focus:ring-0 accent-forest-900" type="checkbox"/>
+<span class="font-body-regular text-on-surface group-hover:text-primary transition-colors">50 - 65 Hours (Standard)</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-4 h-4 rounded border-border text-primary focus:ring-0 accent-forest-900" type="checkbox"/>
+<span class="font-body-regular text-on-surface group-hover:text-primary transition-colors">80+ Hours (Grand Vessel)</span>
+</label>
+</div>
+</div>
+<!-- Size Options Filter -->
+<div class="flex flex-col gap-4 pt-4 border-t border-border">
+<span class="font-navigation text-navigation uppercase tracking-wider text-primary font-bold">Size & Format</span>
+<div class="flex flex-col gap-3">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-4 h-4 rounded border-border text-primary focus:ring-0 accent-forest-900" type="checkbox"/>
+<span class="font-body-regular text-on-surface group-hover:text-primary transition-colors">Standard Jar (240g)</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-4 h-4 rounded border-border text-primary focus:ring-0 accent-forest-900" type="checkbox"/>
+<span class="font-body-regular text-on-surface group-hover:text-primary transition-colors">Travel Tin (120g)</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-4 h-4 rounded border-border text-primary focus:ring-0 accent-forest-900" type="checkbox"/>
+<span class="font-body-regular text-on-surface group-hover:text-primary transition-colors">Triple Wick Vessel (500g)</span>
+</label>
+</div>
+</div>
+</aside>
+<!-- Main Product Area -->
+<div class="flex-1 flex flex-col gap-8" id="product-grid">
+<!-- Sorting and Results Count -->
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center pb-4 border-b border-border gap-4">
+<p class="font-body-regular text-on-surface-variant">Showing <span class="text-primary font-bold">12</span> of 24 botanical candles</p>
+<div class="flex items-center gap-3">
+<span class="font-navigation text-navigation text-on-surface-variant">Sort by:</span>
+<select class="bg-surface border border-border rounded px-3 py-2 font-body-regular text-on-surface focus:outline-none focus:border-primary">
+<option>Featured Botanicals</option>
+<option>Price: Low to High</option>
+<option>Price: High to Low</option>
+<option>Burn Time: Longest</option>
+</select>
+</div>
+</div>
+<!-- Product Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
+<!-- Product Card 1 -->
+<div class="flex flex-col group">
+<div class="relative aspect-[4/5] bg-surface-container-high rounded-xl overflow-hidden mb-4">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500" data-alt="Minimalist amber glass candle jar with a crisp white label featuring elegant typography, resting on a dark slate surface with scattered cedar needles and soft ambient lighting, high-end editorial product photography." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDF2l2R0rxUGaRdIj2w7wmX07ySqDNrAWNRKCr6hNCkrH0pDBWmwtgGgS9YRoqvv8Ljgdyexix6ebZd_0tt_i-hhHrhr5UCY1vnmJb15lMSMId77uuMAmu-joa8yEBw4AJ5P_WoFvziDsVBeRNiJ17cz23NJyoVjxv0bccSLdJTGm2IajRid6mGejv6rEzNZMvAe_QtBlvsvXrbdIeiLsf-rfoZ8cbalBre71ng3qyWNU_HCrdASVF2')"></div>
+<span class="absolute top-3 left-3 bg-sage-100 text-on-surface font-caption text-caption px-2.5 py-1 rounded">Bestseller</span>
+<button aria-label="Quick Add" class="absolute bottom-3 right-3 bg-surface/90 hover:bg-surface text-primary p-3 rounded-full shadow-md transition-all opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0">
+<span class="material-symbols-outlined text-[20px]">shopping_bag</span>
+</button>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-caption text-caption text-on-surface-variant uppercase tracking-wider">Cedarwood & Moss</span>
+<h3 class="font-card-heading text-card-heading text-primary group-hover:text-forest-700 transition-colors">Hinterland Sanctuary Candle</h3>
+<div class="flex items-center justify-between mt-1">
+<span class="font-product-price text-product-price text-primary">$42.00</span>
+<span class="font-caption text-caption text-on-surface-variant">60 hr burn</span>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="flex flex-col group">
+<div class="relative aspect-[4/5] bg-surface-container-high rounded-xl overflow-hidden mb-4">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500" data-alt="A matte charcoal ceramic candle vessel with organic glaze texture, placed on raw oak wood with drifting wisps of subtle smoke and green fern fronds in the soft focus background, botanical luxury lifestyle photography." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAMNdAWI3p0THdwGn9fINBe0IBXuytF5GYufLSTSRvmL5XqxTxYUYwcT_D2ETF-iVDT5TBVAYsLDlG_qHK6Ixu90ivcjt_7_IGIoqRjMeIWtr2Iwv0uACZjDyvfA_bQv6egHP_IGbAxeGELHI-CQp0-95IeMUHAvtkZ52GMKl6mPKB02wu79uCXLSHH-NSUI0u7_bmF37VcaZS0mRci7NcBK9bovDD6x5PqKMrAcibEKGEzbv06G0wH')"></div>
+<button aria-label="Quick Add" class="absolute bottom-3 right-3 bg-surface/90 hover:bg-surface text-primary p-3 rounded-full shadow-md transition-all opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0">
+<span class="material-symbols-outlined text-[20px]">shopping_bag</span>
+</button>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-caption text-caption text-on-surface-variant uppercase tracking-wider">White Pine & Smoke</span>
+<h3 class="font-card-heading text-card-heading text-primary group-hover:text-forest-700 transition-colors">Alpine Hearth Vessel</h3>
+<div class="flex items-center justify-between mt-1">
+<span class="font-product-price text-product-price text-primary">$48.00</span>
+<span class="font-caption text-caption text-on-surface-variant">65 hr burn</span>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="flex flex-col group">
+<div class="relative aspect-[4/5] bg-surface-container-high rounded-xl overflow-hidden mb-4">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500" data-alt="An elegant clear glass apothecary candle with golden soy wax visible inside, surrounded by fresh bergamot slices and amber crystals on a textured linen table runner, warm inviting afternoon illumination." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC4MInECyl_afO2lro5DsLSPCwO48RrpIv8ZoUkwe2XikN5THx5UEv8Fh3GZpJz2SfapQKftnyYtj2L-G0BfaUWMFaklRq7d--8qiIbdI_Id8GK_N7y8g7ZmxEcox3sGTOqSLj4y1HK__T3hVBzQkrmG3O0qdaD6MxR7T-O1TwIAGCWu2kpNL6jMgmEKkBZLh-Yg_OiXoltXDOxp6R3tUtolUEWkZvrx8IFlYZ4E8MUMcC5HUkqAdxI')"></div>
+<span class="absolute top-3 left-3 bg-sage-100 text-on-surface font-caption text-caption px-2.5 py-1 rounded">New Release</span>
+<button aria-label="Quick Add" class="absolute bottom-3 right-3 bg-surface/90 hover:bg-surface text-primary p-3 rounded-full shadow-md transition-all opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0">
+<span class="material-symbols-outlined text-[20px]">shopping_bag</span>
+</button>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-caption text-caption text-on-surface-variant uppercase tracking-wider">Bergamot & Amber</span>
+<h3 class="font-card-heading text-card-heading text-primary group-hover:text-forest-700 transition-colors">Solstice Meridian Candle</h3>
+<div class="flex items-center justify-between mt-1">
+<span class="font-product-price text-product-price text-primary">$45.00</span>
+<span class="font-caption text-caption text-on-surface-variant">55 hr burn</span>
+</div>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="flex flex-col group">
+<div class="relative aspect-[4/5] bg-surface-container-high rounded-xl overflow-hidden mb-4">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500" data-alt="A compact brushed bronze travel tin candle with a minimalist cream label, resting beside eucalyptus leaves and smooth river stones on a minimalist concrete ledge, soft natural daylight." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBa62GnoVsaT56EXt5yHcPk5F1wky-is-dA6Lb017f1JebpL090x_hOiG4RdpjDHY9fBwpHt9FEgyTOL_nBdSg03HQB-ANggNsWFLa0zloxzT8V8xYYQYyJqvK8gO6MkxGEDVOgbVz7jfBmu1hur6d5ObCjSdsbKiHrv-iRPsJYBcK4l9LDvS31gZXX3DiYp72--gXMdrG9B1wQu84uONCeBTAfhcW6ffVyZIsnkCFGB4Z-iE52c8X3')"></div>
+<button aria-label="Quick Add" class="absolute bottom-3 right-3 bg-surface/90 hover:bg-surface text-primary p-3 rounded-full shadow-md transition-all opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0">
+<span class="material-symbols-outlined text-[20px]">shopping_bag</span>
+</button>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-caption text-caption text-on-surface-variant uppercase tracking-wider">Eucalyptus & Vetiver</span>
+<h3 class="font-card-heading text-card-heading text-primary group-hover:text-forest-700 transition-colors">Nomad Botanical Tin</h3>
+<div class="flex items-center justify-between mt-1">
+<span class="font-product-price text-product-price text-primary">$26.00</span>
+<span class="font-caption text-caption text-on-surface-variant">35 hr burn</span>
+</div>
+</div>
+</div>
+<!-- Product Card 5 -->
+<div class="flex flex-col group">
+<div class="relative aspect-[4/5] bg-surface-container-high rounded-xl overflow-hidden mb-4">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500" data-alt="A large triple-wick cream ceramic candle vessel sitting on a rustic wooden dining table, surrounded by dried fig branches and warm ambient candlelight reflecting on a textured wall." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAHjJFizPK5i_VUY47u0K-kvh8_DjF4Xabc4ZYbsRGs4RWZmh8vyuKBjmYai1PvC8nZm3KF8To7Jzi6QmxysvXK9aG_aaslmmOnxaibMf-kcC18OdggLJIdv2xd_L9P4SJGppEW_KVnnzRm9ngeK0VAWE7RbzAQAYDvr0m5cTgCrHJ8SFEnlR0UUKMqvZyRhkms3FongI8dconAWgePzERpji-5xEfH0Dl_ZA8O30sX-_XyHNITaGRB')"></div>
+<button aria-label="Quick Add" class="absolute bottom-3 right-3 bg-surface/90 hover:bg-surface text-primary p-3 rounded-full shadow-md transition-all opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0">
+<span class="material-symbols-outlined text-[20px]">shopping_bag</span>
+</button>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-caption text-caption text-on-surface-variant uppercase tracking-wider">Sandalwood & Fig</span>
+<h3 class="font-card-heading text-card-heading text-primary group-hover:text-forest-700 transition-colors">Grand Heirloom Vessel</h3>
+<div class="flex items-center justify-between mt-1">
+<span class="font-product-price text-product-price text-primary">$78.00</span>
+<span class="font-caption text-caption text-on-surface-variant">90 hr burn</span>
+</div>
+</div>
+</div>
+<!-- Product Card 6 -->
+<div class="flex flex-col group">
+<div class="relative aspect-[4/5] bg-surface-container-high rounded-xl overflow-hidden mb-4">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500" data-alt="A dark amber apothecary jar candle with a minimalist kraft paper label, placed among wild pine cones and forest moss on an antique wooden workbench, moody atmospheric lighting." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCDlKZqH85DxUNiZTIdMk9j7LIH0_Fnd5-wNoITWaBc9JObZNvi0IQ3zuidTLeAPo9R9xrpona78lYqqzZd_-l9CickHuOYbForRzFgMRfw7Zs2HE5RGbIY91atYBFUN_YXKMQC7PNJVX73394_RStIACpj_lSQjOrbRZYKw8IeHP_HXB0FKcsXfNRhHWnP9Eq4KO55RzKmRhDdoOeHrW2S9E_yCTeUOkUTbvztf-mrzLieGhuuU0cG')"></div>
+<button aria-label="Quick Add" class="absolute bottom-3 right-3 bg-surface/90 hover:bg-surface text-primary p-3 rounded-full shadow-md transition-all opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0">
+<span class="material-symbols-outlined text-[20px]">shopping_bag</span>
+</button>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-caption text-caption text-on-surface-variant uppercase tracking-wider">Cedarwood & Moss</span>
+<h3 class="font-card-heading text-card-heading text-primary group-hover:text-forest-700 transition-colors">Forest Floor Apothecary</h3>
+<div class="flex items-center justify-between mt-1">
+<span class="font-product-price text-product-price text-primary">$44.00</span>
+<span class="font-caption text-caption text-on-surface-variant">60 hr burn</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="flex justify-center items-center gap-2 pt-12 border-t border-border mt-8">
+<button class="w-10 h-10 rounded border border-border flex items-center justify-center font-button text-button text-primary bg-surface-container-low hover:bg-surface-container transition-colors">1</button>
+<button class="w-10 h-10 rounded border border-border flex items-center justify-center font-button text-button text-on-surface-variant hover:bg-surface-container transition-colors">2</button>
+<button class="w-10 h-10 rounded border border-border flex items-center justify-center font-button text-button text-on-surface-variant hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- SEO Content Area -->
+<section class="w-full bg-surface-container-low py-20 px-margin border-t border-border mt-12">
+<div class="max-w-[1000px] mx-auto flex flex-col gap-8">
+<div class="flex flex-col gap-3 text-center">
+<span class="font-navigation text-navigation uppercase tracking-widest text-primary">Mindful Illumination</span>
+<h2 class="font-section-heading text-section-heading-mobile lg:text-section-heading text-primary">
+          The Art of Clean-Burning Botanical Candles
+        </h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 font-body-regular text-on-surface-variant leading-relaxed">
+<div class="flex flex-col gap-4">
+<p>
+            At Earth & Essence, every candle is conceived as a tactile sculpture for the senses. We reject conventional paraffin waxes in favor of a proprietary blend of sustainably cultivated soy and coconut waxes that burn cleaner, slower, and cooler, ensuring zero petroleum soot buildup in your living spaces.
+          </p>
+<p>
+            Our fragrance formulation process mirrors fine perfumery. By working directly with master botanists across the Pacific Northwest and Mediterranean, we extract rare aromatic resins, wild-harvested mosses, and sun-cured woods to create complex scent profiles that evolve gracefully as the wax pool deepens.
+          </p>
+</div>
+<div class="flex flex-col gap-4">
+<p>
+            Each candle features an unbleached 100% organic cotton or FSC-certified wood wick designed to produce a gentle, meditative crackle reminiscent of an open hearth. Hand-poured in small batches within our studio, our vessels are chosen for their reusable durability—transforming effortlessly into planters, desk organizers, or heirloom containers once the wax has naturally depleted.
+          </p>
+<p>
+            Whether you seek the grounding, earthy aroma of Cedarwood & Moss to anchor your evening meditation, or the crisp, clarifying notes of White Pine & Smoke to invigorate a workspace, our collection invites you to curate sanctuary within the everyday.
+          </p>
+</div>
+</div>
+</div>
+</section>
+</div></main><footer class="w-full bg-forest-900 text-on-primary py-space-xl"><div class="max-w-[1440px] mx-auto px-margin grid grid-cols-1 md:grid-cols-4 gap-space-lg mb-space-xl"><div class="flex flex-col gap-space-md"><span class="font-section-heading text-2xl tracking-tight">Earth & Essence</span><p class="text-body-regular text-primary-fixed-dim max-w-sm">Botanical wellness and quiet luxury, curated for conscious living and mindful spaces.</p></div><div class="flex flex-col gap-space-sm"><span class="font-navigation text-navigation tracking-wider uppercase text-primary-fixed">Navigation</span><a class="text-body-regular text-primary-fixed-dim hover:text-on-primary transition-colors" href="#">Shop All</a><a class="text-body-regular text-primary-fixed-dim hover:text-on-primary transition-colors" href="#">Candles & Home</a><a class="text-body-regular text-primary-fixed-dim hover:text-on-primary transition-colors" href="#">Hair & Body Care</a><a class="text-body-regular text-primary-fixed-dim hover:text-on-primary transition-colors" href="#">Editorial Collections</a></div><div class="flex flex-col gap-space-sm"><span class="font-navigation text-navigation tracking-wider uppercase text-primary-fixed">Customer Care</span><a class="text-body-regular text-primary-fixed-dim hover:text-on-primary transition-colors" href="#">Shipping & Returns</a><a class="text-body-regular text-primary-fixed-dim hover:text-on-primary transition-colors" href="#">Sustainability</a><a class="text-body-regular text-primary-fixed-dim hover:text-on-primary transition-colors" href="#">Stockists</a><a class="text-body-regular text-primary-fixed-dim hover:text-on-primary transition-colors" href="#">Contact Us</a></div><div class="flex flex-col gap-space-md"><span class="font-navigation text-navigation tracking-wider uppercase text-primary-fixed">Newsletter</span><p class="text-body-regular text-primary-fixed-dim">Receive editorial notes, early access, and seasonal releases.</p><form class="flex gap-2"><input class="bg-forest-800 text-on-primary px-space-md py-3 rounded text-body-regular focus:outline-none focus:ring-1 focus:ring-primary-fixed-dim flex-1" placeholder="Enter your email" type="email"/><button class="bg-surface text-primary px-space-md py-3 rounded font-button text-button hover:bg-surface-container-low transition-colors" type="submit">Join</button></form></div></div><div class="max-w-[1440px] mx-auto px-margin pt-space-md border-t border-forest-800 flex flex-col md:flex-row justify-between items-center text-caption text-primary-fixed-dim"><p>© 2024 Earth & Essence. All rights reserved.</p><div class="flex gap-space-md mt-space-sm md:mt-0"><a class="hover:text-on-primary transition-colors" href="#">Privacy Policy</a><a class="hover:text-on-primary transition-colors" href="#">Terms of Service</a></div></div></footer></body></html>

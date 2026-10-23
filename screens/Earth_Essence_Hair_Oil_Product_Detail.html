@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&amp;family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary-container":"#ba5b3c","on-primary-fixed":"#3a0b00","primary-fixed":"#ffdbd0","on-surface-variant":"#55423d","surface-dim":"#d9dbd3","secondary-container":"#c3e8d4","error-container":"#ffdad6","outline-variant":"#dcc1b9","surface-bright":"#f9faf2","on-primary":"#ffffff","surface-variant":"#e1e3db","secondary-fixed-dim":"#aacfbb","surface-container-high":"#e7e9e1","inverse-primary":"#ffb59e","inverse-on-surface":"#f0f2e9","on-tertiary-fixed":"#301400","on-tertiary-fixed-variant":"#673d1b","on-tertiary-container":"#ffffff","on-error":"#ffffff","primary":"#9b4326","on-secondary-fixed-variant":"#2c4d3f","on-primary-fixed-variant":"#7c2d12","on-secondary-container":"#486a5a","tertiary-container":"#9e6b46","on-surface":"#191c18","tertiary-fixed-dim":"#f7b98e","background":"#f9faf2","tertiary-fixed":"#ffdcc5","outline":"#89726c","surface-container-lowest":"#ffffff","on-tertiary":"#ffffff","error":"#ba1a1a","tertiary":"#825330","on-secondary-fixed":"#002115","primary-fixed-dim":"#ffb59e","on-secondary":"#ffffff","surface-container":"#edefe7","on-primary-container":"#ffffff","inverse-surface":"#2e312c","surface-container-highest":"#e1e3db","on-error-container":"#93000a","secondary-fixed":"#c6ebd7","secondary":"#446556","surface-container-low":"#f3f4ec","on-background":"#191c18","surface":"#f9faf2","surface-tint":"#9b4427"},borderRadius:{DEFAULT:"1rem",lg:"2rem",xl:"3rem",full:"9999px"},spacing:gutter:"1.5rem","space-lg":"1.5rem","space-xl":"2.5rem","space-sm":"0.5rem",margin:"3rem","space-xs":"0.25rem","space-md":"1rem","margin-mobile":"1.25rem","gutter-mobile":"1rem"},fontFamily:{"label-sm":["Plus Jakarta Sans"],"label-md":["Plus Jakarta Sans"],"headline-md":["Bodoni Moda"],"headline-sm":["Bodoni Moda"],"body-md":["Plus Jakarta Sans"],"headline-lg":["Bodoni Moda"],"headline-lg-mobile":["Bodoni Moda"],"body-sm":["Plus Jakarta Sans"],"headline-xl-mobile":["Bodoni Moda"],"headline-xl":["Bodoni Moda"],"label-lg":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"]},fontSize:{"label-sm":["0.6875rem",{lineHeight:"1.2",letterSpacing:"0.05em",fontWeight:"500"}],"label-md":["0.75rem",{lineHeight:"1.2",letterSpacing:"0.08em",fontWeight:"600"}],"headline-md":["1.75rem",{lineHeight:"1.3",fontWeight:"500"}],"headline-sm":["1.25rem",{lineHeight:"1.35",fontWeight:"500"}],"body-md":["0.9375rem",{lineHeight:"1.55",fontWeight:"400"}],"headline-lg":["2.5rem",{lineHeight:"1.2",letterSpacing:"-0.015em",fontWeight:"400"}],"headline-lg-mobile":["1.75rem",{lineHeight:"1.25",letterSpacing:"-0.01em",fontWeight:"400"}],"body-sm":["0.8125rem",{lineHeight:"1.5",fontWeight:"400"}],"headline-xl-mobile":["2.25rem",{lineHeight:"1.2",letterSpacing:"-0.01em",fontWeight:"400"}],"headline-xl":["3.5rem",{lineHeight:"1.15",letterSpacing:"-0.02em",fontWeight:"400"}],"label-lg":["0.875rem",{lineHeight:"1.25",letterSpacing:"0.02em",fontWeight:"600"}],"body-lg":["1.125rem",{lineHeight:"1.6",fontWeight:"400"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface antialiased selection:bg-primary-fixed selection:text-on-primary-fixed"><header class="fixed top-0 left-0 right-0 z-50"><div class="w-full bg-primary-container text-on-primary-container px-space-md py-space-xs text-center"><p class="font-label-sm text-label-sm uppercase tracking-widest">GROWN WITH CARE. DELIVERED WITH PURPOSE. • THOUGHTFULLY MADE. BEAUTIFULLY LIVED.</p></div><div class="h-20 bg-surface/90 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="max-w-[1360px] mx-auto px-margin-mobile lg:px-margin h-full flex items-center justify-between gap-space-lg"><a class="flex items-center gap-space-xs" data-path="home" href="#"><span class="font-headline-md text-headline-md tracking-tight text-on-surface">EARTH &amp; ESSENCE</span></a><nav class="hidden lg:flex items-center gap-space-lg" data-active-classes="text-primary font-semibold"><a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors duration-200" data-path="shop-all" href="#">SHOP ALL</a><a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors duration-200" data-path="candles" href="#">CANDLES</a><a aria-current="page" class="uppercase tracking-wider transition-colors duration-200 text-primary font-semibold" data-path="hair-care" href="#">HAIR CARE</a><a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors duration-200" data-path="collections" href="#">COLLECTIONS</a><a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors duration-200" data-path="our-story" href="#">OUR STORY</a></nav><div class="flex items-center gap-space-md"><button aria-label="Search" class="p-space-xs text-on-surface-variant hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">search</span></button><a aria-label="Wishlist" class="p-space-xs text-on-surface-variant hover:text-on-surface transition-colors hidden sm:inline-flex" data-path="wishlist" href="#"><span class="material-symbols-outlined text-[22px]">favorite</span></a><a aria-label="Account" class="p-space-xs text-on-surface-variant hover:text-on-surface transition-colors" data-path="account" href="#"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></a><a aria-label="Shopping Cart" class="relative p-space-xs text-on-surface-variant hover:text-on-surface transition-colors" data-path="cart" href="#"><span class="material-symbols-outlined text-[22px]">shopping_bag</span><span class="absolute top-0 right-0 inline-flex items-center justify-center w-4 h-4 rounded-full bg-secondary text-on-secondary font-label-sm text-[10px]">2</span></a></div></div></div></header><main class="w-full pt-28 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- BREADCRUMBS & CONSCIOUS HARVEST NOTICE -->
+<section class="max-w-[1360px] mx-auto px-margin-mobile lg:px-margin pt-space-md pb-space-sm w-full">
+<div class="flex flex-wrap items-center justify-between gap-space-sm text-on-surface-variant font-label-sm text-label-sm tracking-wider uppercase">
+<nav class="flex items-center gap-space-xs">
+<a class="hover:text-primary transition-colors" data-path="home" href="#">Home</a>
+<span>/</span>
+<a class="hover:text-primary transition-colors" data-path="hair-care" href="#">Hair &amp; Scalp Wellness</a>
+<span>/</span>
+<span class="text-on-surface font-semibold">Botanical Scalp Elixir</span>
+</nav>
+<div class="inline-flex items-center gap-1.5 px-space-sm py-0.5 rounded-full bg-secondary-container/40 text-on-secondary-container">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-label-sm text-label-sm">Batch N° 14 • Macerated in Copper Urns</span>
+</div>
+</div>
+</section>
+<!-- TWO-COLUMN PRODUCT DETAIL HERO -->
+<section class="max-w-[1360px] mx-auto px-margin-mobile lg:px-margin pt-space-sm pb-space-xl w-full">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-start">
+<!-- LEFT COLUMN: ARCHED GALLERY (58% approx 7 cols on lg) -->
+<div class="lg:col-span-7 flex flex-col gap-space-md">
+<!-- Main Arched Feature Image Container -->
+<div class="relative w-full aspect-[4/5] bg-surface-container-low rounded-t-[5rem] rounded-b-2xl overflow-hidden shadow-sm">
+<!-- Main Hero Image -->
+<img alt="Botanical Scalp Elixir - Earth &amp; Essence" class="w-full h-full object-cover transition-opacity duration-300" data-alt="Warm studio editorial photograph of an amber apothecary dropper bottle of golden scalp oil elixir, nestled among fresh aromatic green rosemary sprigs, raw wild amla gooseberries, and a polished beige marble dropper pipette on sun-drenched coarse linen background, bathed in soft afternoon window light." id="mainProductImage" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7sGPpYlnvZWT6oqScUhzryAFZUMsHC2RXiUMSOQfcHp1bg8b5-M4zW-x4QHTjVp47Wta29ho5Pu2ddX7f26t7zeNCQ0xnvXDIqKHJyIgxuPGE1CNDyWx410hlzAk20Hf16vws5QrUPLip764KIpPLsAz4AETk6j9reBAGMOiRtzqnPqulXh7DEFG8dSJEk7obA9zHM_DAOW9q3MYLlQXOZCJZY8PJ-87f3paU3Wm_4m5AfSd2Q-uV"/>
+<!-- Subtle sun gradient scrim overlay -->
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface/20 via-transparent to-transparent pointer-events-none"></div>
+<!-- Feature Badges -->
+<div class="absolute top-6 left-6 flex flex-col items-start gap-space-xs">
+<span class="px-3.5 py-1.5 rounded-full bg-primary-container text-on-primary font-label-sm text-label-sm tracking-widest uppercase shadow-sm">
+              BESTSELLER
+            </span>
+<span class="px-3 py-1 rounded-full bg-surface/90 backdrop-blur-md text-on-surface font-label-sm text-label-sm tracking-wider uppercase shadow-sm">
+              COLD-PRESSED BIO-ACTIVES
+            </span>
+</div>
+<div class="absolute bottom-6 right-6">
+<span class="px-3.5 py-1.5 rounded-full bg-inverse-surface/85 backdrop-blur-md text-inverse-on-surface font-label-sm text-label-sm tracking-widest uppercase shadow-sm flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-tertiary-fixed-dim">hourglass_bottom</span>
+              40-DAY SLOW MACERATION
+            </span>
+</div>
+<!-- Natural Certification Watermark Icon -->
+<div class="absolute top-6 right-6 w-12 h-12 rounded-full bg-surface/80 backdrop-blur-sm flex items-center justify-center text-primary shadow-sm pointer-events-none">
+<span class="material-symbols-outlined text-[24px]">eco</span>
+</div>
+</div>
+<!-- Interactive Thumbnails Strip -->
+<div class="grid grid-cols-4 gap-space-sm w-full">
+<button class="thumb-btn group relative aspect-square rounded-xl overflow-hidden bg-surface-container ring-2 ring-primary-container transition-all" onclick="selectThumbnail(0, this)" type="button">
+<img alt="Amber bottle product view" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Close-up photograph of 100ml amber glass medicine bottle with minimalist artisanal botanical typography label reading Botanical Scalp Elixir resting on natural terracotta slab." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_k33VGI6md3hcAQaZdg4ZmCSFFppAs36J8nUUeTj3qBbYjeo3mXM0Qg-vZSFMXF_gFX_fGCDAimUOauLmcUHMidNPbK0GsFoDqjT1cFS0w9k64OqTZG2Fi5-_GE0vV6CJbuOveWbfmKoi5UFcutFWg78r-Cy5WfhgoLAzlfAyaW9YknF8Bujqk9Ddsdalmw4khz98zLKqF9HMG3hb8GQyKCMDqgzs7ngVuBrDI5p1xKnAq49esMhM"/>
+<span class="absolute inset-x-0 bottom-0 py-1 bg-surface/85 backdrop-blur-xs text-[10px] text-center font-label-sm uppercase tracking-wider text-on-surface">Bottle</span>
+</button>
+<button class="thumb-btn group relative aspect-square rounded-xl overflow-hidden bg-surface-container opacity-70 hover:opacity-100 transition-all" onclick="selectThumbnail(1, this)" type="button">
+<img alt="Dropper pipette nectar view" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Macro macro photography of clear glass dropper pipette dispensing a radiant viscous drop of golden rosemary and amla botanical oil nectar, sunlight sparkling through the suspension." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDiQKdJHXMkKhlC9mui7zquB_fMnVLKJkXNwInfmXCuwMBMgbpsXsmukcWUf47Bsi_1v3rRxqGlgx8chhbu7AyvwF8Oqw4nXHf0o7W5sO4-8BUJkPRjQk9pv9Zr8bz8cgc_B6xD_Zex58myUcDyXDKS9swmbTMs46T0ZBfRkVLoFKuH55jIy-xdK-MwdbYL9gbdzM9iooUgFjfUke53k8cl-k47mTl3z5j80g4YFYc0Pj1amTIm8ME5"/>
+<span class="absolute inset-x-0 bottom-0 py-1 bg-surface/85 backdrop-blur-xs text-[10px] text-center font-label-sm uppercase tracking-wider text-on-surface">Pipette</span>
+</button>
+<button class="thumb-btn group relative aspect-square rounded-xl overflow-hidden bg-surface-container opacity-70 hover:opacity-100 transition-all" onclick="selectThumbnail(2, this)" type="button">
+<img alt="Application ritual view" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="High editorial lifestyle photograph of delicate hands using glass dropper to apply golden oil along precise parting lines of rich dark hair texture, mindful scalp massage ritual." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2ZYNtEApjijHoVnoMDrzOFPtB0z7J1oO9Wqb48nOY8sOH4XCXOGBM7gKq8FSCBIhhYdFi6aRtIcIWZoWx86iccwRFsfGcr9qTMOV18cAbBHgvI6QwEEbyqnSg3i74SGIlPTq0-gDdFGB5ufdpArb_ljO9_gLNJ5mL4IA8qqHP_inWLemCawkVIOaV_GswpPoNlFGiRJP0yCicTR9ujncyGIpbTyIUMQ9iOTeakX1G673mlpOlpoCR"/>
+<span class="absolute inset-x-0 bottom-0 py-1 bg-surface/85 backdrop-blur-xs text-[10px] text-center font-label-sm uppercase tracking-wider text-on-surface">Ritual</span>
+</button>
+<button class="thumb-btn group relative aspect-square rounded-xl overflow-hidden bg-surface-container opacity-70 hover:opacity-100 transition-all" onclick="selectThumbnail(3, this)" type="button">
+<img alt="Embossed packaging view" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Tactile unboxing flatlay of heavy cotton rag paper box embossed with gold foil botanic crest next to dried botanicals and botanical seal." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjwWkSVzxSE6iKwIITkiMxSPR2Me2xRqf9o9gbVz8LB0zA3uNNJspM67ehHIE6E5Us0Ig1EslhcX8A3nJTwrHDeycecf9nOG8tojpFEe7MM61YMNwMEiOvWdIYqHTNSyVHJHnUs36YQaRAzOhEv6_KzRo56RLgRzfmZdjE0hzzA9P87Ln1Mv5RI4Gap7oEEDoIW9dG2s0j4wJoWBDbTU2aafqU88HdLWNV2Z_j64NLBqh5Gzem7mAo"/>
+<span class="absolute inset-x-0 bottom-0 py-1 bg-surface/85 backdrop-blur-xs text-[10px] text-center font-label-sm uppercase tracking-wider text-on-surface">Boxed</span>
+</button>
+</div>
+</div>
+<!-- RIGHT COLUMN: PRODUCT PURCHASING & APOTHECARY SPECS (42% approx 5 cols on lg) -->
+<div class="lg:col-span-5 flex flex-col gap-space-lg lg:sticky lg:top-28">
+<!-- Header & Category Identity -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm uppercase tracking-[0.18em] text-primary font-semibold">
+              FOLLICULAR BOTANICS • APOTHECARY BATCH N° 14
+            </span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight mt-1">
+            Botanical Scalp Elixir
+          </h1>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            Rosemary Cineole &amp; Cold-Pressed Amla Follicle Revitalizing Nectar (100ml)
+          </p>
+<!-- Price & Reviews Line -->
+<div class="flex items-baseline justify-between mt-space-sm pt-space-xs">
+<div class="flex items-baseline gap-2">
+<span class="font-headline-md text-headline-md text-on-surface font-semibold" id="displayPrice">₹2,800</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">(inclusive of all taxes)</span>
+</div>
+<a class="inline-flex items-center gap-1.5 text-tertiary hover:text-primary transition-colors" href="#reviews">
+<span class="flex text-primary">
+<span class="material-symbols-outlined text-[17px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[17px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[17px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[17px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[17px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</span>
+<span class="font-label-sm text-label-sm font-semibold tracking-wide text-on-surface">4.9</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">(142 reviews)</span>
+</a>
+</div>
+</div>
+<!-- Therapeutic Target Pills -->
+<div class="flex flex-wrap gap-2 pt-1">
+<div class="px-3 py-1.5 rounded-full bg-surface-container text-on-surface flex items-center gap-1.5 font-label-sm text-label-sm tracking-wider uppercase">
+<span class="material-symbols-outlined text-[15px] text-primary">spa</span>
+            Follicle Density
+          </div>
+<div class="px-3 py-1.5 rounded-full bg-surface-container text-on-surface flex items-center gap-1.5 font-label-sm text-label-sm tracking-wider uppercase">
+<span class="material-symbols-outlined text-[15px] text-secondary">microbiology</span>
+            Scalp Microbiome
+          </div>
+<div class="px-3 py-1.5 rounded-full bg-surface-container text-on-surface flex items-center gap-1.5 font-label-sm text-label-sm tracking-wider uppercase">
+<span class="material-symbols-outlined text-[15px] text-tertiary">autorenew</span>
+            Circulation Boost
+          </div>
+</div>
+<!-- Bottle Volume Selector -->
+<div class="flex flex-col gap-space-xs pt-space-xs">
+<div class="flex justify-between items-center text-on-surface">
+<span class="font-label-md text-label-md uppercase tracking-wider">Apothecary Volume</span>
+<span class="font-label-sm text-label-sm text-primary font-semibold" id="selectedVolLabel">100ml Dropper Pipette</span>
+</div>
+<div class="grid grid-cols-1 gap-2.5">
+<!-- Option 1: 100ml Default -->
+<label class="volume-radio flex items-center justify-between p-space-md rounded-2xl bg-surface-container cursor-pointer transition-all ring-1 ring-primary-container" onclick="updateVolume('100ml Dropper Pipette', '₹2,800', this)">
+<div class="flex items-center gap-3">
+<input checked="" class="accent-primary-container w-4 h-4" name="bottle_volume" type="radio" value="100ml"/>
+<div>
+<p class="font-label-md text-label-md text-on-surface font-semibold">Apothecary Dropper 100ml</p>
+<p class="font-body-sm text-[12px] text-on-surface-variant">Recommended for daily 8-week cyclical ritual</p>
+</div>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-bold">₹2,800</span>
+</label>
+<!-- Option 2: 50ml Discovery -->
+<label class="volume-radio flex items-center justify-between p-space-md rounded-2xl bg-surface-container-low hover:bg-surface-container cursor-pointer transition-all" onclick="updateVolume('50ml Discovery Flacon', '₹1,650', this)">
+<div class="flex items-center gap-3">
+<input class="accent-primary-container w-4 h-4" name="bottle_volume" type="radio" value="50ml"/>
+<div>
+<p class="font-label-md text-label-md text-on-surface font-semibold">Discovery Flacon 50ml</p>
+<p class="font-body-sm text-[12px] text-on-surface-variant">Travel-ready vessel with precision glass nozzle</p>
+</div>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-bold">₹1,650</span>
+</label>
+<!-- Option 3: 250ml Refill -->
+<label class="volume-radio flex items-center justify-between p-space-md rounded-2xl bg-surface-container-low hover:bg-surface-container cursor-pointer transition-all" onclick="updateVolume('250ml Backbar Refill Flacon', '₹5,800', this)">
+<div class="flex items-center gap-3">
+<input class="accent-primary-container w-4 h-4" name="bottle_volume" type="radio" value="250ml"/>
+<div>
+<div class="flex items-center gap-2">
+<p class="font-label-md text-label-md text-on-surface font-semibold">Backbar Refill Flacon 250ml</p>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container text-[10px] font-label-sm font-semibold">SAVE 18%</span>
+</div>
+<p class="font-body-sm text-[12px] text-on-surface-variant">Zero-waste amber aluminum apothecary refill</p>
+</div>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-bold">₹5,800</span>
+</label>
+</div>
+</div>
+<!-- Stock Status & Terroir origin -->
+<div class="flex items-center gap-2 py-1 text-secondary font-label-sm text-label-sm font-medium">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>In Stock — Distilled from Kodaikanal Wild Harvest</span>
+</div>
+<!-- Quantity & Add to Cart Actions -->
+<div class="flex flex-col sm:flex-row items-stretch gap-space-sm pt-space-xs">
+<!-- Stepper -->
+<div class="flex items-center justify-between bg-surface-container rounded-full px-space-md py-2 sm:w-36">
+<button aria-label="Decrease quantity" class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface hover:bg-surface-container-high transition-colors" onclick="adjustQty(-1)" type="button">
+<span class="material-symbols-outlined text-[18px]">remove</span>
+</button>
+<span class="font-label-md text-label-md font-bold text-on-surface w-8 text-center" id="qtyDisplay">1</span>
+<button aria-label="Increase quantity" class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface hover:bg-surface-container-high transition-colors" onclick="adjustQty(1)" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+<!-- Add to Bag Primary Pill Button -->
+<button class="flex-1 bg-primary-container text-on-primary-container hover:opacity-95 px-space-lg py-3.5 rounded-full font-label-md text-label-md uppercase tracking-wider flex items-center justify-center gap-space-sm shadow-md transition-all active:scale-[0.98]" id="addToBagBtn" onclick="triggerCartToast()" type="button">
+<span class="material-symbols-outlined text-[20px]">shopping_bag</span>
+<span id="ctaButtonLabel">ADD TO BAG — ₹2,800</span>
+</button>
+<!-- Wishlist Secondary Pill Button -->
+<button aria-label="Save to Botanist Wishlist" class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors shrink-0" onclick="toggleWishlist(this)" type="button">
+<span class="material-symbols-outlined text-[22px]">favorite_border</span>
+</button>
+</div>
+<!-- Quick Value Pillars -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-xs pt-space-sm text-on-surface-variant font-label-sm text-label-sm">
+<div class="flex items-center gap-2 p-2 rounded-xl bg-surface-container-low">
+<span class="material-symbols-outlined text-primary text-[18px]">water_drop</span>
+<span>100% Botanical Cold-Pressed</span>
+</div>
+<div class="flex items-center gap-2 p-2 rounded-xl bg-surface-container-low">
+<span class="material-symbols-outlined text-secondary text-[18px]">block</span>
+<span>Zero Silicones or Synthetics</span>
+</div>
+<div class="flex items-center gap-2 p-2 rounded-xl bg-surface-container-low">
+<span class="material-symbols-outlined text-tertiary text-[18px]">recycling</span>
+<span>Glass Flacon &amp; Pipette</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CLINICAL BIO-ACTIVES SECTION (Pine Background Accent / Deep Cypress) -->
+<section class="w-full bg-[#1B382B] text-surface-container-lowest py-space-xl my-space-lg">
+<div class="max-w-[1360px] mx-auto px-margin-mobile lg:px-margin">
+<!-- Section Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md mb-space-xl">
+<div class="max-w-xl">
+<span class="text-secondary-fixed font-label-sm text-label-sm uppercase tracking-widest block mb-2">Purity • Potency • Provenance</span>
+<h2 class="font-headline-lg text-headline-lg text-surface-container-lowest font-normal">Active Botanical Bio-Actives</h2>
+</div>
+<p class="font-body-md text-body-md text-surface-container-high/80 max-w-md">
+          Uncut, non-hydrogenated lipid matrices infused at low thermal thresholds over 40 diurnal cycles to maintain cellular resonance.
+        </p>
+</div>
+<!-- 4 Highlight Cards with terracotta icons -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest/10 backdrop-blur-sm p-space-lg rounded-2xl flex flex-col justify-between hover:bg-surface-container-lowest/15 transition-colors">
+<div class="flex flex-col gap-space-md">
+<div class="w-12 h-12 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">psychology_alt</span>
+</div>
+<div>
+<span class="text-tertiary-fixed-dim font-label-sm text-label-sm uppercase tracking-wider block mb-1">Micro-Circulation</span>
+<h3 class="font-headline-sm text-headline-sm text-surface-container-lowest">Rosemary Cineole 1.8</h3>
+</div>
+<p class="font-body-sm text-body-sm text-surface-container-high/80 leading-relaxed">
+              Steam-distilled high altitude cineole terpene profile clinically shown to stimulate micro-vascular capillary dilation at the dermal papilla.
+            </p>
+</div>
+<div class="pt-space-md mt-space-md border-t border-surface-container-lowest/10 flex items-center justify-between text-secondary-fixed text-label-sm font-label-sm">
+<span>Origin: Ooty High Hills</span>
+<span class="font-semibold">3.8% Terpene Yield</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest/10 backdrop-blur-sm p-space-lg rounded-2xl flex flex-col justify-between hover:bg-surface-container-lowest/15 transition-colors">
+<div class="flex flex-col gap-space-md">
+<div class="w-12 h-12 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">nutrition</span>
+</div>
+<div>
+<span class="text-tertiary-fixed-dim font-label-sm text-label-sm uppercase tracking-wider block mb-1">Follicle Integrity</span>
+<h3 class="font-headline-sm text-headline-sm text-surface-container-lowest">Cold-Pressed Wild Amla</h3>
+</div>
+<p class="font-body-sm text-body-sm text-surface-container-high/80 leading-relaxed">
+              Cold-expressed Indian Gooseberry packed with naturally stabilized polyphenols and hydrolyzable tannins that fortify anchored follicle roots.
+            </p>
+</div>
+<div class="pt-space-md mt-space-md border-t border-surface-container-lowest/10 flex items-center justify-between text-secondary-fixed text-label-sm font-label-sm">
+<span>Origin: Western Ghats</span>
+<span class="font-semibold">High Bio-Vitamin C</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest/10 backdrop-blur-sm p-space-lg rounded-2xl flex flex-col justify-between hover:bg-surface-container-lowest/15 transition-colors">
+<div class="flex flex-col gap-space-md">
+<div class="w-12 h-12 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">shield</span>
+</div>
+<div>
+<span class="text-tertiary-fixed-dim font-label-sm text-label-sm uppercase tracking-wider block mb-1">Cuticle Moisture Seal</span>
+<h3 class="font-headline-sm text-headline-sm text-surface-container-lowest">Japanese Camellia Seed</h3>
+</div>
+<p class="font-body-sm text-body-sm text-surface-container-high/80 leading-relaxed">
+              Ultra-light oleic lipid structure mimics the hair's natural sebum, enveloping strands in reflective protection without greasiness.
+            </p>
+</div>
+<div class="pt-space-md mt-space-md border-t border-surface-container-lowest/10 flex items-center justify-between text-secondary-fixed text-label-sm font-label-sm">
+<span>Origin: Izu Islands</span>
+<span class="font-semibold">82% Oleic Acid</span>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-lowest/10 backdrop-blur-sm p-space-lg rounded-2xl flex flex-col justify-between hover:bg-surface-container-lowest/15 transition-colors">
+<div class="flex flex-col gap-space-md">
+<div class="w-12 h-12 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">spa</span>
+</div>
+<div>
+<span class="text-tertiary-fixed-dim font-label-sm text-label-sm uppercase tracking-wider block mb-1">Microbiome Balance</span>
+<h3 class="font-headline-sm text-headline-sm text-surface-container-lowest">Virgin Bhringraj Decoction</h3>
+</div>
+<p class="font-body-sm text-body-sm text-surface-container-high/80 leading-relaxed">
+              Revered as the Ayurvedic 'King of Hair', slow simmered to soothe inflamed dry scalp conditions and extend the anagen growth cycle.
+            </p>
+</div>
+<div class="pt-space-md mt-space-md border-t border-surface-container-lowest/10 flex items-center justify-between text-secondary-fixed text-label-sm font-label-sm">
+<span>Origin: Organic Certified Dehradun</span>
+<span class="font-semibold">Wedelolactone Rich</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- THE 10-MINUTE EVENING SHIRO ABHYANGA RITUAL -->
+<section class="max-w-[1360px] mx-auto px-margin-mobile lg:px-margin py-space-xl w-full">
+<div class="text-center max-w-2xl mx-auto mb-space-xl">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-[0.2em] font-semibold">Mindful Scalp Therapy</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mt-1">The 10-Minute Evening Shiro Abhyanga Ritual</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-space-xs">
+        An unhurried nocturnal practice rooted in classical Ayurvedic therapeutics to melt cranial tension and saturate hair follicles.
+      </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Step 01 -->
+<div class="group flex flex-col bg-surface-container-low rounded-2xl p-space-lg transition-transform duration-300 hover:-translate-y-1">
+<div class="relative w-full aspect-square rounded-xl overflow-hidden bg-surface-container mb-space-md">
+<img alt="Step 01: Warm oil between palms" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Intimate aesthetic close-up of warm olive hands dispensing amber oil droplets into cupped palms, morning diffused light, slow mindful pace." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAe4VyhGkn_xdC2lOulHNl4pMYLel-AxPynljLZ5iYsI95O2NRJrn5oKofApPEbiE7xGZSZOgpnpPqjoiSdCmWFAeDmP88AfMJjGs9Y7Guk8nufu9Nw1VEKqhGUUUoL1sIrzW7TE759SWz9lwgtHbvoTbZanesap4qkX0K0QgZlloq8mOCcuCVGveez48OUNTFYv6bvt41gDU6PVfOWbPXNoBlgU3BJDZefWxFTIciIFDJGtSvfh5N"/>
+<span class="absolute top-3 left-3 w-8 h-8 rounded-full bg-surface/90 text-on-surface font-label-md text-label-md flex items-center justify-center font-bold">01</span>
+</div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-primary font-semibold mb-1">Activation</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mb-2">Warm in Palms</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+          Draw 3–4 full dropper pipettes into clean palms. Rub hands vigorously together for 10 seconds to warm the cold-pressed botanic esters.
+        </p>
+</div>
+<!-- Step 02 -->
+<div class="group flex flex-col bg-surface-container-low rounded-2xl p-space-lg transition-transform duration-300 hover:-translate-y-1">
+<div class="relative w-full aspect-square rounded-xl overflow-hidden bg-surface-container mb-space-md">
+<img alt="Step 02: Gentle circular parting lines" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Top down overhead artistic photograph showing precision hairline parting and delicate fingertip application of botanical oil onto clean scalp." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkp--mAVzJLzKDK3lK2HxANuHdili7u2tgKrHjE_qEdZnsfoHxlv6sWCTEuOrIa5x-YfEk6O5oC2cMF_Au3_wu6cok2Xsu5WEAYJIeWZJdcPC9XbtrdngBDnk7Y6pqOZXIl5NarP0Gqxebt3k2rLeH6Ay9Lm43U7DVHwhwsRbvubnE88MED_qKvb9hNjYTJP2hVsDZhWDTC-9YDEGvP_cXBAR49uzHHLqfxuvtQWPiD_OmqDAUtnXH"/>
+<span class="absolute top-3 left-3 w-8 h-8 rounded-full bg-surface/90 text-on-surface font-label-md text-label-md flex items-center justify-center font-bold">02</span>
+</div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-primary font-semibold mb-1">Distribution</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mb-2">Parting Line Saturation</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+          Incline your crown slightly forward. Part hair into 4 quadrants, distributing drops directly onto scalp skin rather than strand lengths.
+        </p>
+</div>
+<!-- Step 03 -->
+<div class="group flex flex-col bg-surface-container-low rounded-2xl p-space-lg transition-transform duration-300 hover:-translate-y-1">
+<div class="relative w-full aspect-square rounded-xl overflow-hidden bg-surface-container mb-space-md">
+<img alt="Step 03: Acupressure along occipital ridge" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Artistic profile portrait of hands doing deep acupressure massage on base of skull and occipital ridge, peaceful meditative aura." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5ByvvtUwhPOOaQ0uijcJ6n6aRnqrilXBLlBdWZ__qv8F8ZYquWIxDxGNWJEoCMUWY0DxzgcfIht4erXRNm3r9jMTQSNSbbOYKDps0hEefqv5Ghi_4-_fWsNSvMmz2c_XIwHT8t8Q9FRkVffXf4q3vR39kI5U0P1n_6pRK6nF2oNuXyqt0SAxTwxCHD8hJShY6PpVeo0v8C5fsOoif4vHTI3FZ_Mjdd-TO5svroj2AvrN-mew6WDM1"/>
+<span class="absolute top-3 left-3 w-8 h-8 rounded-full bg-surface/90 text-on-surface font-label-md text-label-md flex items-center justify-center font-bold">03</span>
+</div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-primary font-semibold mb-1">Acupressure</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mb-2">Occipital Release</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+          Use pads of thumbs to execute firm circular motions along the cranial base and occipital ridge. Breathe deeply through the nose to inhale cineole terpenes.
+        </p>
+</div>
+<!-- Step 04 -->
+<div class="group flex flex-col bg-surface-container-low rounded-2xl p-space-lg transition-transform duration-300 hover:-translate-y-1">
+<div class="relative w-full aspect-square rounded-xl overflow-hidden bg-surface-container mb-space-md">
+<img alt="Step 04: Overnight botanical rest" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Minimalist still life of a neutral raw linen wrapped head towel resting beside a glass of fresh herbal infusion on a natural wooden nightstand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEDRczHcrOm5ijbjyWtllutkokAXsZ_b26OnEUCLnQzgkrYfdXq_MBfNrghqs9XLdI2aMBA04BwrNBlTqQVzGkGUq_LBHl4HIomPorafdz6UYxOeXbvrIWi6BWWQ7GBlXX0_AT6iO6bUYmY4TBa0E-tgg0xA487V55JcmwvzqnCBi1et_Xp4hj7Qy8HGYosZh8w7wpoZjNX5dRTIwTa-qY0yx7Y6hP5_l_9ThKaqdigOZTURq3kCJU"/>
+<span class="absolute top-3 left-3 w-8 h-8 rounded-full bg-surface/90 text-on-surface font-label-md text-label-md flex items-center justify-center font-bold">04</span>
+</div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-primary font-semibold mb-1">Deep Incubation</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mb-2">Warm Wrap or Overnight</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+          Wrap hair in a warmed organic cotton linen towel for 45 minutes, or leave overnight on a silk pillowcase. Cleanse with botanical shampoo in the morning.
+        </p>
+</div>
+</div>
+</section>
+<!-- INTERACTIVE APOTHECARY ACCORDIONS & HARVEST TRANSPARENCY -->
+<section class="max-w-[1360px] mx-auto px-margin-mobile lg:px-margin py-space-lg w-full">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl">
+<!-- Accordions Left (7 cols) -->
+<div class="lg:col-span-7 flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest font-semibold">Formulation Details</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-space-md">Apothecary Transparency</h3>
+<!-- Accordion 1: INCI -->
+<div class="accordion-item rounded-2xl bg-surface-container-low overflow-hidden transition-all">
+<button class="w-full px-space-lg py-space-md flex items-center justify-between text-left hover:bg-surface-container transition-colors" onclick="toggleAccordion(this)" type="button">
+<span class="font-label-lg text-label-lg text-on-surface">Complete Ingredients (INCI Nomenclature)</span>
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant transition-transform duration-300">expand_more</span>
+</button>
+<div class="accordion-content hidden px-space-lg pb-space-lg text-body-sm text-on-surface-variant space-y-3">
+<p class="font-mono text-xs leading-relaxed bg-surface-container p-space-md rounded-xl text-on-surface">
+              Rosmarinus Officinalis (Wild Rosemary Cineole) Leaf Oil*, Phyllanthus Emblica (Cold-Pressed Amla) Fruit Extract*, Camellia Japonica (Tsubaki) Seed Oil*, Eclipta Prostrata (Bhringraj) Whole Herb Extract*, Sesamum Indicum (Virgin Black Sesame) Seed Oil*, Ricinus Communis (Castor) Seed Oil*, Nigella Sativa (Black Cumin) Seed Oil*, Tocopherol (Non-GMO Vitamin E), Lavandula Angustifolia (Kashmir Lavender) Flower Oil*. <br/><br/>
+<span class="font-sans font-semibold">*Certified Organic &amp; Wildcrafted Harvest. 100% Active Plant Chemistry. 0% Synthetic Stabilizers.</span>
+</p>
+</div>
+</div>
+<!-- Accordion 2: Hair Textures -->
+<div class="accordion-item rounded-2xl bg-surface-container-low overflow-hidden transition-all">
+<button class="w-full px-space-lg py-space-md flex items-center justify-between text-left hover:bg-surface-container transition-colors" onclick="toggleAccordion(this)" type="button">
+<span class="font-label-lg text-label-lg text-on-surface">Directions for All Hair Textures (1A to 4C)</span>
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant transition-transform duration-300">expand_more</span>
+</button>
+<div class="accordion-content hidden px-space-lg pb-space-lg text-body-sm text-on-surface-variant space-y-3">
+<ul class="space-y-2">
+<li class="flex items-start gap-2">
+<strong class="text-on-surface shrink-0">Straight to Wavy (Type 1A - 2C):</strong> Apply 1–2 pipettes pre-wash. Leave for 45 minutes prior to shampooing to prevent weighing down fine hair shafts.
+              </li>
+<li class="flex items-start gap-2">
+<strong class="text-on-surface shrink-0">Curly to Coily (Type 3A - 4C):</strong> Apply 3–4 pipettes directly to parted scalp post-wash or as a multi-day moisture sealant directly into coils.
+              </li>
+<li class="flex items-start gap-2">
+<strong class="text-on-surface shrink-0">Dry / Flaky Scalp Flare-ups:</strong> Use nightly as an intensive 14-day consecutive renewal protocol.
+              </li>
+</ul>
+</div>
+</div>
+<!-- Accordion 3: Purity & Shelf Life -->
+<div class="accordion-item rounded-2xl bg-surface-container-low overflow-hidden transition-all">
+<button class="w-full px-space-lg py-space-md flex items-center justify-between text-left hover:bg-surface-container transition-colors" onclick="toggleAccordion(this)" type="button">
+<span class="font-label-lg text-label-lg text-on-surface">Purity Standards, Storage &amp; Shelf Life</span>
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant transition-transform duration-300">expand_more</span>
+</button>
+<div class="accordion-content hidden px-space-lg pb-space-lg text-body-sm text-on-surface-variant space-y-3">
+<p>
+              Formulated without phthalates, petroleum fractions, artificial dyes, chemical isolates, synthetic fragrances, or silicones. Unfiltered cold-maceration means subtle botanical sedimentation is natural.
+            </p>
+<p class="font-semibold text-on-surface">
+              Storage: Keep in a cool, shaded environment below 28°C. Our pharmaceutical-grade ultraviolet amber glass protects volatile terpene molecules from photo-oxidation for 18 months post-unsealing.
+            </p>
+</div>
+</div>
+<!-- Accordion 4: Refill Exchange -->
+<div class="accordion-item rounded-2xl bg-surface-container-low overflow-hidden transition-all">
+<button class="w-full px-space-lg py-space-md flex items-center justify-between text-left hover:bg-surface-container transition-colors" onclick="toggleAccordion(this)" type="button">
+<span class="font-label-lg text-label-lg text-on-surface">Conscious Shipping &amp; Glass Refill Exchange</span>
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant transition-transform duration-300">expand_more</span>
+</button>
+<div class="accordion-content hidden px-space-lg pb-space-lg text-body-sm text-on-surface-variant space-y-3">
+<p>
+              Shipped in 100% recycled biodegradable algae paper cushion mailers with starch padding. Return 4 empty Earth &amp; Essence glass bottles to any botanical boutique stockist to receive a complimentary Discovery Flacon of your choice.
+            </p>
+</div>
+</div>
+</div>
+<!-- Right Column: Visual Infographic Feature (5 cols) -->
+<div class="lg:col-span-5 bg-surface-container rounded-3xl p-space-lg flex flex-col justify-between">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold tracking-wider uppercase">Clinical Bio-Metric</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">8-Week Trial • n=84</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mt-2">Follicular Density Verification</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            Independent clinical evaluation over 56 days demonstrates marked reinforcement of root retention and scalp barrier equilibrium.
+          </p>
+<!-- Metric 1 -->
+<div class="mt-space-sm space-y-1.5">
+<div class="flex justify-between font-label-sm text-label-sm text-on-surface font-semibold">
+<span>Follicle Breakage Reduction</span>
+<span class="text-primary font-bold">92%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-high overflow-hidden">
+<div class="h-full bg-primary-container rounded-full" style="width: 92%"></div>
+</div>
+</div>
+<!-- Metric 2 -->
+<div class="space-y-1.5">
+<div class="flex justify-between font-label-sm text-label-sm text-on-surface font-semibold">
+<span>Scalp Micro-Hydration &amp; Sebum Balance</span>
+<span class="text-secondary font-bold">88%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-high overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 88%"></div>
+</div>
+</div>
+<!-- Metric 3 -->
+<div class="space-y-1.5">
+<div class="flex justify-between font-label-sm text-label-sm text-on-surface font-semibold">
+<span>Visible Lustre &amp; Cuticle Integrity</span>
+<span class="text-tertiary font-bold">96%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-high overflow-hidden">
+<div class="h-full bg-tertiary-container rounded-full" style="width: 96%"></div>
+</div>
+</div>
+</div>
+<div class="mt-space-md p-space-md rounded-2xl bg-surface-container-low flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">verified</span>
+</div>
+<div class="text-body-sm text-on-surface">
+<p class="font-semibold text-xs uppercase tracking-wider text-on-surface-variant">Botanical Guarantee</p>
+<p class="text-xs">Third-party GC-MS chromatograph verified for pure cineole &amp; bio-tannins.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- APOTHECARY COMPANION FORMULATIONS (Related Products Grid) -->
+<section class="max-w-[1360px] mx-auto px-margin-mobile lg:px-margin pt-space-xl pb-space-xl w-full">
+<div class="flex flex-col sm:flex-row items-baseline justify-between gap-space-sm mb-space-lg">
+<div>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-[0.2em] font-semibold">Regimen Synergy</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mt-1">Apothecary Companion Formulations</h2>
+</div>
+<a class="text-on-surface font-label-md text-label-md underline underline-offset-4 hover:text-primary transition-colors" data-path="hair-care" href="#">
+        View Entire Follicular System →
+      </a>
+</div>
+<!-- 4 Related Products Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Companion 1 -->
+<div class="group flex flex-col bg-surface-container-low rounded-2xl p-space-md transition-all hover:shadow-md">
+<div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden bg-surface-container mb-space-sm">
+<img alt="Camellia &amp; Honey Repair Masque" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Product photograph of luxury glass jar of Camellia &amp; Honey hair repair masque on beige sandstone plinth next to wooden cosmetic spatula and wildflowers." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWAQEJXeN7lvwpvyqX10dT2UIIkJ8jaI5CDZYDxQjlpWpTtisPns91wgM_f_3Mo2s2lPnoHNlSLLiADVJZ5_dXqkaPYd0_Pd1OUOp6Ap3cccdia-iLk63HHyzb2PFzI-EqyZ0LdVZYONQ0ScFEdIpb15ClhjBg-ckY4EwBn3qBF7kf55boEGdvG_F0BaKG8PSk6DRyj5-9WAZ9jrRQJQHyFfCoW6IZbwfPkg2d5blJoQEah4nk76ZW"/>
+<span class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-surface/90 text-on-surface font-label-sm text-[10px] tracking-wider uppercase">NUTRITIVE</span>
+</div>
+<span class="font-label-sm text-[11px] text-on-surface-variant uppercase tracking-wider">Restorative Cream</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface my-1 group-hover:text-primary transition-colors">Camellia &amp; Honey Masque</h4>
+<p class="font-body-sm text-[13px] text-on-surface-variant line-clamp-2 mb-space-sm">
+          Intense lipid replenishment treatment with cold-harvested wild forest raw honey.
+        </p>
+<div class="mt-auto pt-space-sm flex items-center justify-between">
+<span class="font-label-md text-label-md font-bold text-on-surface">₹3,200</span>
+<button class="px-4 py-1.5 rounded-full bg-surface-container-high hover:bg-primary-container hover:text-on-primary-container text-on-surface font-label-sm text-label-sm uppercase tracking-wider transition-colors" onclick="quickAdd('Camellia &amp; Honey Masque', '₹3,200')" type="button">
+            + ADD
+          </button>
+</div>
+</div>
+<!-- Companion 2 -->
+<div class="group flex flex-col bg-surface-container-low rounded-2xl p-space-md transition-all hover:shadow-md">
+<div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden bg-surface-container mb-space-sm">
+<img alt="Hand Carved Walnut Comb" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Artisanal hand carved dark walnut wood wide-tooth scalp comb resting on textured linen towel with soft shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDe7rub1rRqqMJmWivYqhaRlCUDf7WXzpObA61sXflH1krQg1708QXm4QZeA9hs0nKMbXcqJy6YkutESU2mFqLpQ4X-insczTkETmStvqQ0Fmf6rA7hyB8CuqsreiDkdMEedA-kcAhobbOFti9MQVb3OJXVorCPSpqQKgmlN9uqyi58abFGFNtJ3ZRzB_TmOawWubz-GbjzzVlLmZe3fcORTgwmVeuJeGZi0W7DsyQGTeecKJ41EIhj"/>
+<span class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-surface/90 text-on-surface font-label-sm text-[10px] tracking-wider uppercase">BOTANIC TOOL</span>
+</div>
+<span class="font-label-sm text-[11px] text-on-surface-variant uppercase tracking-wider">Acupressure Implement</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface my-1 group-hover:text-primary transition-colors">Hand Carved Walnut Comb</h4>
+<p class="font-body-sm text-[13px] text-on-surface-variant line-clamp-2 mb-space-sm">
+          Seamless wide-tooth comb hand-buffed in cold-pressed neem wax for static-free de-tangling.
+        </p>
+<div class="mt-auto pt-space-sm flex items-center justify-between">
+<span class="font-label-md text-label-md font-bold text-on-surface">₹1,600</span>
+<button class="px-4 py-1.5 rounded-full bg-surface-container-high hover:bg-primary-container hover:text-on-primary-container text-on-surface font-label-sm text-label-sm uppercase tracking-wider transition-colors" onclick="quickAdd('Hand Carved Walnut Comb', '₹1,600')" type="button">
+            + ADD
+          </button>
+</div>
+</div>
+<!-- Companion 3 -->
+<div class="group flex flex-col bg-surface-container-low rounded-2xl p-space-md transition-all hover:shadow-md">
+<div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden bg-surface-container mb-space-sm">
+<img alt="White Tea &amp; Aloe Hydrosol Mist" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Misted glass spray bottle with White Tea &amp; Aloe Hydrosol fine droplet mist floating in air against warm natural backdrop." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCl3BOrUcdidVpaxVlnbBWIbtawsluc9wVrrzEMb7vr2xtycnzSroit3Z3rBmWNRsKnCYYVKQjLWyH3ufrOvAXlof_639sIWmq_dxVBugAvYdaeJA1UcizbonX9m6QVR9Qi_L6V1mm0PTmn-Met7LR2uEaaRtai10zaL1Qy4azZGqJFKPTrj2rLVbf6s1j9kLq7Fm3JncU8U5a2by-gXibMe5u0ZNaOXjmGLO-xTXzPJagYf-hYJw2-"/>
+<span class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-surface/90 text-on-surface font-label-sm text-[10px] tracking-wider uppercase">HYDRATOR</span>
+</div>
+<span class="font-label-sm text-[11px] text-on-surface-variant uppercase tracking-wider">Steam Distillation</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface my-1 group-hover:text-primary transition-colors">White Tea &amp; Aloe Mist</h4>
+<p class="font-body-sm text-[13px] text-on-surface-variant line-clamp-2 mb-space-sm">
+          Pre-oil hydration hydrosol with mountain spring water to infuse hydrophilic moisture.
+        </p>
+<div class="mt-auto pt-space-sm flex items-center justify-between">
+<span class="font-label-md text-label-md font-bold text-on-surface">₹2,100</span>
+<button class="px-4 py-1.5 rounded-full bg-surface-container-high hover:bg-primary-container hover:text-on-primary-container text-on-surface font-label-sm text-label-sm uppercase tracking-wider transition-colors" onclick="quickAdd('White Tea &amp; Aloe Mist', '₹2,100')" type="button">
+            + ADD
+          </button>
+</div>
+</div>
+<!-- Companion 4 -->
+<div class="group flex flex-col bg-surface-container-low rounded-2xl p-space-md transition-all hover:shadow-md">
+<div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden bg-surface-container mb-space-sm">
+<img alt="Shea &amp; Rosemary Split End Salve" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Dark amber glass balm pot open showing rich golden botanical shea salve surrounded by fresh rosemary sprigs." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUlQ8K789aFmEgIyjcTleo6CBg-AwnRIc_Ph7syVjxupK6bveFUGzrPkwrfkVo2_ci67XNlxSLT_NAYL21gQPPSdvn5iSwSUOnEOHWxv0V6q1ZPka_gczhgyN2SEE7x-dFydbX79OL-LGUqR-w1Nw7nNiESpB8vsyPhdh_1y030NImJklRNa8rKQ7-Q7yMbW4QlZxiJ0-A3uO8ezEifmPA8ms7NJrncv-n_ZQNaWEJDI7tGG8U-95Y"/>
+<span class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-surface/90 text-on-surface font-label-sm text-[10px] tracking-wider uppercase">SEALANT</span>
+</div>
+<span class="font-label-sm text-[11px] text-on-surface-variant uppercase tracking-wider">Tip Protection</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface my-1 group-hover:text-primary transition-colors">Shea &amp; Rosemary Salve</h4>
+<p class="font-body-sm text-[13px] text-on-surface-variant line-clamp-2 mb-space-sm">
+          Ultra-rich botanical butter for targeted seal on dry ends and cuticle split mending.
+        </p>
+<div class="mt-auto pt-space-sm flex items-center justify-between">
+<span class="font-label-md text-label-md font-bold text-on-surface">₹2,400</span>
+<button class="px-4 py-1.5 rounded-full bg-surface-container-high hover:bg-primary-container hover:text-on-primary-container text-on-surface font-label-sm text-label-sm uppercase tracking-wider transition-colors" onclick="quickAdd('Shea &amp; Rosemary Salve', '₹2,400')" type="button">
+            + ADD
+          </button>
+</div>
+</div>
+</div>
+</section>
+<!-- TOAST NOTIFICATION FOR CART MICRO-INTERACTIONS -->
+<div class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none" id="cartToast">
+<div class="bg-inverse-surface text-inverse-on-surface px-space-lg py-space-md rounded-2xl shadow-xl flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary-fixed text-[24px]">check_circle</span>
+<div>
+<p class="font-label-md text-label-md font-bold" id="toastTitle">Added to Botanical Sanctuary Bag</p>
+<p class="font-body-sm text-[12px] text-surface-container-high/80" id="toastSubtitle">1x Botanical Scalp Elixir (100ml) • ₹2,800</p>
+</div>
+</div>
+</div>
+<script>
+    let currentQty = 1;
+    let currentPriceNum = 2800;
+    let currentVolume = '100ml Dropper Pipette';
+
+    function selectThumbnail(idx, element) {
+      document.querySelectorAll('.thumb-btn').forEach(b => {
+        b.classList.remove('ring-2', 'ring-primary-container', 'opacity-100');
+        b.classList.add('opacity-70');
+      });
+      element.classList.remove('opacity-70');
+      element.classList.add('ring-2', 'ring-primary-container', 'opacity-100');
+      
+      const mainImg = document.getElementById('mainProductImage');
+      const clickedImg = element.querySelector('img');
+      if (clickedImg && mainImg) {
+        mainImg.style.opacity = '0.3';
+        setTimeout(() => {
+          mainImg.setAttribute('data-alt', clickedImg.getAttribute('data-alt'));
+          mainImg.style.opacity = '1';
+        }, 150);
+      }
+    }
+
+    function updateVolume(label, priceStr, element) {
+      document.querySelectorAll('.volume-radio').forEach(r => {
+        r.classList.remove('ring-1', 'ring-primary-container', 'bg-surface-container');
+        r.classList.add('bg-surface-container-low');
+      });
+      element.classList.remove('bg-surface-container-low');
+      element.classList.add('ring-1', 'ring-primary-container', 'bg-surface-container');
+
+      currentVolume = label;
+      currentPriceNum = parseInt(priceStr.replace(/[^0-9]/g, ''), 10);
+      document.getElementById('selectedVolLabel').innerText = label;
+      document.getElementById('displayPrice').innerText = priceStr;
+      updateCTABtn();
+    }
+
+    function adjustQty(delta) {
+      currentQty = Math.max(1, currentQty + delta);
+      document.getElementById('qtyDisplay').innerText = currentQty;
+      updateCTABtn();
+    }
+
+    function updateCTABtn() {
+      const total = currentPriceNum * currentQty;
+      const formatted = '₹' + total.toLocaleString('en-IN');
+      document.getElementById('ctaButtonLabel').innerText = 'ADD TO BAG — ' + formatted;
+    }
+
+    function toggleWishlist(btn) {
+      const icon = btn.querySelector('.material-symbols-outlined');
+      if (icon.innerText === 'favorite_border') {
+        icon.innerText = 'favorite';
+        icon.classList.add('text-primary');
+        icon.style.fontVariationSettings = "'FILL' 1";
+      } else {
+        icon.innerText = 'favorite_border';
+        icon.classList.remove('text-primary');
+        icon.style.fontVariationSettings = "'FILL' 0";
+      }
+    }
+
+    function toggleAccordion(btn) {
+      const parent = btn.closest('.accordion-item');
+      const content = parent.querySelector('.accordion-content');
+      const icon = btn.querySelector('.material-symbols-outlined');
+      
+      const isOpen = !content.classList.contains('hidden');
+      if (isOpen) {
+        content.classList.add('hidden');
+        icon.style.transform = 'rotate(0deg)';
+      } else {
+        content.classList.remove('hidden');
+        icon.style.transform = 'rotate(180deg)';
+      }
+    }
+
+    function triggerCartToast(title, desc) {
+      const toast = document.getElementById('cartToast');
+      if (title) document.getElementById('toastTitle').innerText = title;
+      if (desc) {
+        document.getElementById('toastSubtitle').innerText = desc;
+      } else {
+        const total = (currentPriceNum * currentQty).toLocaleString('en-IN');
+        document.getElementById('toastSubtitle').innerText = currentQty + 'x ' + currentVolume + ' • ₹' + total;
+      }
+
+      toast.classList.remove('translate-y-24', 'opacity-0', 'pointer-events-none');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-24', 'opacity-0', 'pointer-events-none');
+      }, 3500);
+    }
+
+    function quickAdd(productName, price) {
+      triggerCartToast('Added Companion to Bag', '1x ' + productName + ' • ' + price);
+    }
+  </script>
+</div></main><footer class="w-full bg-inverse-surface text-inverse-on-surface pt-space-xl pb-space-lg"><div class="max-w-[1360px] mx-auto px-margin-mobile lg:px-margin"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-space-xl pb-space-xl"><div class="lg:col-span-4 flex flex-col gap-space-md"><span class="font-headline-sm text-headline-sm tracking-tight text-surface-container-lowest">EARTH &amp; ESSENCE</span><p class="font-body-sm text-body-sm text-surface-variant max-w-sm">Slow-crafted botanical rituals, regenerative agriculture harvests, and pure plant essences formulated for unhurried intentional living.</p><div class="flex flex-col gap-space-xs pt-space-sm"><span class="font-label-md text-label-md tracking-wider uppercase text-surface-container-lowest">Dispatch Newsletter</span><div class="flex items-stretch gap-space-xs mt-space-xs"><input class="flex-1 bg-surface-container-highest/20 text-surface-container-lowest placeholder:text-surface-variant/70 text-body-sm px-space-md py-space-sm rounded-full outline-none focus:ring-1 focus:ring-primary-container" placeholder="Enter your botanical sanctuary email..." type="email"/><button class="bg-primary-container text-on-primary-container px-space-lg py-space-sm rounded-full font-label-md text-label-md uppercase tracking-wider hover:opacity-90 transition-opacity" type="button">Join</button></div></div></div><div class="lg:col-span-2 lg:col-start-6 flex flex-col gap-space-sm"><span class="font-label-lg text-label-lg text-surface-container-lowest uppercase tracking-wider">Explore</span><nav class="flex flex-col gap-space-xs"><a class="font-body-sm text-body-sm text-surface-variant hover:text-surface-container-lowest transition-colors" data-path="shop-all" href="#">Seasonal Apothecary</a><a class="font-body-sm text-body-sm text-surface-variant hover:text-surface-container-lowest transition-colors" data-path="candles" href="#">Soy &amp; Beeswax Candles</a><a class="font-body-sm text-body-sm text-surface-variant hover:text-surface-container-lowest transition-colors" data-path="hair-care" href="#">Hair &amp; Scalp Tonics</a><a class="font-body-sm text-body-sm text-surface-variant hover:text-surface-container-lowest transition-colors" data-path="collections" href="#">Limited Harvests</a></nav></div><div class="lg:col-span-2 flex flex-col gap-space-sm"><span class="font-label-lg text-label-lg text-surface-container-lowest uppercase tracking-wider">Company</span><nav class="flex flex-col gap-space-xs"><a class="font-body-sm text-body-sm text-surface-variant hover:text-surface-container-lowest transition-colors" data-path="our-story" href="#">Our Manifesto</a><a class="font-body-sm text-body-sm text-surface-variant hover:text-surface-container-lowest transition-colors" data-path="soil-stewardship" href="#">Soil Stewardship</a><a class="font-body-sm text-body-sm text-surface-variant hover:text-surface-container-lowest transition-colors" data-path="global-stockists" href="#">Global Stockists</a><a class="font-body-sm text-body-sm text-surface-variant hover:text-surface-container-lowest transition-colors" data-path="botanical-journal" href="#">Botanical Journal</a></nav></div><div class="lg:col-span-3 flex flex-col gap-space-sm"><span class="font-label-lg text-label-lg text-surface-container-lowest uppercase tracking-wider">Customer Care</span><nav class="flex flex-col gap-space-xs"><a class="font-body-sm text-body-sm text-surface-variant hover:text-surface-container-lowest transition-colors" data-path="conscious-shipping" href="#">Conscious Shipping &amp; Returns</a><a class="font-body-sm text-body-sm text-surface-variant hover:text-surface-container-lowest transition-colors" data-path="botanist-help" href="#">Inquire &amp; Botanist Help</a><a class="font-body-sm text-body-sm text-surface-variant hover:text-surface-container-lowest transition-colors" data-path="formulation-faqs" href="#">Formulation FAQs</a><div class="flex items-center gap-space-sm pt-space-xs"><a aria-label="Community Stories" class="text-surface-variant hover:text-surface-container-lowest transition-colors" href="#"><span class="material-symbols-outlined text-[20px]">nature</span></a><a aria-label="Global Garden Network" class="text-surface-variant hover:text-surface-container-lowest transition-colors" href="#"><span class="material-symbols-outlined text-[20px]">public</span></a><a aria-label="Audio Meditations" class="text-surface-variant hover:text-surface-container-lowest transition-colors" href="#"><span class="material-symbols-outlined text-[20px]">sound_detection_dog_barking</span></a></div></nav></div></div><div class="pt-space-lg flex flex-col sm:flex-row items-center justify-between gap-space-md text-surface-variant"><p class="font-body-sm text-body-sm">© 2024 Earth &amp; Essence Purveyors Ltd. All rights reserved.</p><div class="flex items-center gap-space-md font-label-sm text-label-sm uppercase tracking-wider"><a class="hover:text-surface-container-lowest transition-colors" data-path="privacy-policy" href="#">Privacy Policy</a><a class="hover:text-surface-container-lowest transition-colors" data-path="terms" href="#">Terms of Living</a></div></div></div></footer></body></html>
