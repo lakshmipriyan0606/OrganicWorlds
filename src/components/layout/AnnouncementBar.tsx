@@ -3,12 +3,12 @@
 import React from "react";
 
 const marqueeItems = [
-  "Free carbon-neutral shipping across India on orders over ₹1,500",
-  "100% Pure South Indian Botanical Alchemy",
-  "Complimentary 4-week cured herbal soap sample with orders above ₹1,200",
-  "Cold-pressed scalp elixirs & hand-cut artisanal bath soaps",
-  "Zero synthetic chemicals • Zero parabens • Zero palm oil",
-  "Ethically wild-harvested herbs & sun-dried Vetiver roots",
+  "100% Pure Botanical Oils",
+  "Ethically Wild-Harvested Herbs & Sun-Dried Vetiver Roots",
+  "Free Carbon-Neutral Shipping Across India on Orders Over ₹1,500",
+  "Handcrafted With Love in South India",
+  "Complimentary 4-Week Cured Herbal Soap Sample with Orders Above ₹1,200",
+  "Zero Synthetic Chemicals • Zero Parabens • Zero Palm Oil",
 ];
 
 export function AnnouncementBar() {
