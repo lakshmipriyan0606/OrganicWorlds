@@ -76,33 +76,18 @@ export function SiteHeader() {
             </Link>
           </nav>
 
-          {/* Center Brand Identity with Botanical Mark */}
-          <div className="text-center">
-            <Link href="/" className="inline-flex items-center gap-2.5 group text-left">
-              <svg
-                className="w-7 h-7 text-[#1A231C] opacity-90 flex-shrink-0 group-hover:scale-105 transition-transform"
-                viewBox="0 0 40 40"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.4"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                {/* Botanical vine sprig motif */}
-                <path d="M12 30 C16 26, 20 20, 26 12 C28 9, 31 7, 34 6" />
-                <path d="M18 24 C16 20, 16 16, 18 13 C21 15, 22 18, 20 22" fill="currentColor" fillOpacity="0.1" />
-                <path d="M23 18 C25 15, 27 13, 30 14 C29 17, 27 19, 24 19" fill="currentColor" fillOpacity="0.1" />
-                <path d="M13 29 C9 28, 7 25, 8 22 C11 23, 13 25, 14 28" fill="currentColor" fillOpacity="0.1" />
-                <path d="M28 10 C31 9, 34 9, 35 11 C34 13, 31 13, 29 12" fill="currentColor" fillOpacity="0.1" />
-              </svg>
-              <div className="flex flex-col">
-                <span className="font-display text-2xl font-medium tracking-tight text-[#1A231C] leading-none group-hover:text-[#0D3B2E] transition-colors">
-                  Pavishna
-                </span>
-                <span className="text-[9.5px] uppercase tracking-[0.24em] text-[#3D453D] font-medium mt-1">
-                  Organic Worlds
-                </span>
-              </div>
+          {/* Center Brand Identity with Official Logo Image */}
+          <div className="text-center flex items-center justify-center">
+            <Link
+              href="/"
+              className="inline-flex items-center justify-center group py-1.5 focus:outline-none"
+              aria-label="Pavishna Organic Worlds Homepage"
+            >
+              <img
+                src="/images/logo-header-transparent.png"
+                alt="Pavishna Organic Worlds"
+                className="h-12 sm:h-13 md:h-15 w-auto max-w-[200px] sm:max-w-[240px] object-contain transition-transform duration-300 group-hover:scale-105"
+              />
             </Link>
           </div>
 
@@ -231,23 +216,17 @@ export function SiteHeader() {
           <div className="fixed inset-y-0 left-0 w-4/5 max-w-sm bg-[#FBF9F3] p-6 shadow-xl flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between pb-6 border-b border-[#E2DDD2]">
-                <div className="flex items-center gap-3">
-                  <div className="relative w-11 h-11 rounded-full overflow-hidden border border-emerald-900/15 shadow-sm bg-white shrink-0">
-                    <img
-                      src="/images/logo.jpeg"
-                      alt="Pavishna Organic Worlds"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div>
-                    <span className="font-display text-xl text-[#0D3B2E] block font-bold leading-tight">
-                      Pavishna
-                    </span>
-                    <span className="text-[10px] uppercase tracking-widest text-[#0D3B2E]/90 font-bold">
-                      Organic Worlds
-                    </span>
-                  </div>
-                </div>
+                <Link
+                  href="/"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center"
+                >
+                  <img
+                    src="/images/logo-header-transparent.png"
+                    alt="Pavishna Organic Worlds"
+                    className="h-10 w-auto object-contain"
+                  />
+                </Link>
                 <button
                   onClick={() => setMobileMenuOpen(false)}
                   className="p-2 text-charcoal-600 hover:text-forest-900 cursor-pointer"

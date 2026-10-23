@@ -10,12 +10,12 @@ export function SiteFooter() {
           
           {/* Brand Philosophy Column */}
           <div className="lg:col-span-2 space-y-5">
-            <Link href="/" className="inline-flex items-center gap-3.5 group">
-              <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-white/20 shadow-md bg-white shrink-0 group-hover:scale-105 transition-transform">
+            <Link href="/" className="inline-flex items-center gap-4 group">
+              <div className="h-12 px-2.5 py-1 rounded-md bg-[#F6F3EC] border border-white/20 shadow-md shrink-0 flex items-center group-hover:scale-105 transition-transform">
                 <img
-                  src="/images/logo.jpeg"
+                  src="/images/logo-header-transparent.png"
                   alt="Pavishna Organic Worlds"
-                  className="w-full h-full object-cover"
+                  className="h-8 w-auto object-contain"
                 />
               </div>
               <div>
