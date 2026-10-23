@@ -101,51 +101,60 @@ export default function HomePage() {
           HERO SECTION: Replicated Pixel-Accurate to Screenshot
           ========================================================================= */}
       <section className="relative w-full bg-[#F6F3EC] text-[#1B1C19] overflow-hidden pt-8 pb-16 lg:pt-12 lg:pb-22 border-b border-[#EAE4D8]">
-        
-        {/* Natural Sun-Dappled Foliage Shadows (Left Side) */}
-        <div className="absolute top-0 -left-12 sm:-left-6 w-[340px] sm:w-[520px] lg:w-[600px] h-full pointer-events-none opacity-20 mix-blend-multiply z-0 select-none overflow-hidden">
-          <svg className="w-full h-full text-[#38412F]" viewBox="0 0 600 700" fill="currentColor" style={{ filter: "blur(10px)" }}>
-            <path d="M-50 40 C30 80, 100 120, 160 80 C220 40, 280 90, 220 160 C160 230, 240 280, 290 240 C340 200, 360 270, 310 320 C260 370, 330 420, 270 470 C210 520, 140 460, 90 520 C40 580, -20 540, -50 620 Z" />
-            <path d="M-80 180 C-10 210, 60 260, 40 330 C20 400, 110 420, 90 500 C70 580, -10 610, -80 660 Z" />
-            <ellipse cx="230" cy="180" rx="45" ry="25" transform="rotate(-25 230 180)" />
-            <ellipse cx="280" cy="270" rx="55" ry="30" transform="rotate(35 280 270)" />
-            <ellipse cx="180" cy="360" rx="50" ry="25" transform="rotate(-15 180 360)" />
-            <ellipse cx="120" cy="240" rx="40" ry="20" transform="rotate(45 120 240)" />
-            <ellipse cx="70" cy="420" rx="60" ry="30" transform="rotate(20 70 420)" />
-          </svg>
-        </div>
+        {/* Rotating Circular Botanical Heritage Seal Badge (Bottom Right Corner) */}
+        <div className="absolute -bottom-10 -right-10 sm:-bottom-8 sm:-right-8 lg:-bottom-6 lg:-right-6 w-44 h-44 sm:w-52 sm:h-52 pointer-events-none select-none z-10 overflow-hidden">
+          <style>{`
+            @keyframes rotateHeroSeal {
+              from { transform: rotate(0deg); }
+              to { transform: rotate(360deg); }
+            }
+            .animate-rotate-hero-seal {
+              animation: rotateHeroSeal 24s linear infinite;
+              transform-origin: center center;
+            }
+          `}</style>
+          <div className="w-full h-full animate-rotate-hero-seal">
+            <svg
+              className="w-full h-full text-[#384532] opacity-45"
+              viewBox="0 0 200 200"
+              fill="none"
+              stroke="currentColor"
+            >
+              {/* Outer dashed stamped ring */}
+              <circle cx="100" cy="100" r="92" strokeWidth="1" strokeDasharray="3 3" />
+              {/* Outer solid fine ring */}
+              <circle cx="100" cy="100" r="86" strokeWidth="1.2" />
+              {/* Inner boundary ring */}
+              <circle cx="100" cy="100" r="66" strokeWidth="1" />
+              <circle cx="100" cy="100" r="62" strokeWidth="0.8" strokeDasharray="2 2" />
 
-        {/* Decorative Botanical Line-Art Sprig & Circular Stamp (Lower Right) */}
-        <div className="absolute -bottom-8 right-16 sm:right-32 w-80 h-80 pointer-events-none opacity-35 z-0 select-none">
-          <svg className="w-full h-full text-[#5B6753]" viewBox="0 0 200 200" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M100 190 C100 140, 110 80, 150 40" />
-            <path d="M105 155 C90 145, 85 130, 90 120 C105 125, 108 140, 105 155 Z" />
-            <path d="M112 128 C128 120, 138 122, 140 135 C125 140, 116 134, 112 128 Z" />
-            <path d="M120 102 C108 92, 106 78, 115 70 C125 78, 124 92, 120 102 Z" />
-            <path d="M132 78 C148 70, 160 72, 162 82 C148 88, 138 84, 132 78 Z" />
-            <path d="M145 46 C148 30, 160 24, 168 28 C166 40, 155 45, 145 46 Z" />
-          </svg>
-        </div>
+              {/* Full 360-degree Circular Text Path */}
+              <path
+                id="heroSealPath"
+                d="M 100, 100 m -76, 0 a 76,76 0 1,1 152,0 a 76,76 0 1,1 -152,0"
+                fill="none"
+              />
+              <text
+                fontSize="8.5"
+                letterSpacing="0.22em"
+                fill="currentColor"
+                fontWeight="600"
+                className="uppercase"
+              >
+                <textPath href="#heroSealPath" startOffset="0%">
+                  • AUTHENTIC BOTANICAL ALCHEMY • ESTD 2026 • 100% PURE HERBAL •
+                </textPath>
+              </text>
 
-        {/* Circular Stamped Botanical Seal (Far Right) */}
-        <div className="hidden lg:block absolute bottom-14 -right-12 w-40 h-40 pointer-events-none opacity-25 z-0 select-none">
-          <svg className="w-full h-full text-[#38412F]" viewBox="0 0 160 160" fill="none" stroke="currentColor" strokeWidth="1.2">
-            <circle cx="80" cy="80" r="70" strokeDasharray="3 3" />
-            <circle cx="80" cy="80" r="62" />
-            <path d="M60 80 Q75 60 80 80 Q85 100 100 80" />
-            <path d="M80 50 L80 110" />
-            <path id="curve" d="M 30,80 A 50,50 0 1,1 130,80" fill="none" />
-            <text fontSize="8" letterSpacing="0.28em" fill="currentColor" fontWeight="bold">
-              <textPath href="#curve" startOffset="10%">
-                AUTHENTIC BOTANICAL
-              </textPath>
-            </text>
-          </svg>
-        </div>
-
-        {/* Sparkle Star ✦ (Bottom Right) */}
-        <div className="absolute bottom-6 right-6 text-[#D5CAB7] text-2xl select-none pointer-events-none opacity-80">
-          ✦
+              {/* Center Floral Emblem */}
+              <g transform="translate(100, 100)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M0 -22 L0 22 M-22 0 L22 0" strokeWidth="1" />
+                <path d="M-12 -12 L12 12 M-12 12 L12 -12" strokeWidth="0.8" opacity="0.6" />
+                <circle cx="0" cy="0" r="6" fill="#F6F3EC" strokeWidth="1.2" />
+                <circle cx="0" cy="0" r="2.5" fill="currentColor" />
+              </g>
+            </svg>
+          </div>
         </div>
 
         <Container className="relative z-10">
