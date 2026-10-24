@@ -57,7 +57,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${bodoni.variable} ${manrope.variable}`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${bodoni.variable} ${manrope.variable}`}>
       <body className="min-h-screen flex flex-col bg-ivory-50 text-charcoal-900 font-body antialiased">
         <CartProvider>
           <AnnouncementBar />

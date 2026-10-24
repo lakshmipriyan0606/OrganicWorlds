@@ -304,6 +304,205 @@ export const mockProducts: Product[] = [
     inStock: true,
     rating: 5.0,
     reviewCount: 42
+  },
+
+  // --------------------------------------------------------------------------
+  // 5. STITCH BOTANICAL EDITORIAL SIGNATURE COLLECTION
+  // --------------------------------------------------------------------------
+  {
+    id: "stitch-hair-01",
+    slug: "botanical-scalp-elixir",
+    title: "Botanical Scalp Elixir",
+    subtitle: "Rosemary & Amla Cold-Infused Follicle Nectar (100ml)",
+    description: "An intensive cold-macerated elixir blending high-elevation Kashmir Rosemary with wild Satpura Amla berries and virgin argan nectar. Formulated to awaken dormant follicles, soothe inflamed roots, and deliver deep micro-circulation without occlusive buildup.",
+    category: "hair-care",
+    categoryLabel: "Scalp Elixirs",
+    price: 2800,
+    originalPrice: 3100,
+    badge: "Bestseller",
+    featuredImage: "https://lh3.googleusercontent.com/aida-public/AB6AXuDqlAOtGNk3tJ2FxpSmh4JI2aNOxXmiQDqRCk_jd_Uq-ztlPcT-uboJ_rnDnIdqh2x_4N-SReJu6QZxakIHhb5VNtA2rhaLaAPfgNLTk_ulUzL-wVdiDd-Cqcv8RXJcbvF3ML54NPaElJKPyq3Q9xrMQOaAzghw7MSK3STCQAxFWISQFFOlibPUL2yEnGDKG4Tew19Rld8nVuUSi6s-wx3Le3ecJKBV5vigTBnQe5NgFaO1O1vVIj1-",
+    images: [
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuDqlAOtGNk3tJ2FxpSmh4JI2aNOxXmiQDqRCk_jd_Uq-ztlPcT-uboJ_rnDnIdqh2x_4N-SReJu6QZxakIHhb5VNtA2rhaLaAPfgNLTk_ulUzL-wVdiDd-Cqcv8RXJcbvF3ML54NPaElJKPyq3Q9xrMQOaAzghw7MSK3STCQAxFWISQFFOlibPUL2yEnGDKG4Tew19Rld8nVuUSi6s-wx3Le3ecJKBV5vigTBnQe5NgFaO1O1vVIj1-"
+    ],
+    inStock: true,
+    rating: 4.9,
+    reviewCount: 142,
+    ingredientsSummary: "Cold-Pressed Rosemary Cineole, Wild Indian Gooseberry (Amla) Extract, Moroccan Argan Oil, Cold-Pressed Castor Seed, Brahmi Root.",
+    ritualSteps: [
+      "Dispense 3–4 drops directly along parted hair sections onto clean scalp.",
+      "Massage firmly in circular motions with fingertips for 5 minutes.",
+      "Leave on for 45 minutes or overnight before gentle cleansing."
+    ],
+    variants: [
+      { id: "v-elixir-100", name: "100ml Dropper Bottle", price: 2800, inStock: true, sku: "ST-ELX-100" },
+      { id: "v-elixir-refill", name: "200ml Eco Refill Bottle", price: 4600, inStock: true, sku: "ST-ELX-200" }
+    ]
+  },
+  {
+    id: "stitch-hair-02",
+    slug: "camellia-honey-repair-masque",
+    title: "Camellia & Wild Mountain Honey Deep Repair Masque",
+    subtitle: "Intensive Biomimetic Keratin Treatment & Moisture Butter (200g)",
+    description: "An ultra-nourishing hair butter masque whipped with cold-pressed Camellia Oleifera seed oil, raw high-altitude wildflower honey from Himachal cooperatives, and hydrolyzed micro-oat peptides. Rebuilds split cuticle scales, restores softness, and locks in mirror-like luminosity.",
+    category: "hair-care",
+    categoryLabel: "Conditioning Butters",
+    price: 3200,
+    originalPrice: 3600,
+    badge: "Intensive Care",
+    featuredImage: "https://lh3.googleusercontent.com/aida-public/AB6AXuCrhJRD-WPQ19gytjiWWn66PERaxqUyjv021TRXPfY4f3Kjzkt8gn_BgmPS1pnM0Qc0rm0lT4Y6VfijLjSvAU_kAEO2yVdGWTY9WiTELicTdZJ6pm4EpBihz5-9r_pswbhEYJDRJEwykIuj_Sjdk8v5QQQ7NKBTctHiuHswdoCfNPHuMSvllwsYMnJp_OPUjeIFAUi9tCIxy9V0JgdlU1lN9PGlStwKsI4a8OLgSuQowU3GBdgqR1yQ",
+    images: [
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuCrhJRD-WPQ19gytjiWWn66PERaxqUyjv021TRXPfY4f3Kjzkt8gn_BgmPS1pnM0Qc0rm0lT4Y6VfijLjSvAU_kAEO2yVdGWTY9WiTELicTdZJ6pm4EpBihz5-9r_pswbhEYJDRJEwykIuj_Sjdk8v5QQQ7NKBTctHiuHswdoCfNPHuMSvllwsYMnJp_OPUjeIFAUi9tCIxy9V0JgdlU1lN9PGlStwKsI4a8OLgSuQowU3GBdgqR1yQ",
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuCLvflG30Qfh1TuHv5yRZoL1a4X2_Ik_1p1QNyd3jolTo5VTYarqCxPc1A5kxfWdwko-HQgOC1BlBLycVWSPkCwWy4jfjp6Lly5NaAxwRyzlK7d-kiUNBxSKGnQToVZWBTwv8-LjDoU_UKysBikPv8di67VNiGMf0Bzyj1XuzYtad0JfrzMOuz3Qb0EP252us0fgVMCeRk5L79lMJS835ZxZKhdC8FMYdCrITvrV7hdI_BCcYgiFjG3",
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuB0axqaM0xQezc7pCyKfEX_GNr7wv9bP0a229RMk39E1_w_nckvQTTRn5QYLjgp5Yqv7gHbziWMwijHdB_3k-qg-pIVUaFHy3cMO97uByy51N-O-qrAyX1lZTPWxRqmxFYOhEN_MG0enyzebhVtWsd2E_2myo3kouuk1hLDZEgYxPbSCxFqit1gIZecr5-lezoptmasN8WFbeu3Bc82Zgh6hRqnesgh-u1cplTsxEFRGm23KnVyghD6",
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuDkiekRKS5O8gIssc9SXRJCmf19aTFnooogMxaP1EsEDX7iQlfn_IVwxnozVtDH9iasM-GVpJacZjxFQC383kcAQa0Uwthhg_BeLLHqpJdexfSQt-MQDMEnblYkwBAPDMbitHoeXxsjury8EjWecwuCsEUhoU1tA7mjIGKK2ta3vsTJctOGrjszRQZ3fmOVjURKzg7unBnqT1hrSuM87Rmi1293t9GuZEbvT-GvBe6DB6RmsSwaqLbd"
+    ],
+    inStock: true,
+    rating: 4.8,
+    reviewCount: 98,
+    ingredientsSummary: "Cold-Pressed Camellia Oleifera Seed Oil, Raw Himachal Wildflower Honey, Hydrolyzed Oat Peptides, Cold-Pressed Nilotica Shea Butter, Sandalwood Extract.",
+    ritualSteps: [
+      "Gently press excess moisture from washed strands with a soft linen towel.",
+      "Warm a chestnut-sized dollop between palms until it melts into a spreadable nectar.",
+      "Comb through mid-lengths to ends with wide-tooth wooden comb. Dwell for 15 minutes before rinsing."
+    ],
+    variants: [
+      { id: "v-masque-jar", name: "Artisan Ceramic Jar 200g", price: 3200, inStock: true, sku: "ST-MSQ-JAR" },
+      { id: "v-masque-pouch", name: "Compostable Refill Pouch 200g", price: 2600, inStock: true, sku: "ST-MSQ-PCH" },
+      { id: "v-masque-duo", name: "Duo Ritual Set (Jar + Refill)", price: 5400, inStock: true, sku: "ST-MSQ-DUO" }
+    ],
+    reviews: [
+      {
+        id: "rev-m1",
+        author: "Ananya Deshmukh",
+        rating: 5,
+        date: "October 20, 2026",
+        title: "Transcendent hair repair — feels like raw luxury silk",
+        comment: "The texture is unmatched. My dry ends were instantly smoothed after just one application and the scent of wild honey and camellia is mesmerizing.",
+        verifiedPurchase: true
+      }
+    ]
+  },
+  {
+    id: "stitch-hair-03",
+    slug: "white-tea-aloe-tonic-mist",
+    title: "White Tea & Aloe Tonic Mist",
+    subtitle: "Lightweight pH-Balancing Cuticle Hydrosol (150ml)",
+    description: "An ethereal botanical mist combining Darjeeling silver needle white tea antioxidants with fresh filleted inner-leaf aloe vera hydrosol. Gently seals the acidic hair mantle, neutralizes hard water minerals, and imparts weightless humidity defense.",
+    category: "hair-care",
+    categoryLabel: "Nourishing Mists",
+    price: 2100,
+    originalPrice: 2350,
+    badge: "Hydrating",
+    featuredImage: "https://lh3.googleusercontent.com/aida-public/AB6AXuB88o0CVbQnHBJgXY-_VNa8AXsV_gNhhbvlcWo_kr30qgn6keRF9J6pfcWXm0BXz_SBHduxkPSfaAfmIYTolIqAlsECL63G5AdY3g6igPdYG1PPRs9p1-9Yxurbke2WEhXP0PjoqEqlt1EkcuLeBFQUwBv0oIbR-LnDem0lc9F1KP8rPIKgZ0wm6mrtEXRvDAHPnnjCzyzQ-p3v7W7Uei_3IckOnvijthayjuZgbVKXn4Bk9Zorb2J6",
+    images: [
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuB88o0CVbQnHBJgXY-_VNa8AXsV_gNhhbvlcWo_kr30qgn6keRF9J6pfcWXm0BXz_SBHduxkPSfaAfmIYTolIqAlsECL63G5AdY3g6igPdYG1PPRs9p1-9Yxurbke2WEhXP0PjoqEqlt1EkcuLeBFQUwBv0oIbR-LnDem0lc9F1KP8rPIKgZ0wm6mrtEXRvDAHPnnjCzyzQ-p3v7W7Uei_3IckOnvijthayjuZgbVKXn4Bk9Zorb2J6"
+    ],
+    inStock: true,
+    rating: 4.7,
+    reviewCount: 64
+  },
+  {
+    id: "stitch-hair-04",
+    slug: "nocturnal-scalp-renewal-drops",
+    title: "Nocturnal Scalp Renewal Drops",
+    subtitle: "Overnight Peptide & Bhringraj Cellular Lipid (50ml)",
+    description: "A restorative overnight cellular lipid serum powered by bioactive peptides, bio-fermented Bhringraj root, and cold-pressed black castor seed. Works in rhythm with nocturnal regenerative cycles to stimulate root anchor proteins and calm stress-related hair thinning.",
+    category: "hair-care",
+    categoryLabel: "Scalp Elixirs",
+    price: 3100,
+    originalPrice: 3500,
+    badge: "Overnight Care",
+    featuredImage: "https://lh3.googleusercontent.com/aida-public/AB6AXuANaRo-ySPekmpyINHjGyo9SYn_Y5Js1cusYo2xYN6M6uPq1bhdUWhsMF5hrxZ33GPlgf9bmOigGhc78ZQBcSxEy04CnXNIMaVWx1YprfiNtA7_xAUUwgU7YYB121dsrKD5ojqhDorqCGq9nnVnBKC7w4FdVObgwzHsuxK1W7Yu_zeir3yOiffaBqY_cwBNeXBdAOLXgyW-LEWsV8nTlrjQgPd9N9Ky23irdD0eJOPyw7kGrU7w_KAJ",
+    images: [
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuANaRo-ySPekmpyINHjGyo9SYn_Y5Js1cusYo2xYN6M6uPq1bhdUWhsMF5hrxZ33GPlgf9bmOigGhc78ZQBcSxEy04CnXNIMaVWx1YprfiNtA7_xAUUwgU7YYB121dsrKD5ojqhDorqCGq9nnVnBKC7w4FdVObgwzHsuxK1W7Yu_zeir3yOiffaBqY_cwBNeXBdAOLXgyW-LEWsV8nTlrjQgPd9N9Ky23irdD0eJOPyw7kGrU7w_KAJ"
+    ],
+    inStock: true,
+    rating: 4.9,
+    reviewCount: 118
+  },
+  {
+    id: "stitch-hair-05",
+    slug: "hand-carved-walnut-comb",
+    title: "Hand Carved Walnut Comb",
+    subtitle: "Static-Free Wide Tooth Scalp Acupressure Tool",
+    description: "Individually hand-carved from seasoned, fallen dark walnut wood and oiled with organic camellia seed lipid. The rounded, seamless tines glide effortlessly through wet or dry hair without snagging, gently stimulating acupressure points along the scalp.",
+    category: "hair-care",
+    categoryLabel: "Wooden Apothecary Tools",
+    price: 1600,
+    badge: "Handcrafted",
+    featuredImage: "https://lh3.googleusercontent.com/aida-public/AB6AXuBecf6yU05it5lG6Iv_IM970Sw45EjggJPxwx4y2lKrP3lpFnpYyX_qhEwv30zMKshNPMvKaWSUKP1CKWod-weFJNPCi021j4sJ4dssW6hXVR-KKT-HAK5APcUPzPiCkoq2x6bsJ9Bt2iIU_iLmuLySldG-xb47vIb2Hgl5i_-c2Yus9WSdbYqQbI1YULLbBUJ1uEg0JiUqdn-ptLK2jHgN35Aq93LE6nEFtESwvBKrD6-eV91ABDGv",
+    images: [
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuBecf6yU05it5lG6Iv_IM970Sw45EjggJPxwx4y2lKrP3lpFnpYyX_qhEwv30zMKshNPMvKaWSUKP1CKWod-weFJNPCi021j4sJ4dssW6hXVR-KKT-HAK5APcUPzPiCkoq2x6bsJ9Bt2iIU_iLmuLySldG-xb47vIb2Hgl5i_-c2Yus9WSdbYqQbI1YULLbBUJ1uEg0JiUqdn-ptLK2jHgN35Aq93LE6nEFtESwvBKrD6-eV91ABDGv"
+    ],
+    inStock: true,
+    rating: 5.0,
+    reviewCount: 87
+  },
+  {
+    id: "stitch-hair-06",
+    slug: "shea-rosemary-split-end-salve",
+    title: "Shea & Rosemary Split End Salve",
+    subtitle: "Heat-Defending Botanical Sealing Balm (60g)",
+    description: "A concentrated, solid conditioning butter formulated with raw unrefined nilotica shea, rosemary cineole, and golden beeswax. Melts upon fingertip contact to seal frayed end fibers, prevent mechanical breakage, and lock in lasting moisture.",
+    category: "hair-care",
+    categoryLabel: "Conditioning Butters",
+    price: 2400,
+    badge: "Solid Salve",
+    featuredImage: "https://lh3.googleusercontent.com/aida-public/AB6AXuBYYrEZs_DUgfkJ2XOZhOAbZwEWyyOqJKJuvBH1TlPMtXbx_IevZoL-AzY5AH1VNQPNI3NQ3seBo7ehKe1e9hdMWCTmGcS4Ul-nzH2rGbVtdnYuVhM4RiRbNm6x4VRFkOkfm2RWNRgOvjlAZROo67EFZyLCRyD6bE5bgJTIDmLZvJqSkauMbqAwkp0skUiS3G-7qW4bsXiMPePIQNmJtaUCn_YLMPP3n2ecZTQCU4IAvxn1Cb94NmCv",
+    images: [
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuBYYrEZs_DUgfkJ2XOZhOAbZwEWyyOqJKJuvBH1TlPMtXbx_IevZoL-AzY5AH1VNQPNI3NQ3seBo7ehKe1e9hdMWCTmGcS4Ul-nzH2rGbVtdnYuVhM4RiRbNm6x4VRFkOkfm2RWNRgOvjlAZROo67EFZyLCRyD6bE5bgJTIDmLZvJqSkauMbqAwkp0skUiS3G-7qW4bsXiMPePIQNmJtaUCn_YLMPP3n2ecZTQCU4IAvxn1Cb94NmCv"
+    ],
+    inStock: true,
+    rating: 4.8,
+    reviewCount: 51
+  },
+  {
+    id: "stitch-candle-01",
+    slug: "santal-hinoki-candle",
+    title: "Santal & Hinoki Candle",
+    subtitle: "Hand-poured clay vessel, 55 hr burn with sacred cedar smoke",
+    description: "Slow-poured into tactile wheel-thrown terracotta stoneware. Infused with pure Japanese hinoki cypress, aged sandalwood, and warm resins for grounding meditation spaces.",
+    category: "candles",
+    categoryLabel: "Ceramic Candle",
+    price: 2200,
+    badge: "Bestseller",
+    featuredImage: "https://lh3.googleusercontent.com/aida-public/AB6AXuDVE3MAXEB9dR5XMFgbnIqLFQ-_951m2FOR5Zj3twDW4V2Tlz5sBGHjwSHmTslDVxz2zIqruG_KzhJvhOzd8BauqrTK6bcz95_UhvjKJ70lSeEFYike-ZsrK0eOxLZE11NSyVpgUYa-lFS1Z4wr05gnirMT1bSgzX13CIEAggrYhUxZNB2valWTUfHITwsVXnlAWrTwwVVuUz6mdD0ooGOXuCotEZiiXqIWcE1513xp-guU6g77QAmF",
+    images: ["https://lh3.googleusercontent.com/aida-public/AB6AXuDVE3MAXEB9dR5XMFgbnIqLFQ-_951m2FOR5Zj3twDW4V2Tlz5sBGHjwSHmTslDVxz2zIqruG_KzhJvhOzd8BauqrTK6bcz95_UhvjKJ70lSeEFYike-ZsrK0eOxLZE11NSyVpgUYa-lFS1Z4wr05gnirMT1bSgzX13CIEAggrYhUxZNB2valWTUfHITwsVXnlAWrTwwVVuUz6mdD0ooGOXuCotEZiiXqIWcE1513xp-guU6g77QAmF"],
+    inStock: true,
+    rating: 4.9,
+    reviewCount: 62
+  },
+  {
+    id: "stitch-candle-02",
+    slug: "dusk-olive-grove-candle",
+    title: "Dusk Olive Grove Candle",
+    subtitle: "Green olive leaf, ripe crushed fig & warm dry amber resin",
+    description: "A nuanced Mediterranean harvest blend in a glazed sage-green stoneware mug. Evokes golden dusk hours walking through ancient olive and fig groves.",
+    category: "candles",
+    categoryLabel: "Seasonal Edition",
+    price: 2400,
+    badge: "Autumn Batch",
+    featuredImage: "https://lh3.googleusercontent.com/aida-public/AB6AXuBmS3ZXH_pBJcWcPmTOXowDKZy37izJ2gAUOFN_BYZlfFTpGNW-o0cThF47lQpqn846_icZ6QXWK7-sRU-EFr-W1OzuaydYUnWVS61FUkdUBTPvI0o6enBjEjgLYbQdOOlSn2l8p_jZfKBF1VhZjYwcKJ6ARh7YNCUI6vGnwypdAzf3Va1XGD-cwxJu8QPnpaE8F-9hQCu5SP1bHJ15K8hgOCdWZWG93M3M9_6HTnh-tvlEpCP0HDXc",
+    images: ["https://lh3.googleusercontent.com/aida-public/AB6AXuBmS3ZXH_pBJcWcPmTOXowDKZy37izJ2gAUOFN_BYZlfFTpGNW-o0cThF47lQpqn846_icZ6QXWK7-sRU-EFr-W1OzuaydYUnWVS61FUkdUBTPvI0o6enBjEjgLYbQdOOlSn2l8p_jZfKBF1VhZjYwcKJ6ARh7YNCUI6vGnwypdAzf3Va1XGD-cwxJu8QPnpaE8F-9hQCu5SP1bHJ15K8hgOCdWZWG93M3M9_6HTnh-tvlEpCP0HDXc"],
+    inStock: true,
+    rating: 4.8,
+    reviewCount: 45
+  },
+  {
+    id: "stitch-crate-01",
+    slug: "solstice-crate-roots",
+    title: "Solstice Crate: Roots Keepsake Box",
+    subtitle: "Archival cedar presentation box with candle, tonic & carved comb",
+    description: "The complete evening restorative collection encased inside an artisan-crafted solid cedarwood box with botanical cotton binding.",
+    category: "gifting",
+    categoryLabel: "Curated Crate",
+    price: 6800,
+    badge: "Keepsake Set",
+    featuredImage: "https://lh3.googleusercontent.com/aida-public/AB6AXuDv1x1xG1hZy2Xc17KIX8CXRo-7pmWxWVk-mRYeoC4KPN7ka5UBevINoCtu35nCPvGhhWHB7jvc1Vk2qboSlUJzqucXmb6zbgpJ_lSkURZO1r1izy5RyPwanEAQTaD3hr404s7Rgpxnpj3sCTG4zT1909Uzm8RyymE5KDci9PSWVkUYd8BYUQJA_koRLcLcqn6WQ8DJFtIEMTNPjbbY3X2QxFyy8KWgNZbTtv4OMAi6LVpM1TsZMdC3",
+    images: ["https://lh3.googleusercontent.com/aida-public/AB6AXuDv1x1xG1hZy2Xc17KIX8CXRo-7pmWxWVk-mRYeoC4KPN7ka5UBevINoCtu35nCPvGhhWHB7jvc1Vk2qboSlUJzqucXmb6zbgpJ_lSkURZO1r1izy5RyPwanEAQTaD3hr404s7Rgpxnpj3sCTG4zT1909Uzm8RyymE5KDci9PSWVkUYd8BYUQJA_koRLcLcqn6WQ8DJFtIEMTNPjbbY3X2QxFyy8KWgNZbTtv4OMAi6LVpM1TsZMdC3"],
+    inStock: true,
+    rating: 5.0,
+    reviewCount: 29
   }
 ];
 

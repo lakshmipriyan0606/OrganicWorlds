@@ -148,33 +148,99 @@ export default function OurStoryPage() {
         </Container>
       </Section>
 
-      {/* Values Pillars */}
-      <Section bg="default" spacing="spacious" className="bg-[#FAFBF9] border-t border-[#E3E8E1]">
+      {/* Farm-to-Ritual Journey Flow Graph (Requested Connected Flow) */}
+      <Section bg="default" spacing="spacious" className="bg-[#FAFBF9] border-t border-[#E3E8E1] relative overflow-hidden">
         <Container>
           <div className="max-w-2xl mx-auto text-center mb-16">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-900/5 text-emerald-900 text-[11px] font-bold tracking-widest uppercase border border-emerald-900/15 mb-2">
-              Our Core Commitments
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#263D32]/8 text-[#263D32] text-[11px] font-bold tracking-widest uppercase border border-[#263D32]/15 mb-2">
+              விவசாய நிலத்திலிருந்து உங்கள் கைகளுக்கு • FARM TO SACRED RITUAL
             </span>
-            <h2 className="font-display text-3xl sm:text-4xl text-[#0D3B2E] font-bold">
-              Pure Ingredients, Honest Craft
+            <h2 className="font-display text-3xl sm:text-4xl text-[#1A1C18] font-normal">
+              Pure Ingredients, <span className="italic font-display text-[#82947B]">Honest Craft</span>
             </h2>
+            <p className="text-xs sm:text-sm text-[#424844] mt-2 max-w-lg mx-auto">
+              Our 4-step botanical journey preserving living phytosterols and authentic Dravidian healing wisdom.
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {siteConfig.values.map((v) => (
-              <div key={v.title} className="bg-white p-8 rounded-2xl border border-[#DCE3DB] shadow-2xs space-y-3">
-                <span className="w-10 h-10 rounded-full bg-emerald-50 text-[#0D3B2E] flex items-center justify-center font-bold text-sm">
-                  ✓
-                </span>
-                <h3 className="font-display text-xl font-bold text-[#0D3B2E]">{v.title}</h3>
-                <p className="text-xs sm:text-sm text-[#4A5568] leading-relaxed font-normal">{v.description}</p>
-              </div>
-            ))}
+          {/* Connected 4-Step Journey Flow */}
+          <div className="relative">
+            {/* Desktop Connecting Flow Line */}
+            <div className="hidden lg:block absolute top-1/2 left-8 right-8 h-0.5 bg-gradient-to-r from-[#82947B]/20 via-[#263D32]/30 to-[#82947B]/20 -translate-y-6 z-0 pointer-events-none" />
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
+              {[
+                {
+                  step: "01",
+                  tamilStep: "பாரம்பரிய உழவு",
+                  title: "Regenerative Farming",
+                  description: "Pesticide-free cultivation of Vetiver, Neem, Damask Roses, and Hibiscus in South Indian fertile soils.",
+                  icon: "🌱",
+                },
+                {
+                  step: "02",
+                  tamilStep: "மரச்செக்கு பிழிதல்",
+                  title: "Wood-Pressed Extraction",
+                  description: "Cold mechanical extraction in Vaagai wood presses without friction heat to protect live bio-lipids.",
+                  icon: "🪵",
+                },
+                {
+                  step: "03",
+                  tamilStep: "40 நாள் மூலிகை ஊறல்",
+                  title: "40-Day Solar Infusion",
+                  description: "Slow solar decoction in terracotta urns, allowing potent roots to naturally saturate base carrier oils.",
+                  icon: "☀️",
+                },
+                {
+                  step: "04",
+                  tamilStep: "பூஜ்ஜிய பிளாஸ்டிக்",
+                  title: "100% Plastic-Free",
+                  description: "Carefully wrapped in plant-fiber kraft, sealed in glass apothecary vessels, and despatched sustainably.",
+                  icon: "📦",
+                },
+              ].map((item, idx) => (
+                <div
+                  key={item.step}
+                  className="group bg-white rounded-3xl p-6 sm:p-7 border border-[#E3DDD1] shadow-2xs hover:shadow-xl hover:shadow-[#263D32]/10 hover:border-[#263D32]/40 hover:-translate-y-2 transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col justify-between cursor-pointer"
+                >
+                  <div>
+                    {/* Step Badge & Icon */}
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="w-10 h-10 rounded-2xl bg-[#EAF0E6] text-[#263D32] flex items-center justify-center font-bold text-xs group-hover:scale-110 group-hover:bg-[#263D32] group-hover:text-white transition-all duration-300 shadow-xs">
+                        {item.step}
+                      </span>
+                      <span className="text-xl">{item.icon}</span>
+                    </div>
+
+                    {/* Tamil Title */}
+                    <span className="text-[11px] font-semibold text-[#82947B] block mb-0.5">
+                      {item.tamilStep}
+                    </span>
+
+                    {/* English Title */}
+                    <h3 className="font-display text-lg text-[#1A1C18] font-medium mb-2 group-hover:text-[#263D32] transition-colors">
+                      {item.title}
+                    </h3>
+
+                    {/* Description */}
+                    <p className="text-xs text-[#525A55] leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
+
+                  {/* Flow Indicator on Mobile/Tablet */}
+                  <div className="pt-4 mt-4 border-t border-[#ECE7DC] flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-[#82947B]">
+                    <span>Step {item.step} of 04</span>
+                    <span className="group-hover:translate-x-1 transition-transform">→</span>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
           <div className="mt-16 text-center">
             <Link href="/shop">
-              <Button variant="primary" size="lg" className="rounded-full bg-[#0D3B2E] hover:bg-emerald-900 text-white px-8 py-3.5 text-xs uppercase tracking-widest font-bold shadow-md">
+              <Button variant="primary" size="lg" className="rounded-full bg-[#263D32] hover:bg-[#1A2C23] text-white px-8 py-3.5 text-xs uppercase tracking-widest font-bold shadow-md hover:scale-102 transition-transform cursor-pointer">
                 Experience Pavishna Offerings
               </Button>
             </Link>

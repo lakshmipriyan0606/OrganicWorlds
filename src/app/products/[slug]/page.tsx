@@ -1,9 +1,8 @@
 import React from "react";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { Container } from "@/components/ui/Container";
 import { ProductDetailView } from "@/components/product/ProductDetailView";
-import { ProductGrid } from "@/components/product/ProductGrid";
+import { ProductCard } from "@/components/product/ProductCard";
 import { mockProducts, getProductBySlug } from "@/config/products";
 import { ChevronRight } from "lucide-react";
 
@@ -28,75 +27,66 @@ export default async function ProductPage({ params }: ProductPageProps) {
   // Related products from same category or fallback
   const relatedProducts = mockProducts
     .filter((p) => p.id !== product.id)
-    .slice(0, 3);
+    .slice(0, 4);
 
   return (
-    <div className="py-8 md:py-12">
-      <Container>
-        {/* Breadcrumb Navigation */}
-        <nav className="flex items-center gap-2 text-xs text-charcoal-600 mb-8 overflow-x-auto whitespace-nowrap">
-          <Link href="/" className="hover:text-forest-900 transition-colors">Home</Link>
-          <ChevronRight className="w-3.5 h-3.5 text-neutral-400" />
-          <Link href="/shop" className="hover:text-forest-900 transition-colors">Shop</Link>
-          <ChevronRight className="w-3.5 h-3.5 text-neutral-400" />
-          <Link href={`/categories/${product.category}`} className="hover:text-forest-900 transition-colors">
-            {product.categoryLabel}
-          </Link>
-          <ChevronRight className="w-3.5 h-3.5 text-neutral-400" />
-          <span className="text-forest-900 font-medium truncate max-w-xs">{product.title}</span>
-        </nav>
+    <div className="bg-[#FAFBF9] text-[#1A1C18] min-h-screen selection:bg-[#CEE9D9] selection:text-[#10271D]">
+      <div className="max-w-[1360px] mx-auto px-5 sm:px-8 lg:px-12 pt-6 pb-20">
+        
+        {/* Top Breadcrumbs & Tactile Specification Notation (Screen 3 Header) */}
+        <div className="flex flex-wrap items-center justify-between gap-y-3 pb-8">
+          <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#55423D]/80">
+            <Link href="/" className="hover:text-[#263D32] transition-colors">Home</Link>
+            <ChevronRight className="w-3.5 h-3.5 text-[#AAA99F]" />
+            <Link href="/shop" className="hover:text-[#263D32] transition-colors">Botanical Dispensary</Link>
+            <ChevronRight className="w-3.5 h-3.5 text-[#AAA99F]" />
+            <Link href={`/categories/${product.category}`} className="hover:text-[#263D32] transition-colors">
+              {product.categoryLabel}
+            </Link>
+            <ChevronRight className="w-3.5 h-3.5 text-[#AAA99F]" />
+            <span className="text-[#263D32] font-bold truncate max-w-xs">{product.title}</span>
+          </nav>
 
-        {/* Product Details Component */}
+          <div className="hidden md:flex items-center gap-3 text-[#424844] text-[11px] font-semibold tracking-wider uppercase">
+            <span className="inline-flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#426B50] animate-pulse" />
+              SMALL BATCH DISTILLATION
+            </span>
+            <span>•</span>
+            <span className="tracking-widest">DISPENSARY SPECIFICATION ST-12</span>
+          </div>
+        </div>
+
+        {/* Product Details Component with Arched Gallery Stage & Regimen */}
         <ProductDetailView product={product} />
 
-        {/* Customer Reviews Section */}
-        {product.reviews && product.reviews.length > 0 && (
-          <div className="mt-24 pt-16 border-t border-border">
-            <div className="max-w-3xl">
-              <span className="eyebrow mb-2">Verified Impressions</span>
-              <h2 className="font-display text-2xl sm:text-3xl text-forest-900 mb-8">
-                Customer Ritual Reviews
-              </h2>
-
-              <div className="space-y-6">
-                {product.reviews.map((rev) => (
-                  <div key={rev.id} className="p-6 bg-white border border-border rounded-[3px]">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="font-semibold text-sm text-forest-900">{rev.author}</span>
-                      <span className="text-xs text-neutral-400">{rev.date}</span>
-                    </div>
-                    <div className="flex items-center gap-1 text-warning text-xs mb-3">
-                      {"★".repeat(rev.rating)}
-                    </div>
-                    <h4 className="font-display text-lg text-forest-900 mb-1">{rev.title}</h4>
-                    <p className="text-sm text-charcoal-600 leading-relaxed font-light">{rev.comment}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Related Offerings */}
-        <div className="mt-24 pt-16 border-t border-border">
+        {/* Related Offerings Section */}
+        <div className="mt-20 pt-16 border-t border-[#E6E1D7]">
           <div className="flex justify-between items-end mb-10">
             <div>
-              <span className="eyebrow mb-2">Complete the Ritual</span>
-              <h2 className="font-display text-2xl sm:text-3xl text-forest-900">
+              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#263D32] block mb-1">
+                Complete the Ritual
+              </span>
+              <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl text-[#1A1C18] font-normal tracking-tight">
                 You May Also Appreciate
               </h2>
             </div>
             <Link
               href="/shop"
-              className="text-xs uppercase tracking-wider font-semibold text-forest-900 hover:text-forest-700 underline underline-offset-4"
+              className="text-xs uppercase tracking-wider font-bold text-[#263D32] hover:text-[#10271D] underline underline-offset-4 cursor-pointer"
             >
-              Browse All
+              Browse All Offerings
             </Link>
           </div>
 
-          <ProductGrid products={relatedProducts} columns={3} />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {relatedProducts.map((relProduct) => (
+              <ProductCard key={relProduct.slug} product={relProduct} />
+            ))}
+          </div>
         </div>
-      </Container>
+
+      </div>
     </div>
   );
 }

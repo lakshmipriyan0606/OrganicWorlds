@@ -15,7 +15,12 @@ export function SiteHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [mounted, setMounted] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (searchOpen && searchInputRef.current) {
@@ -36,108 +41,108 @@ export function SiteHeader() {
       <header className="sticky top-0 z-40 bg-[#F6F3EC]/95 backdrop-blur-md border-b border-[#ECE6DB] transition-all duration-200">
         <div className="max-w-[1360px] mx-auto px-5 md:px-8 lg:px-12 h-20 flex items-center justify-between">
           
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMobileMenuOpen(true)}
-            className="lg:hidden p-2 text-[#1F241F] hover:text-[#0D3B2E] focus:outline-none cursor-pointer"
-            aria-label="Open Navigation Menu"
-          >
-            <Menu className="w-5 h-5" />
-          </button>
+          {/* Left: Mobile Menu Button + Brand Identity */}
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setMobileMenuOpen(true)}
+              className="lg:hidden p-2 text-[#1F241F] hover:text-[#0D3B2E] focus:outline-none cursor-pointer"
+              aria-label="Open Navigation Menu"
+            >
+              <Menu className="w-5 h-5" />
+            </button>
 
-          {/* Desktop Left Navigation */}
-          <nav className="hidden lg:flex items-center gap-7">
-            <Link
-              href="/categories/soaps"
-              className={cn(
-                "text-[11px] font-semibold tracking-[0.14em] uppercase transition-colors duration-200 hover:text-[#0D3B2E] py-1",
-                pathname === "/categories/soaps" ? "text-[#0D3B2E] font-bold" : "text-[#1F241F]"
-              )}
-            >
-              Artisanal Soaps
-            </Link>
-            <Link
-              href="/categories/hair-care"
-              className={cn(
-                "text-[11px] font-semibold tracking-[0.14em] uppercase transition-colors duration-200 hover:text-[#0D3B2E] py-1",
-                pathname === "/categories/hair-care" ? "text-[#0D3B2E] font-bold" : "text-[#1F241F]"
-              )}
-            >
-              Hair &amp; Scalp
-            </Link>
-            <Link
-              href="/shop"
-              className={cn(
-                "text-[11px] font-semibold tracking-[0.14em] uppercase transition-colors duration-200 hover:text-[#0D3B2E] py-1",
-                pathname === "/shop" ? "text-[#0D3B2E] font-bold" : "text-[#1F241F]"
-              )}
-            >
-              Shop All
-            </Link>
-          </nav>
-
-          {/* Center Brand Identity with Official Logo Image */}
-          <div className="text-center flex items-center justify-center">
             <Link
               href="/"
-              className="inline-flex items-center justify-center group py-1.5 focus:outline-none"
+              className="inline-flex items-center gap-2.5 group py-1.5 focus:outline-none"
               aria-label="Pavishna Organic Worlds Homepage"
             >
               <img
                 src="/images/logo-header-transparent.png"
                 alt="Pavishna Organic Worlds"
-                className="h-12 sm:h-13 md:h-15 w-auto max-w-[200px] sm:max-w-[240px] object-contain transition-transform duration-300 group-hover:scale-105"
+                className="h-10 sm:h-11 md:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-102"
               />
             </Link>
           </div>
 
-          {/* Right Navigation & Actions */}
-          <div className="flex items-center gap-6">
-            <nav className="hidden lg:flex items-center gap-7">
-              <Link
-                href="/categories/candles"
-                className={cn(
-                  "text-[11px] font-semibold tracking-[0.14em] uppercase transition-colors duration-200 hover:text-[#0D3B2E] py-1",
-                  pathname === "/categories/candles" ? "text-[#0D3B2E] font-bold" : "text-[#1F241F]"
-                )}
-              >
-                Candles
-              </Link>
-              <Link
-                href="/our-story"
-                className={cn(
-                  "text-[11px] font-semibold tracking-[0.14em] uppercase transition-colors duration-200 hover:text-[#0D3B2E] py-1",
-                  pathname === "/our-story" ? "text-[#0D3B2E] font-bold" : "text-[#1F241F]"
-                )}
-              >
-                Our Story
-              </Link>
-            </nav>
+          {/* Center Navigation Links (Exact from Mockup: Home, Shop, Our Story, Ingredients, Blog) */}
+          <nav className="hidden lg:flex items-center gap-8">
+            <Link
+              href="/"
+              className={cn(
+                "text-[12.5px] font-medium tracking-wide transition-colors duration-200 hover:text-[#0D281E] py-1",
+                pathname === "/" ? "text-[#0D281E] font-semibold" : "text-[#4A554D]"
+              )}
+            >
+              Home
+            </Link>
+            <Link
+              href="/shop"
+              className={cn(
+                "text-[12.5px] font-medium tracking-wide transition-colors duration-200 hover:text-[#0D281E] py-1",
+                pathname.startsWith("/shop") || pathname.startsWith("/categories") ? "text-[#0D281E] font-semibold" : "text-[#4A554D]"
+              )}
+            >
+              Shop
+            </Link>
+            <Link
+              href="/our-story"
+              className={cn(
+                "text-[12.5px] font-medium tracking-wide transition-colors duration-200 hover:text-[#0D281E] py-1",
+                pathname === "/our-story" ? "text-[#0D281E] font-semibold" : "text-[#4A554D]"
+              )}
+            >
+              Our Story
+            </Link>
+            <Link
+              href="/#ingredients"
+              className="text-[12.5px] font-medium tracking-wide text-[#4A554D] hover:text-[#0D281E] transition-colors duration-200 py-1"
+            >
+              Ingredients
+            </Link>
+            <Link
+              href="/#blog"
+              className="text-[12.5px] font-medium tracking-wide text-[#4A554D] hover:text-[#0D281E] transition-colors duration-200 py-1"
+            >
+              Blog
+            </Link>
+          </nav>
 
-            <div className="flex items-center gap-4">
-              {/* Search Trigger */}
-              <button
-                onClick={() => setSearchOpen(!searchOpen)}
-                className="text-[#1F241F] hover:text-[#0D3B2E] transition-colors p-1 cursor-pointer"
-                aria-label="Search catalog"
-              >
-                <Search className="w-4.5 h-4.5 stroke-[1.6]" />
-              </button>
+          {/* Right: Search, Account/User, Cart Bag */}
+          <div className="flex items-center gap-4 sm:gap-5">
+            {/* Search Trigger */}
+            <button
+              onClick={() => setSearchOpen(!searchOpen)}
+              className="text-[#1F241F] hover:text-[#0D281E] transition-colors p-1.5 cursor-pointer"
+              aria-label="Search catalog"
+            >
+              <Search className="w-4.5 h-4.5 stroke-[1.8]" />
+            </button>
 
-              {/* Shopping Bag Trigger */}
-              <button
-                onClick={openCart}
-                className="relative p-1 text-[#1F241F] hover:text-[#0D3B2E] transition-colors flex items-center cursor-pointer"
-                aria-label={`Open shopping cart with ${totalItems} items`}
-              >
-                <ShoppingBag className="w-4.5 h-4.5 stroke-[1.6]" />
-                {totalItems > 0 && (
-                  <span className="absolute -top-1.5 -right-2 bg-[#133829] text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center animate-scale-in">
-                    {totalItems}
-                  </span>
-                )}
-              </button>
-            </div>
+            {/* Account / User Link */}
+            <Link
+              href="/contact"
+              className="text-[#1F241F] hover:text-[#0D281E] transition-colors p-1.5 hidden sm:inline-block cursor-pointer"
+              aria-label="Account and orders"
+            >
+              <svg className="w-4.5 h-4.5 stroke-[1.8]" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+            </Link>
+
+            {/* Shopping Bag Trigger */}
+            <button
+              onClick={openCart}
+              className="relative p-1.5 text-[#1F241F] hover:text-[#0D281E] transition-colors flex items-center cursor-pointer"
+              aria-label={`Open shopping cart with ${totalItems} items`}
+            >
+              <ShoppingBag className="w-4.5 h-4.5 stroke-[1.8]" />
+              {mounted && (
+                <span className="absolute -top-1 -right-1 bg-[#0D281E] text-white text-[9.5px] font-bold w-4.5 h-4.5 rounded-full flex items-center justify-center shadow-xs">
+                  {totalItems}
+                </span>
+              )}
+            </button>
           </div>
         </div>
 

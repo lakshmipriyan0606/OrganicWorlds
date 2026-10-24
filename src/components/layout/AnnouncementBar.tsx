@@ -1,64 +1,47 @@
 "use client";
 
 import React from "react";
-
-const marqueeItems = [
-  "100% Pure Botanical Oils",
-  "Ethically Wild-Harvested Herbs & Sun-Dried Vetiver Roots",
-  "Free Carbon-Neutral Shipping Across India on Orders Over ₹1,500",
-  "Handcrafted With Love in South India",
-  "Complimentary 4-Week Cured Herbal Soap Sample with Orders Above ₹1,200",
-  "Zero Synthetic Chemicals • Zero Parabens • Zero Palm Oil",
-];
+import Link from "next/link";
+import { Leaf, Heart, Sparkles, Truck } from "lucide-react";
 
 export function AnnouncementBar() {
   return (
     <aside
-      aria-label="Store Announcements"
-      className="relative bg-[#48533D] text-[#E8EFE3] text-[10.5px] sm:text-[11px] font-semibold tracking-[0.16em] uppercase py-2.5 overflow-hidden border-b border-[#3B4432] select-none z-50"
+      aria-label="Store Announcement"
+      className="w-full bg-[#0D281E] text-white py-2 px-4 sm:px-8 text-[11px] font-medium border-b border-[#1A382B] select-none z-50 overflow-hidden"
     >
-      <style>{`
-        @keyframes marqueeScroll {
-          0% {
-            transform: translate3d(0, 0, 0);
-          }
-          100% {
-            transform: translate3d(-50%, 0, 0);
-          }
-        }
-        .announcement-marquee-track {
-          display: flex;
-          width: max-content;
-          animation: marqueeScroll 28s linear infinite;
-          will-change: transform;
-        }
-        .announcement-marquee-track:hover {
-          animation-play-state: paused;
-        }
-      `}</style>
+      <div className="max-w-[1360px] mx-auto flex items-center justify-between">
+        
+        {/* Left / Center: Benefit Statements with Dots */}
+        <div className="flex items-center gap-3 sm:gap-6 mx-auto sm:mx-0 overflow-x-auto no-scrollbar text-[#E2EAE5]">
+          <span className="flex items-center gap-1.5 whitespace-nowrap">
+            <Truck className="w-3.5 h-3.5 text-[#86B398]" />
+            Free Shipping on orders above ₹999
+          </span>
+          <span className="text-[#86B398]/50 hidden sm:inline">•</span>
+          <span className="flex items-center gap-1.5 whitespace-nowrap hidden sm:flex">
+            <Leaf className="w-3.5 h-3.5 text-[#86B398]" />
+            100% Natural Botanicals
+          </span>
+          <span className="text-[#86B398]/50 hidden md:inline">•</span>
+          <span className="flex items-center gap-1.5 whitespace-nowrap hidden md:flex">
+            <Heart className="w-3.5 h-3.5 text-[#86B398]" />
+            Handmade with Love in Tamil Nadu
+          </span>
+        </div>
 
-      <div className="announcement-marquee-track">
-        {/* Render 2 identical sets for 100% seamless, infinite -50% loop */}
-        {[...marqueeItems, ...marqueeItems].map((msg, idx) => (
-          <div key={idx} className="flex items-center gap-3.5 px-6 shrink-0">
-            <svg
-              className="w-3.5 h-3.5 text-[#D0DEC4] flex-shrink-0"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
-              <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" />
-            </svg>
-            <span className="tracking-[0.15em] font-medium">{msg}</span>
-            <span className="text-[#C2D2B5]/70 text-xs ml-3 font-normal">✦</span>
-          </div>
-        ))}
+        {/* Right: Track Order & Help */}
+        <div className="hidden lg:flex items-center gap-5 text-[11px] text-[#C4D9CD]">
+          <Link href="/contact" className="hover:text-white transition-colors">
+            Track Order
+          </Link>
+          <span className="text-white/20">|</span>
+          <Link href="/contact" className="hover:text-white transition-colors">
+            Customer Care
+          </Link>
+        </div>
+
       </div>
     </aside>
   );
 }
-
