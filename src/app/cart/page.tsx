@@ -20,45 +20,9 @@ export default function CartPage() {
     isFreeShipping,
   } = useCart();
 
-  const [isCheckingOut, setIsCheckingOut] = useState(false);
-  const [orderPlaced, setOrderPlaced] = useState(false);
   const [giftNote, setGiftNote] = useState("");
 
   const remainingForFreeShipping = Math.max(0, freeShippingThreshold - subtotal);
-
-  const handleCheckout = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsCheckingOut(true);
-    setTimeout(() => {
-      setIsCheckingOut(false);
-      setOrderPlaced(true);
-      clearCart();
-    }, 1500);
-  };
-
-  if (orderPlaced) {
-    return (
-      <div className="py-24 text-center">
-        <Container size="narrow">
-          <div className="w-16 h-16 rounded-full bg-sage-100 text-forest-900 border border-[#d6e0d0] flex items-center justify-center mx-auto mb-6">
-            <Check className="w-8 h-8" />
-          </div>
-          <span className="eyebrow mb-2">Order Confirmed</span>
-          <h1 className="font-display text-4xl text-forest-900 mb-4">
-            Thank you for bringing Earth & Essence into your home.
-          </h1>
-          <p className="text-sm text-charcoal-600 max-w-md mx-auto leading-relaxed mb-8">
-            Your ritual order has been received. Our Bangalore studio will hand-pack your items with unbleached cotton paper and dispatch within 24–48 hours.
-          </p>
-          <Link href="/shop">
-            <Button variant="primary" size="lg">
-              Return to Catalog
-            </Button>
-          </Link>
-        </Container>
-      </div>
-    );
-  }
 
   if (items.length === 0) {
     return (
@@ -232,16 +196,16 @@ export default function CartPage() {
               </span>
             </div>
 
-            <Button
-              variant="primary"
-              size="lg"
-              className="w-full py-4 text-sm tracking-wider uppercase flex items-center justify-center gap-2"
-              onClick={handleCheckout}
-              isLoading={isCheckingOut}
-            >
-              <span>Complete Ritual Purchase</span>
-              <ArrowRight className="w-4 h-4" />
-            </Button>
+            <Link href="/checkout" className="block w-full">
+              <Button
+                variant="primary"
+                size="lg"
+                className="w-full py-4 text-sm tracking-wider uppercase flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <span>Proceed to Secure Checkout</span>
+                <ArrowRight className="w-4 h-4" />
+              </Button>
+            </Link>
 
             <div className="pt-4 border-t border-border space-y-2 text-xs text-charcoal-600">
               <div className="flex items-center gap-2">

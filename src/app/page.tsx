@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { PavishnaHero } from "@/components/home/PavishnaHero";
 import { PavishnaShopByRitual } from "@/components/home/PavishnaShopByRitual";
@@ -15,10 +15,31 @@ import { PavishnaBlogSection } from "@/components/home/PavishnaBlogSection";
 import { useCart } from "@/components/cart/CartContext";
 import { Product } from "@/types/product";
 import { CheckCircle2, ShoppingBag } from "lucide-react";
+import { HeroCMSData } from "@/types/cms";
 
 export default function HomePage() {
   const { addItem, openCart } = useCart();
   const [toastItem, setToastItem] = useState<string | null>(null);
+  const [heroContent, setHeroContent] = useState<HeroCMSData | undefined>(undefined);
+
+  useEffect(() => {
+    let ignore = false;
+    async function loadCMS() {
+      try {
+        const res = await fetch("/api/cms/homepage");
+        const data = await res.json();
+        if (!ignore && data.success && data.hero) {
+          setHeroContent(data.hero);
+        }
+      } catch (err) {
+        console.error("Failed to load storefront CMS:", err);
+      }
+    }
+    loadCMS();
+    return () => {
+      ignore = true;
+    };
+  }, []);
 
   const handleQuickAdd = (product: Product) => {
     addItem(product);
@@ -31,8 +52,8 @@ export default function HomePage() {
   return (
     <div className="flex flex-col bg-[#FAF8F5] text-[#10281D] min-h-screen selection:bg-[#CEE9D9] selection:text-[#10271D]">
       
-      {/* 1. Asymmetric Hero & Slim Trust Strip (Mockup Section 1 & 2) */}
-      <PavishnaHero />
+      {/* 1. Asymmetric Hero & Slim Trust Strip (Dynamic CMS-driven) */}
+      <PavishnaHero content={heroContent} />
 
       {/* 2. Asymmetric Shopping-by-Ritual Mosaic (Mockup Section 4) */}
       <PavishnaShopByRitual />

@@ -4,7 +4,12 @@ import Link from "next/link";
 import { Container, Section } from "@/components/ui/Container";
 import { ProductGrid } from "@/components/product/ProductGrid";
 import { productCategories, getProductsByCategory } from "@/config/products";
+import { getPublishedCatalog } from "@/lib/services/product-service";
+import { prisma } from "@/lib/prisma";
+import { Product } from "@/types/product";
 import { ArrowLeft } from "lucide-react";
+
+export const instant = false;
 
 interface CategoryPageProps {
   params: Promise<{ slug: string }>;
@@ -18,13 +23,33 @@ export async function generateStaticParams() {
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
   const { slug } = await params;
-  const category = productCategories.find((c) => c.slug === slug);
+  
+  let categoryName = "";
+  let categoryDesc: string | null = "";
 
-  if (!category) {
-    notFound();
+  try {
+    const dbCat = await prisma.category.findUnique({ where: { slug } });
+    if (dbCat) {
+      categoryName = dbCat.name;
+      categoryDesc = dbCat.description;
+    }
+  } catch (err) {
+    console.error("DB category lookup error:", err);
   }
 
-  const products = getProductsByCategory(slug);
+  if (!categoryName) {
+    const staticCat = productCategories.find((c) => c.slug === slug);
+    if (!staticCat) {
+      notFound();
+    }
+    categoryName = staticCat.name;
+    categoryDesc = staticCat.description;
+  }
+
+  let products = await getPublishedCatalog({ categorySlug: slug });
+  if (!products || products.length === 0) {
+    products = (getProductsByCategory(slug) as unknown as typeof products) || [];
+  }
 
   return (
     <div className="bg-[#FAFBF9] text-[#1B1C19]">
@@ -44,10 +69,10 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
           <div className="max-w-2xl">
             <span className="eyebrow mb-2">Artisanal Collection</span>
             <h1 className="font-display text-4xl sm:text-5xl text-forest-900 mb-4 tracking-tight">
-              {category.name}
+              {categoryName}
             </h1>
             <p className="text-sm sm:text-base text-[#3E4640] leading-relaxed font-normal">
-              {category.description}
+              {categoryDesc}
             </p>
           </div>
         </Container>
@@ -68,7 +93,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
             </Link>
           </div>
 
-          <ProductGrid products={products} columns={3} />
+          <ProductGrid products={products as unknown as Product[]} columns={3} />
         </Container>
       </Section>
     </div>

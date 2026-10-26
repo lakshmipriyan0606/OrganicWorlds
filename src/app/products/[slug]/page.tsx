@@ -3,8 +3,12 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ProductDetailView } from "@/components/product/ProductDetailView";
 import { ProductCard } from "@/components/product/ProductCard";
-import { mockProducts, getProductBySlug } from "@/config/products";
+import { mockProducts, getProductBySlug as getMockProductBySlug } from "@/config/products";
+import { getProductBySlug as getDbProductBySlug } from "@/lib/services/product-service";
 import { ChevronRight } from "lucide-react";
+import { Product } from "@/types/product";
+
+export const instant = false;
 
 interface ProductPageProps {
   params: Promise<{ slug: string }>;
@@ -18,7 +22,20 @@ export async function generateStaticParams() {
 
 export default async function ProductPage({ params }: ProductPageProps) {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  let product: Product | null = null;
+
+  try {
+    const dbProduct = await getDbProductBySlug(slug);
+    if (dbProduct) {
+      product = dbProduct as unknown as Product;
+    }
+  } catch (err) {
+    console.error("DB product lookup error:", err);
+  }
+
+  if (!product) {
+    product = (getMockProductBySlug(slug) as unknown as Product) || null;
+  }
 
   if (!product) {
     notFound();

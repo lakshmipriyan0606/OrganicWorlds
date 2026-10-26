@@ -1,26 +1,99 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useSyncExternalStore } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { siteConfig } from "@/config/site";
 import { useCart } from "@/components/cart/CartContext";
 import { mockProducts } from "@/config/products";
-import { ShoppingBag, Search, Menu, X, Box, ArrowRight } from "lucide-react";
+import {
+  ShoppingBag,
+  Search,
+  Menu,
+  X,
+  ArrowRight,
+  User,
+  LogOut,
+  ShieldCheck,
+  Truck,
+} from "lucide-react";
 import { cn, formatCurrency } from "@/lib/utils";
+
+interface AuthUser {
+  id: string;
+  email: string;
+  name: string | null;
+  role: string;
+}
 
 export function SiteHeader() {
   const pathname = usePathname();
+  const router = useRouter();
   const { totalItems, openCart } = useCart();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [mounted, setMounted] = useState(false);
+  const [currentUser, setCurrentUser] = useState<AuthUser | null>(null);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const userMenuRef = useRef<HTMLDivElement>(null);
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
+    let ignore = false;
+    async function checkAuth() {
+      try {
+        const res = await fetch("/api/auth/me");
+        if (res.ok) {
+          const data = await res.json();
+          if (!ignore && data.authenticated && data.user) {
+            setCurrentUser(data.user);
+          } else if (!ignore) {
+            setCurrentUser(null);
+          }
+        } else if (!ignore) {
+          setCurrentUser(null);
+        }
+      } catch {
+        if (!ignore) setCurrentUser(null);
+      }
+    }
+    checkAuth();
+    return () => {
+      ignore = true;
+    };
+  }, [pathname]);
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (userMenuRef.current && !userMenuRef.current.contains(e.target as Node)) {
+        setUserMenuOpen(false);
+      }
+    }
+    if (userMenuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [userMenuOpen]);
+
+  const handleLogout = async () => {
+    try {
+      await fetch("/api/auth/logout", { method: "POST" });
+      setCurrentUser(null);
+      setUserMenuOpen(false);
+      setMobileMenuOpen(false);
+      router.push("/");
+      router.refresh();
+    } catch (e) {
+      console.error("Logout error:", e);
+    }
+  };
 
   useEffect(() => {
     if (searchOpen && searchInputRef.current) {
@@ -118,17 +191,138 @@ export function SiteHeader() {
               <Search className="w-4.5 h-4.5 stroke-[1.8]" />
             </button>
 
-            {/* Account / User Link */}
-            <Link
-              href="/contact"
-              className="text-[#1F241F] hover:text-[#0D281E] transition-colors p-1.5 hidden sm:inline-block cursor-pointer"
-              aria-label="Account and orders"
-            >
-              <svg className="w-4.5 h-4.5 stroke-[1.8]" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                <circle cx="12" cy="7" r="4" />
-              </svg>
-            </Link>
+            {/* Account / User Menu Dropdown */}
+            <div className="relative" ref={userMenuRef}>
+              <button
+                onClick={() => setUserMenuOpen((prev) => !prev)}
+                className={cn(
+                  "text-[#1F241F] hover:text-[#0D281E] transition-colors p-1.5 hidden sm:inline-flex items-center justify-center cursor-pointer rounded-full relative",
+                  userMenuOpen && "text-[#0D281E] bg-[#EAE4D7]"
+                )}
+                aria-label="Account and orders menu"
+                aria-expanded={userMenuOpen}
+              >
+                <User className="w-4.5 h-4.5 stroke-[1.8]" />
+                {currentUser && (
+                  <span className="absolute bottom-1 right-1 w-2 h-2 rounded-full bg-emerald-600 ring-2 ring-[#F6F3EC]" />
+                )}
+              </button>
+
+              {/* Profile Dropdown Card */}
+              {userMenuOpen && (
+                <div className="absolute right-0 top-full mt-3 w-72 bg-white rounded-3xl border border-[#E3DDD1] shadow-xl p-5 z-50 animate-in fade-in slide-in-from-top-2 duration-150 space-y-4">
+                  {currentUser ? (
+                    // Logged in user view
+                    <div className="space-y-3">
+                      <div className="pb-3 border-b border-[#F0ECE1]">
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-[#82947B] block">
+                          Sanctuary Patron
+                        </span>
+                        <h4 className="font-display text-sm font-bold text-[#0D281E] truncate">
+                          {currentUser.name || "Botanical Patron"}
+                        </h4>
+                        <p className="text-[11px] text-[#525A55] truncate">{currentUser.email}</p>
+                        {currentUser.role === "ADMIN" && (
+                          <span className="inline-flex items-center gap-1 mt-1.5 px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider bg-amber-50 text-amber-800 border border-amber-200">
+                            <ShieldCheck className="w-3 h-3" />
+                            Apothecary Staff
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="space-y-1 text-xs">
+                        <Link
+                          href="/account"
+                          onClick={() => setUserMenuOpen(false)}
+                          className="flex items-center justify-between p-2 rounded-xl text-[#0D281E] hover:bg-[#FAF8F5] font-semibold transition-colors"
+                        >
+                          <span>My Sanctuary & Orders</span>
+                          <ArrowRight className="w-3.5 h-3.5 text-[#82947B]" />
+                        </Link>
+                        <Link
+                          href="/track"
+                          onClick={() => setUserMenuOpen(false)}
+                          className="flex items-center justify-between p-2 rounded-xl text-[#525A55] hover:bg-[#FAF8F5] hover:text-[#0D281E] font-medium transition-colors"
+                        >
+                          <span>Track Dispatch</span>
+                          <Truck className="w-3.5 h-3.5 text-[#82947B]" />
+                        </Link>
+                        {currentUser.role === "ADMIN" && (
+                          <Link
+                            href="/admin/dashboard"
+                            onClick={() => setUserMenuOpen(false)}
+                            className="flex items-center justify-between p-2 rounded-xl text-amber-900 bg-amber-50/70 hover:bg-amber-100/70 font-bold transition-colors"
+                          >
+                            <span>Admin Workspace</span>
+                            <ArrowRight className="w-3.5 h-3.5" />
+                          </Link>
+                        )}
+                      </div>
+
+                      <div className="pt-2 border-t border-[#F0ECE1]">
+                        <button
+                          onClick={handleLogout}
+                          className="w-full flex items-center justify-center gap-2 py-2 rounded-xl text-xs font-bold text-rose-700 hover:bg-rose-50 transition-colors cursor-pointer"
+                        >
+                          <LogOut className="w-3.5 h-3.5" />
+                          <span>Sign Out</span>
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    // Not logged in view
+                    <div className="space-y-4">
+                      <div>
+                        <h4 className="font-display text-sm font-bold text-[#0D281E]">
+                          Sanctuary Profile
+                        </h4>
+                        <p className="text-[11px] text-[#525A55] mt-0.5 leading-relaxed">
+                          Sign in to access your sacred orders, saved addresses, and botanical self-care history.
+                        </p>
+                      </div>
+
+                      <div className="space-y-2">
+                        <Link
+                          href="/login"
+                          onClick={() => setUserMenuOpen(false)}
+                          className="w-full py-2.5 rounded-full bg-[#0D281E] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#1A4533] transition-colors flex items-center justify-center gap-1.5 shadow-2xs"
+                        >
+                          <span>Sign In to Sanctuary</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </Link>
+
+                        <Link
+                          href="/register"
+                          onClick={() => setUserMenuOpen(false)}
+                          className="w-full py-2.5 rounded-full border border-[#E3DDD1] bg-[#FAF8F5] text-[#0D281E] text-xs font-bold uppercase tracking-wider hover:bg-[#F0ECE1] transition-colors flex items-center justify-center text-center"
+                        >
+                          Create Account
+                        </Link>
+                      </div>
+
+                      <div className="pt-2 border-t border-[#F0ECE1] space-y-1.5 text-xs text-[#525A55]">
+                        <Link
+                          href="/track"
+                          onClick={() => setUserMenuOpen(false)}
+                          className="flex items-center gap-2 p-1.5 rounded-lg hover:text-[#0D281E] hover:bg-[#FAF8F5] transition-colors"
+                        >
+                          <Truck className="w-3.5 h-3.5 text-[#82947B]" />
+                          <span>Track an Order</span>
+                        </Link>
+                        <Link
+                          href="/admin/login"
+                          onClick={() => setUserMenuOpen(false)}
+                          className="flex items-center gap-2 p-1.5 rounded-lg hover:text-[#0D281E] hover:bg-[#FAF8F5] transition-colors text-[11px] text-[#82947B]"
+                        >
+                          <ShieldCheck className="w-3.5 h-3.5" />
+                          <span>Apothecary Staff Login</span>
+                        </Link>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
 
             {/* Shopping Bag Trigger */}
             <button
@@ -257,6 +451,92 @@ export function SiteHeader() {
                   </Link>
                 ))}
               </nav>
+
+              {/* Mobile Account / Sanctuary Section */}
+              <div className="mt-8 pt-6 border-t border-[#E2DDD2] space-y-3">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#82947B] block">
+                  Sanctuary Account
+                </span>
+                {currentUser ? (
+                  <div className="space-y-3">
+                    <div className="text-xs">
+                      <strong className="text-[#0D281E] block font-bold truncate">
+                        {currentUser.name || "Botanical Patron"}
+                      </strong>
+                      <span className="text-[11px] text-[#525A55] block truncate">
+                        {currentUser.email}
+                      </span>
+                    </div>
+
+                    <div className="space-y-2 text-xs">
+                      <Link
+                        href="/account"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="flex items-center justify-between p-2 rounded-xl bg-white border border-[#E3DDD1] font-bold text-[#0D281E]"
+                      >
+                        <span>My Sanctuary & Orders</span>
+                        <ArrowRight className="w-3.5 h-3.5 text-[#82947B]" />
+                      </Link>
+
+                      <Link
+                        href="/track"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="flex items-center justify-between p-2 rounded-xl bg-white border border-[#E3DDD1] font-medium text-[#525A55]"
+                      >
+                        <span>Track Order</span>
+                        <Truck className="w-3.5 h-3.5 text-[#82947B]" />
+                      </Link>
+
+                      {currentUser.role === "ADMIN" && (
+                        <Link
+                          href="/admin/dashboard"
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="flex items-center justify-between p-2 rounded-xl bg-amber-50 border border-amber-200 font-bold text-amber-900"
+                        >
+                          <span>Admin Workspace</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </Link>
+                      )}
+                    </div>
+
+                    <button
+                      onClick={handleLogout}
+                      className="w-full py-2 rounded-xl text-xs font-bold text-rose-700 bg-rose-50 border border-rose-200 flex items-center justify-center gap-1.5 cursor-pointer"
+                    >
+                      <LogOut className="w-3.5 h-3.5" />
+                      <span>Sign Out</span>
+                    </button>
+                  </div>
+                ) : (
+                  <div className="space-y-2">
+                    <Link
+                      href="/login"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="w-full py-2.5 rounded-full bg-[#0D281E] text-white text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-2xs"
+                    >
+                      <span>Sign In to Sanctuary</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+
+                    <Link
+                      href="/register"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="w-full py-2.5 rounded-full border border-[#E3DDD1] bg-white text-[#0D281E] text-xs font-bold uppercase tracking-wider flex items-center justify-center text-center"
+                    >
+                      Create Account
+                    </Link>
+
+                    <Link
+                      href="/track"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="flex items-center justify-between p-2 rounded-xl text-xs font-medium text-[#525A55] hover:text-[#0D281E]"
+                    >
+                      <span>Track Order</span>
+                      <Truck className="w-3.5 h-3.5 text-[#82947B]" />
+                    </Link>
+                  </div>
+                )}
+              </div>
             </div>
 
             <div className="pt-6 border-t border-[#E2DDD2]">

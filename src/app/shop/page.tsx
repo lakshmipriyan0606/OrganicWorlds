@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { mockProducts } from "@/config/products";
@@ -34,6 +34,7 @@ const keynoteChips = [
 
 export default function ShopPage() {
   const { addItem, openCart } = useCart();
+  const [dbProducts, setDbProducts] = useState<Product[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [maxPrice, setMaxPrice] = useState<number>(6000);
   const [inStockOnly, setInStockOnly] = useState<boolean>(true);
@@ -42,6 +43,25 @@ export default function ShopPage() {
   const [wishlist, setWishlist] = useState<Record<string, boolean>>({});
   const [addedSlug, setAddedSlug] = useState<string | null>(null);
   const [toastItem, setToastItem] = useState<string | null>(null);
+
+  useEffect(() => {
+    let ignore = false;
+    async function loadProducts() {
+      try {
+        const res = await fetch("/api/products");
+        const data = await res.json();
+        if (!ignore && data.success && Array.isArray(data.products) && data.products.length > 0) {
+          setDbProducts(data.products);
+        }
+      } catch (err) {
+        console.error("Failed to load products from database:", err);
+      }
+    }
+    loadProducts();
+    return () => {
+      ignore = true;
+    };
+  }, []);
 
   // Toggle keynote chip
   const toggleKeynote = (keynote: string) => {
@@ -70,7 +90,8 @@ export default function ShopPage() {
 
   // Filter & sort logic
   const filteredProducts = useMemo(() => {
-    let result = [...mockProducts];
+    const sourceProducts = dbProducts.length > 0 ? dbProducts : mockProducts;
+    let result = [...sourceProducts];
 
     // Category
     if (selectedCategory !== "all") {

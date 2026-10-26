@@ -7,42 +7,42 @@ import { formatCurrency } from "@/lib/utils";
 import { Product } from "@/types/product";
 
 interface PavishnaBestSellersProps {
-  onQuickAdd: (product: any) => void;
+  onQuickAdd: (product: Product) => void;
 }
 
 const bestSellerItems = [
   {
-    id: "neem-soap",
+    id: "pav-soap-03",
     title: "Neem Soap",
     subtitle: "Purifying & Refreshing",
-    price: 199,
+    price: 390,
     image: "/images/img4.jpeg",
     slug: "neem-bath-soap",
     categoryLabel: "Artisanal Soap",
   },
   {
-    id: "hibiscus-soap",
+    id: "pav-soap-02",
     title: "Hibiscus Soap",
     subtitle: "Brightening & Nourishing",
-    price: 199,
+    price: 450,
     image: "/images/img3.jpeg",
     slug: "hibiscus-rosa-bath-soap",
     categoryLabel: "Artisanal Soap",
   },
   {
-    id: "turmeric-soap",
+    id: "pav-soap-01",
     title: "Turmeric Soap",
     subtitle: "Glow & Protection",
-    price: 199,
+    price: 420,
     image: "/images/turmeric-soap-bar.jpg",
     slug: "vetti-veru-bath-soap",
     categoryLabel: "Artisanal Soap",
   },
   {
-    id: "coconut-soap",
+    id: "pav-soap-05",
     title: "Coconut Soap",
     subtitle: "Gentle & Moisturizing",
-    price: 199,
+    price: 380,
     image: "/images/img2.jpeg",
     slug: "coconut-bath-soap",
     categoryLabel: "Artisanal Soap",

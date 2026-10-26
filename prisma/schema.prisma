@@ -1,0 +1,251 @@
+// Prisma schema for Pavishna Organic Worlds
+// Supports SQLite for local dev & testing, PostgreSQL for production
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String         @id @default(cuid())
+  email        String         @unique
+  passwordHash String
+  name         String
+  role         String         @default("CUSTOMER") // "CUSTOMER" | "ADMIN" | "STAFF"
+  phone        String?
+  addresses    Address[]
+  orders       Order[]
+  auditLogs    AdminAuditLog[]
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+
+  @@index([email])
+  @@index([role])
+}
+
+model Address {
+  id           String   @id @default(cuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  fullName     String
+  addressLine1 String
+  addressLine2 String?
+  city         String
+  state        String
+  postalCode   String
+  phone        String
+  isDefault    Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([userId])
+}
+
+model Category {
+  id          String    @id @default(cuid())
+  name        String
+  slug        String    @unique
+  description String?
+  image       String?
+  order       Int       @default(0)
+  isActive    Boolean   @default(true)
+  products    Product[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([slug])
+}
+
+model Product {
+  id                 String           @id @default(cuid())
+  title              String
+  slug               String           @unique
+  subtitle           String?
+  description        String
+  categoryId         String?
+  category           Category?        @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  categorySlug       String?
+  categoryLabel      String?
+  price              Float
+  originalPrice      Float?
+  sku                String           @unique
+  badge              String?
+  featuredImage      String
+  images             String           // JSON stringified array of image URLs
+  inStock            Boolean          @default(true)
+  stockQuantity      Int              @default(50)
+  lowStockThreshold  Int              @default(5)
+  isPublished        Boolean          @default(true)
+  rating             Float            @default(5.0)
+  reviewCount        Int              @default(0)
+  ingredientsSummary String?
+  ritualSteps        String?          // JSON stringified array of strings
+  soapSpecs          String?          // JSON stringified soap specs object
+  variants           ProductVariant[]
+  orderItems         OrderItem[]
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+
+  @@index([slug])
+  @@index([categorySlug])
+  @@index([isPublished])
+  @@index([inStock])
+}
+
+model ProductVariant {
+  id            String   @id @default(cuid())
+  productId     String
+  product       Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  name          String
+  sku           String   @unique
+  price         Float
+  stockQuantity Int      @default(50)
+  inStock       Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([productId])
+  @@index([sku])
+}
+
+model InventoryLog {
+  id            String   @id @default(cuid())
+  productId     String
+  productSku    String
+  delta         Int
+  previousStock Int
+  newStock      Int
+  reason        String   // "INITIAL_SEED", "ORDER_PLACED", "ORDER_CANCELLED", "MANUAL_ADJUSTMENT", "RESTOCK"
+  actorEmail    String?
+  createdAt     DateTime @default(now())
+
+  @@index([productId])
+  @@index([productSku])
+}
+
+model Order {
+  id              String      @id @default(cuid())
+  orderNumber     String      @unique // e.g. "POW-2026-1001"
+  userId          String?
+  user            User?       @relation(fields: [userId], references: [id], onDelete: SetNull)
+  guestEmail      String?
+  guestPhone      String?
+  guestName       String?
+  status          String      @default("PENDING_PAYMENT") 
+  // "PENDING_PAYMENT", "CONFIRMED", "PROCESSING", "PACKED", "SHIPPED", "OUT_FOR_DELIVERY", "DELIVERED", "CANCELLED", "REFUNDED"
+  paymentStatus   String      @default("PENDING") 
+  // "PENDING", "PROCESSING", "PAID", "FAILED", "REFUNDED"
+  paymentMethod   String      @default("RAZORPAY") // "RAZORPAY" | "COD" | "STRIPE"
+  currency        String      @default("INR")
+  subtotal        Float
+  discountAmount  Float       @default(0)
+  shippingAmount  Float       @default(0)
+  taxAmount       Float       @default(0)
+  totalAmount     Float
+  shippingAddress String      // JSON stringified address snapshot
+  billingAddress  String?     // JSON stringified address snapshot
+  carrier         String?     // e.g. "Delhivery", "BlueDart", "India Post"
+  trackingNumber  String?
+  trackingUrl     String?
+  shippedAt       DateTime?
+  deliveredAt     DateTime?
+  trackingToken   String      @unique @default(cuid()) // Unguessable token for secure public lookup
+  items           OrderItem[]
+  payments        Payment[]
+  notes           String?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  @@index([orderNumber])
+  @@index([userId])
+  @@index([status])
+  @@index([paymentStatus])
+  @@index([trackingToken])
+}
+
+model OrderItem {
+  id              String   @id @default(cuid())
+  orderId         String
+  order           Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId       String?
+  product         Product? @relation(fields: [productId], references: [id], onDelete: SetNull)
+  productName     String   // Immutable snapshot
+  variantName     String?  // Immutable snapshot
+  sku             String   // Immutable snapshot
+  unitPrice       Float    // Immutable snapshot
+  quantity        Int
+  totalPrice      Float    // Immutable snapshot
+  featuredImage   String?
+  createdAt       DateTime @default(now())
+
+  @@index([orderId])
+  @@index([productId])
+}
+
+model Payment {
+  id               String   @id @default(cuid())
+  orderId          String
+  order            Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  gateway          String   @default("RAZORPAY")
+  gatewayOrderId   String?
+  gatewayPaymentId String?
+  gatewaySignature String?
+  amount           Float
+  currency         String   @default("INR")
+  status           String   // "PENDING", "SUCCESS", "FAILED", "REFUNDED"
+  failureReason    String?
+  refundId         String?
+  refundAmount     Float?
+  idempotencyKey   String?  @unique
+  rawResponse      String?  // JSON string
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([orderId])
+  @@index([gatewayOrderId])
+  @@index([gatewayPaymentId])
+  @@index([idempotencyKey])
+}
+
+model HomepageContent {
+  id        String   @id @default(cuid())
+  key       String   @unique // e.g. "hero", "announcement", "featured_rituals"
+  data      String   // JSON stringified configuration
+  updatedAt DateTime @updatedAt
+
+  @@index([key])
+}
+
+model MediaAsset {
+  id        String   @id @default(cuid())
+  filename  String
+  url       String   @unique
+  altText   String?
+  mimeType  String
+  fileSize  Int
+  width     Int?
+  height    Int?
+  createdAt DateTime @default(now())
+
+  @@index([filename])
+}
+
+model AdminAuditLog {
+  id         String   @id @default(cuid())
+  userId     String?
+  user       User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  action     String   // e.g. "CREATE_PRODUCT", "UPDATE_PRICE", "SHIP_ORDER"
+  entityType String   // "PRODUCT", "ORDER", "HOMEPAGE", "CATEGORY"
+  entityId   String?
+  details    String?  // JSON string
+  ipAddress  String?
+  createdAt  DateTime @default(now())
+
+  @@index([userId])
+  @@index([action])
+  @@index([entityType])
+}

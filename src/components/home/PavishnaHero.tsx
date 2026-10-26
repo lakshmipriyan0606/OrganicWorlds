@@ -3,9 +3,16 @@
 import React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Leaf, Award, Heart, Star, Sparkles } from "lucide-react";
+import { Leaf, Award, Heart, Star, Sparkles, ArrowRight } from "lucide-react";
+import { HeroCMSData, DEFAULT_HERO_DATA } from "@/types/cms";
 
-export function PavishnaHero() {
+interface PavishnaHeroProps {
+  content?: HeroCMSData;
+}
+
+export function PavishnaHero({ content }: PavishnaHeroProps) {
+  const data = { ...DEFAULT_HERO_DATA, ...content };
+
   return (
     <section className="relative w-full bg-[#FAF8F5] text-[#10281D] overflow-hidden pt-10 sm:pt-14 lg:pt-18 pb-0 border-b border-[#EAE3D6]">
       
@@ -31,38 +38,34 @@ export function PavishnaHero() {
           >
             {/* Eyebrow Pill */}
             <div className="inline-flex items-center gap-2 mb-5 text-[11px] font-semibold tracking-[0.22em] uppercase text-[#3A4A40]">
-              <span>PURE</span>
-              <span>•</span>
-              <span>BOTANICAL</span>
-              <span>•</span>
-              <span>HANDCRAFTED</span>
+              <span>{data.eyebrow}</span>
             </div>
 
             {/* Editorial Serif Headline */}
             <h1 className="font-display text-[44px] sm:text-[58px] lg:text-[66px] text-[#0D281E] leading-[1.06] tracking-tight font-normal mb-5">
-              Nature’s Care<br />
-              <span className="font-display italic font-normal text-[#1A4533]">for Your Skin</span>
+              {data.title}<br />
+              <span className="font-display italic font-normal text-[#1A4533]">{data.italicTitle}</span>
             </h1>
 
             {/* Subtitle */}
             <p className="text-base sm:text-lg text-[#455048] max-w-lg mb-8 leading-relaxed font-normal">
-              Organic soaps, oils and skincare crafted with traditional wisdom and the power of nature.
+              {data.subtitle}
             </p>
 
             {/* CTAs */}
             <div className="flex flex-wrap items-center gap-4 sm:gap-5 mb-10 sm:mb-12">
               <Link
-                href="/categories/soaps"
+                href={data.ctaPrimaryLink || "/categories/soaps"}
                 className="px-7 py-3.5 rounded-full bg-[#0D281E] text-white hover:bg-[#081B13] text-xs font-semibold uppercase tracking-wider transition-all duration-300 hover:scale-102 shadow-md hover:shadow-lg flex items-center gap-2 cursor-pointer"
               >
-                <span>Shop Organic Soaps</span>
+                <span>{data.ctaPrimaryText}</span>
                 <span>→</span>
               </Link>
               <Link
-                href="/categories/hair-care"
+                href={data.ctaSecondaryLink || "/categories/hair-care"}
                 className="px-7 py-3.5 rounded-full border border-[#0D281E]/40 text-[#0D281E] hover:bg-[#0D281E]/5 text-xs font-semibold uppercase tracking-wider transition-all duration-300 hover:scale-102 cursor-pointer"
               >
-                Explore Our Oils
+                {data.ctaSecondaryText}
               </Link>
             </div>
           </motion.div>
@@ -76,12 +79,19 @@ export function PavishnaHero() {
           >
             <div className="relative w-full max-w-[500px] aspect-square rounded-3xl overflow-hidden shadow-2xl border border-[#E2DDD2] group bg-[#F5F1E8]">
               <img
-                src="/images/hero-hair-oil.jpg"
-                alt="Pavishna Herbal Hair Oil pouring into carved stone mortar surrounded by yellow flowers and fresh neem"
+                src={data.imageDesktop || "/images/hero-hair-oil.jpg"}
+                alt={data.imageAlt || "Pavishna herbal formulation visual"}
                 className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-104"
               />
 
-              {/* Circular Rotating 100% Natural Stamp Badge */}
+              {data.overlayOpacity ? (
+                <div
+                  className="absolute inset-0 bg-black pointer-events-none"
+                  style={{ opacity: (data.overlayOpacity || 0) / 100 }}
+                />
+              ) : null}
+
+              {/* Circular Rotating Stamp Badge */}
               <div className="absolute top-6 right-6 w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-white/90 backdrop-blur-md p-1 shadow-lg border border-[#0D281E]/15 flex items-center justify-center pointer-events-none select-none">
                 <div className="relative w-full h-full flex items-center justify-center animate-spin" style={{ animationDuration: "25s" }}>
                   <svg className="w-full h-full text-[#0D281E]" viewBox="0 0 100 100">
@@ -90,9 +100,9 @@ export function PavishnaHero() {
                       d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"
                       fill="none"
                     />
-                    <text fontSize="8.2" letterSpacing="0.22em" fill="currentColor" fontWeight="600" className="uppercase">
+                    <text fontSize="7.8" letterSpacing="0.2em" fill="currentColor" fontWeight="600" className="uppercase">
                       <textPath href="#heroBadgePath" startOffset="0%">
-                        • 100% NATURAL • INGREDIENTS •
+                        • {data.badgeText || "100% NATURAL INGREDIENTS"} •
                       </textPath>
                     </text>
                   </svg>

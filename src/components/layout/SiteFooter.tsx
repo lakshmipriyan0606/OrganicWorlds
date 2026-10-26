@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { siteConfig } from "@/config/site";
 import { ArrowRight, Check } from "lucide-react";
 
 export function SiteFooter() {

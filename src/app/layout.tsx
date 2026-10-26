@@ -3,10 +3,7 @@ import { Bodoni_Moda, Manrope } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/config/site";
 import { CartProvider } from "@/components/cart/CartContext";
-import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
-import { SiteHeader } from "@/components/layout/SiteHeader";
-import { CartDrawer } from "@/components/layout/CartDrawer";
-import { SiteFooter } from "@/components/layout/SiteFooter";
+import { StoreLayoutWrapper } from "@/components/layout/StoreLayoutWrapper";
 
 const bodoni = Bodoni_Moda({
   subsets: ["latin"],
@@ -60,11 +57,7 @@ export default function RootLayout({
     <html lang="en" data-scroll-behavior="smooth" className={`${bodoni.variable} ${manrope.variable}`}>
       <body className="min-h-screen flex flex-col bg-ivory-50 text-charcoal-900 font-body antialiased">
         <CartProvider>
-          <AnnouncementBar />
-          <SiteHeader />
-          <CartDrawer />
-          <main className="flex-1">{children}</main>
-          <SiteFooter />
+          <StoreLayoutWrapper>{children}</StoreLayoutWrapper>
         </CartProvider>
       </body>
     </html>

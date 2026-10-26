@@ -2,13 +2,43 @@ import React from "react";
 import { Container, Section } from "@/components/ui/Container";
 import { CategoryCard } from "@/components/product/CategoryCard";
 import { productCategories } from "@/config/products";
+import { prisma } from "@/lib/prisma";
 
 export const metadata = {
   title: "All Categories — Curated Botanical Collections | Pavishna Organic Worlds",
   description: "Browse Pavishna Organic Worlds offerings: Handcrafted Herbal Bath Soaps, Cold-Pressed Scalp Oils, and pure botanical essentials.",
 };
 
-export default function CategoriesPage() {
+export default async function CategoriesPage() {
+  let categories: typeof productCategories = [];
+
+  try {
+    const dbCats = await prisma.category.findMany({
+      include: {
+        _count: { select: { products: true } },
+      },
+      orderBy: { name: "asc" },
+    });
+
+    if (dbCats && dbCats.length > 0) {
+      categories = dbCats.map((c) => ({
+        id: c.id,
+        name: c.name,
+        slug: c.slug,
+        description: c.description || "",
+        image: c.image || `/images/${c.slug}.jpg`,
+        itemCount: c._count?.products ?? 0,
+        featured: true,
+      }));
+    }
+  } catch (err) {
+    console.error("DB categories query error:", err);
+  }
+
+  if (categories.length === 0) {
+    categories = productCategories;
+  }
+
   return (
     <div className="bg-[#FAFBF9] text-[#1B1C19]">
       <section className="relative bg-gradient-to-b from-[#F2F6F3] to-[#FAFBF9] py-14 md:py-20 border-b border-[#E3E8E1] overflow-hidden">
@@ -28,7 +58,7 @@ export default function CategoriesPage() {
       <Section spacing="spacious">
         <Container>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
-            {productCategories.map((cat) => (
+            {categories.map((cat) => (
               <CategoryCard key={cat.id} category={cat} />
             ))}
           </div>
