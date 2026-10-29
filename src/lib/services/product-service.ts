@@ -197,12 +197,16 @@ export async function createAdminProduct(input: z.infer<typeof productSchema>, a
  */
 export async function updateAdminProduct(
   id: string,
-  input: Partial<z.infer<typeof productSchema>>
+  input: Partial<z.infer<typeof productSchema>>,
+  actorEmail?: string
 ) {
   const existing = await prisma.product.findUnique({ where: { id } });
   if (!existing) {
     throw new Error(`PRODUCT_NOT_FOUND: Product ${id} not found`);
   }
+
+  const newStock = input.stockQuantity !== undefined ? input.stockQuantity : existing.stockQuantity;
+  const newInStock = input.inStock !== undefined ? input.inStock : newStock > 0;
 
   return await prisma.$transaction(async (tx) => {
     const updated = await tx.product.update({
@@ -221,7 +225,8 @@ export async function updateAdminProduct(
         badge: input.badge,
         featuredImage: input.featuredImage,
         images: input.images ? JSON.stringify(input.images) : undefined,
-        inStock: input.inStock,
+        inStock: newInStock,
+        stockQuantity: newStock,
         lowStockThreshold: input.lowStockThreshold,
         isPublished: input.isPublished,
         ingredientsSummary: input.ingredientsSummary,
@@ -230,6 +235,20 @@ export async function updateAdminProduct(
       },
       include: { variants: true },
     });
+
+    if (input.stockQuantity !== undefined && input.stockQuantity !== existing.stockQuantity) {
+      await tx.inventoryLog.create({
+        data: {
+          productId: existing.id,
+          productSku: input.sku || existing.sku,
+          delta: input.stockQuantity - existing.stockQuantity,
+          previousStock: existing.stockQuantity,
+          newStock: input.stockQuantity,
+          reason: "ADMIN_PRODUCT_EDIT",
+          actorEmail: actorEmail || "admin",
+        },
+      });
+    }
 
     return formatProductResponse(updated);
   });

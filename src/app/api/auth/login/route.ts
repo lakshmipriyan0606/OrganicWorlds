@@ -3,9 +3,19 @@ import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 import { loginSchema } from "@/lib/validations";
 import { setSessionCookie } from "@/lib/auth";
+import { checkRateLimit } from "@/lib/rate-limit";
 
 export async function POST(req: NextRequest) {
   try {
+    const clientIp = req.headers.get("x-forwarded-for")?.split(",")[0].trim() || "127.0.0.1";
+    const rateCheck = checkRateLimit(`login:${clientIp}`, { maxRequests: 15, intervalMs: 60000 });
+    if (!rateCheck.allowed) {
+      return NextResponse.json(
+        { error: "Too many login attempts. Please wait a minute before trying again." },
+        { status: 429 }
+      );
+    }
+
     const body = await req.json();
     const validated = loginSchema.safeParse(body);
 
@@ -29,7 +39,9 @@ export async function POST(req: NextRequest) {
     }
 
     let passwordValid = await bcrypt.compare(password, user.passwordHash);
-    if (!passwordValid) {
+
+    // In development and testing only: allow fallback for seeded demo credentials
+    if (!passwordValid && process.env.NODE_ENV !== "production") {
       if (
         user.email === "customer@example.com" &&
         (password === "CustomerPavishna2026!Secure" || password === "Customer2026!Password")
@@ -55,6 +67,7 @@ export async function POST(req: NextRequest) {
       email: user.email,
       role: user.role as "CUSTOMER" | "ADMIN" | "STAFF",
       name: user.name,
+      tokenVersion: user.tokenVersion ?? 1,
     });
 
     return NextResponse.json({

@@ -55,7 +55,7 @@ export async function PUT(req: NextRequest, { params }: RouteParams) {
     const { id } = await params;
     const body = await req.json();
 
-    const product = await updateAdminProduct(id, body);
+    const product = await updateAdminProduct(id, body, session.email);
     return NextResponse.json({ success: true, product });
   } catch (error: unknown) {
     const msg = error instanceof Error ? error.message : "Error";

@@ -25,5 +25,5 @@ export async function GET() {
     return NextResponse.json({ authenticated: false, user: null }, { status: 401 });
   }
 
-  return NextResponse.json({ authenticated: true, user });
+  return NextResponse.json({ success: true, authenticated: true, user });
 }

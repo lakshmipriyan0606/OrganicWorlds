@@ -1,69 +1,50 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { getSession, setSessionCookie } from "@/lib/auth";
-import bcrypt from "bcryptjs";
+import { getSession } from "@/lib/auth";
 import { calculateAuthoritativeCart } from "@/lib/services/pricing-service";
 import { checkoutSchema } from "@/lib/validations";
+import { checkRateLimit } from "@/lib/rate-limit";
 
 export async function POST(req: NextRequest) {
   try {
-    const session = await getSession();
     const body = await req.json();
 
     // 1. Validate payload schema
-    const parsed = checkoutSchema.parse(body);
-
-    // 2. Authoritative price & stock recalculation
-    const calculation = await calculateAuthoritativeCart(parsed.items);
-
-    // 3. Resolve user identity: session, existing email match, or optional inline registration
-    let finalUserId = session?.userId;
-
-    if (!finalUserId && parsed.email) {
-      const cleanEmail = parsed.email.toLowerCase().trim();
-      const existingUser = await prisma.user.findUnique({
-        where: { email: cleanEmail },
-        select: { id: true },
-      });
-
-      if (existingUser) {
-        finalUserId = existingUser.id;
-      } else if (parsed.createAccount && parsed.password && parsed.password.length >= 6) {
-        try {
-          const passwordHash = await bcrypt.hash(parsed.password, 10);
-          const newUser = await prisma.user.create({
-            data: {
-              name: parsed.customerName,
-              email: cleanEmail,
-              passwordHash,
-              role: "CUSTOMER",
-              phone: parsed.phone,
-            },
-          });
-          finalUserId = newUser.id;
-
-          // Automatically establish session cookie
-          await setSessionCookie({
-            userId: newUser.id,
-            email: newUser.email,
-            role: "CUSTOMER",
-            name: newUser.name,
-          });
-        } catch (regErr) {
-          console.warn("Inline account creation skipped:", regErr);
-        }
-      }
+    const validated = checkoutSchema.safeParse(body);
+    if (!validated.success) {
+      return NextResponse.json(
+        { error: "Validation failed", details: validated.error.flatten().fieldErrors },
+        { status: 400 }
+      );
     }
+    const parsed = validated.data;
 
-    if (!finalUserId) {
+    // 2. Mandatory Customer Session Verification
+    // The customer ID is derived EXCLUSIVELY from the cryptographically verified session
+    const session = await getSession();
+    if (!session?.userId) {
       return NextResponse.json(
         {
           error: "AUTHENTICATION_REQUIRED",
-          message: "Authentication is mandatory: Please sign in or create an account to place your order.",
+          message: "Authentication is mandatory: Please sign in or register an account before placing an order.",
         },
         { status: 401 }
       );
     }
+
+    const customerUserId = session.userId;
+
+    // Rate limiting: max 10 order creations per minute per customer
+    const rateCheck = checkRateLimit(`order:${customerUserId}`, { maxRequests: 10, intervalMs: 60000 });
+    if (!rateCheck.allowed) {
+      return NextResponse.json(
+        { error: "Too many order requests. Please wait a moment before trying again." },
+        { status: 429 }
+      );
+    }
+
+    // 3. Authoritative price & stock recalculation
+    const calculation = await calculateAuthoritativeCart(parsed.items);
 
     // 4. Generate unique order number
     const randomSuffix = Math.floor(1000 + Math.random() * 9000);
@@ -74,7 +55,7 @@ export async function POST(req: NextRequest) {
       const createdOrder = await tx.order.create({
         data: {
           orderNumber,
-          user: { connect: { id: finalUserId } },
+          user: { connect: { id: customerUserId } },
           guestName: parsed.customerName,
           guestEmail: parsed.email,
           guestPhone: parsed.phone,

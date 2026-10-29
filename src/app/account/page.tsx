@@ -109,7 +109,7 @@ export default function CustomerAccountPage() {
         const ordersData = await ordersRes.json();
         const addrData = await addrRes.json();
 
-        if (!ignore && meData.success && meData.user) {
+        if (!ignore && (meData.authenticated || meData.success) && meData.user) {
           setProfile(meData.user);
           setOrders(ordersData.orders || []);
           setAddresses(addrData.addresses || []);

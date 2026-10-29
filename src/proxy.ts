@@ -5,14 +5,37 @@ import { jwtVerify } from "jose";
 const SESSION_COOKIE_NAME = "pow_session";
 
 function getSecretKey(): Uint8Array {
-  const secret = process.env.AUTH_SECRET || "pavishna-dev-secret-super-secure-at-least-32-chars-long";
+  const secret = process.env.AUTH_SECRET;
+  if (!secret) {
+    if (process.env.NODE_ENV === "production") {
+      throw new Error("FATAL: AUTH_SECRET environment variable is missing in production environment");
+    }
+    return new TextEncoder().encode("pavishna-dev-secret-super-secure-at-least-32-chars-long");
+  }
   return new TextEncoder().encode(secret);
 }
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // 1. Handle /admin routes
+  // 1. Handle /api/admin JSON endpoints
+  if (pathname.startsWith("/api/admin")) {
+    const token = request.cookies.get(SESSION_COOKIE_NAME)?.value;
+    if (!token) {
+      return NextResponse.json({ error: "UNAUTHORIZED" }, { status: 401 });
+    }
+    try {
+      const { payload } = await jwtVerify(token, getSecretKey());
+      if (payload.role !== "ADMIN" && payload.role !== "STAFF") {
+        return NextResponse.json({ error: "FORBIDDEN" }, { status: 403 });
+      }
+      return NextResponse.next();
+    } catch {
+      return NextResponse.json({ error: "UNAUTHORIZED" }, { status: 401 });
+    }
+  }
+
+  // 2. Handle /admin routes
   if (pathname.startsWith("/admin")) {
     // Allow public access to admin login page
     if (pathname === "/admin/login") {
@@ -51,7 +74,7 @@ export async function proxy(request: NextRequest) {
     }
   }
 
-  // 2. Handle /account customer routes
+  // 3. Handle /account customer routes
   if (pathname.startsWith("/account")) {
     const token = request.cookies.get(SESSION_COOKIE_NAME)?.value;
     if (!token) {
@@ -74,5 +97,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*", "/account/:path*"],
+  matcher: ["/admin/:path*", "/account/:path*", "/api/admin/:path*"],
 };

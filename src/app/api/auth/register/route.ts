@@ -3,9 +3,19 @@ import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 import { registerSchema } from "@/lib/validations";
 import { setSessionCookie } from "@/lib/auth";
+import { checkRateLimit } from "@/lib/rate-limit";
 
 export async function POST(req: NextRequest) {
   try {
+    const clientIp = req.headers.get("x-forwarded-for")?.split(",")[0].trim() || "127.0.0.1";
+    const rateCheck = checkRateLimit(`register:${clientIp}`, { maxRequests: 10, intervalMs: 60000 });
+    if (!rateCheck.allowed) {
+      return NextResponse.json(
+        { error: "Too many registration attempts. Please wait a minute before trying again." },
+        { status: 429 }
+      );
+    }
+
     const body = await req.json();
     const validated = registerSchema.safeParse(body);
 
@@ -46,6 +56,7 @@ export async function POST(req: NextRequest) {
       email: user.email,
       role: "CUSTOMER",
       name: user.name,
+      tokenVersion: user.tokenVersion ?? 1,
     });
 
     return NextResponse.json(

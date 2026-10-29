@@ -13,6 +13,8 @@ import {
   ShoppingBag,
 } from "lucide-react";
 
+import { getSession } from "@/lib/auth";
+
 export const instant = false;
 
 interface OrderConfirmationPageProps {
@@ -34,6 +36,15 @@ export default async function OrderConfirmationPage({
   });
 
   if (!order) {
+    notFound();
+  }
+
+  // Cross-account IDOR protection: only the authenticated order owner or admin can view order details
+  const session = await getSession();
+  const isOwner = !!(session && (order.userId ? session.userId === order.userId : session.email === order.guestEmail));
+  const isAdmin = session?.role === "ADMIN";
+
+  if (!isOwner && !isAdmin) {
     notFound();
   }
 

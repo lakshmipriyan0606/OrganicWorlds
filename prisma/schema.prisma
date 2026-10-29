@@ -17,9 +17,11 @@ model User {
   name         String
   role         String         @default("CUSTOMER") // "CUSTOMER" | "ADMIN" | "STAFF"
   phone        String?
+  tokenVersion Int            @default(1)
   addresses    Address[]
   orders       Order[]
   auditLogs    AdminAuditLog[]
+  passwordResetTokens PasswordResetToken[]
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
 
@@ -249,3 +251,17 @@ model AdminAuditLog {
   @@index([action])
   @@index([entityType])
 }
+
+model PasswordResetToken {
+  id        String    @id @default(cuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tokenHash String    @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([userId])
+  @@index([tokenHash])
+}
+

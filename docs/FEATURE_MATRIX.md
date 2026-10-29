@@ -1,6 +1,6 @@
 # Pavishna Organic Worlds — Feature Matrix
 
-**Last Updated:** October 26, 2026 (Phase 02 Completed)  
+**Last Updated:** October 29, 2026 (Mandatory Customer Authentication & Checkout Security Audit Completed)  
 **Standard Status Values:** `VERIFIED_COMPLETE` | `PARTIALLY_IMPLEMENTED` | `BROKEN` | `MISSING` | `BLOCKED` | `NOT_TESTED`  
 
 ---
@@ -25,10 +25,11 @@
 | **Product Detail** | Rich Product Detail View | `VERIFIED_COMPLETE` | `src/app/products/[slug]/page.tsx`, `ProductDetailView.tsx` | Database product resolution with fallbacks, variant selectors, batch info, and ritual tabs. |
 | **Customer Cart** | Slide-Over Cart Drawer | `VERIFIED_COMPLETE` | `src/components/layout/CartDrawer.tsx` | Real-time items, quantity change, free shipping threshold indicator, direct checkout link. |
 | **Customer Cart** | Cart Page Review | `VERIFIED_COMPLETE` | `src/app/cart/page.tsx` | Full review of bag items, gift notes, price breakdown, and direct link to real checkout. |
-| **Checkout** | Real Server Checkout | `VERIFIED_COMPLETE` | `src/app/checkout/page.tsx`, `/api/checkout/create-order` | Server-authoritative checkout with Zod validation, pricing recalculation, and atomic DB order persistence. |
-| **Customer Accounts** | Login & Registration | `VERIFIED_COMPLETE` | `/login`, `/register`, `/api/auth/*` | Full frontend portals with botanical styling, bcrypt validation, and secure session cookies. |
-| **Customer Accounts** | Profile & Address Book | `VERIFIED_COMPLETE` | `/account`, `/api/account/addresses/*` | Live address management with create modal, default toggling, and authenticated delete. |
-| **Customer Accounts** | Order History & Tracking | `VERIFIED_COMPLETE` | `/account`, `/api/account/orders`, `/order-confirmation/[id]` | Real-time customer order history with status badges, line items, and confirmation views. |
+| **Checkout** | Mandatory Authenticated Checkout | `VERIFIED_COMPLETE` | `src/app/checkout/page.tsx`, `/api/checkout/create-order` | Two-step checkout with mandatory authentication. Customer ID derived exclusively from verified session. Anonymous guest checkout completely disabled. Rate limited (10 req/min). |
+| **Customer Accounts** | Real DB Login & Registration | `VERIFIED_COMPLETE` | `/login`, `/register`, `/api/auth/*` | Salted bcrypt (12 rounds), min 8-character password constraint, rate limiting (15 login/min, 10 reg/min), account enumeration prevented with identical 401s, demo credentials restricted strictly to dev/test. |
+| **Customer Accounts** | Password Recovery & Reset | `VERIFIED_COMPLETE` | `/forgot-password`, `/reset-password`, `/api/auth/forgot-password`, `/api/auth/reset-password`, `email-service.ts` | 64-char cryptographically secure tokens, SHA-256 hashed DB storage, 1-hour expiry, single-use enforcement, anti-enumeration identical 200 responses, rate limiting (5 req/15 min), configurable email service, and session revocation via `tokenVersion`. |
+| **Customer Accounts** | Profile & Address Book | `VERIFIED_COMPLETE` | `/account`, `/api/account/addresses/*` | Live address management with create modal, default toggling, and authenticated delete strictly scoped to `userId: session.userId`. |
+| **Customer Accounts** | Order History & Tracking | `VERIFIED_COMPLETE` | `/account`, `/api/account/orders`, `/order-confirmation/[id]` | Real-time customer order history strictly isolated by owner. Order confirmation page features strict cross-account IDOR protection rendering 404 for non-owners. |
 
 ---
 
@@ -54,13 +55,16 @@
 
 | Feature Area | Feature Item | Status | Evidence / Implementation Source | Notes & Target Phase |
 |---|---|---|---|---|
-| **Database** | Relational Database & ORM | `VERIFIED_COMPLETE` | `prisma/schema.prisma`, `src/lib/prisma.ts`, `dev.db` | Synchronized SQLite DB with 12 models. Tested via Prisma Client. |
+| **Database** | Relational Database & ORM | `VERIFIED_COMPLETE` | `prisma/schema.prisma`, `src/lib/prisma.ts`, `dev.db` | Synchronized SQLite DB with 13 models (including PasswordResetToken and User.tokenVersion). Tested via Prisma Client. |
 | **Database** | Database Migrations & Seeds | `VERIFIED_COMPLETE` | `prisma/seed.ts` | 19 products, categories, admin user, customer user, and CMS seeded. |
-| **Security** | Role-Based Authentication | `VERIFIED_COMPLETE` | `src/lib/auth.ts`, `src/proxy.ts`, `/api/auth/*` | HTTP-only session cookies, bcryptjs, admin proxy guards. |
-| **Security** | Authoritative Server Pricing | `VERIFIED_COMPLETE` | `src/lib/services/pricing-service.ts` | Strict stock checking and authoritative price recalculation from database. |
-| **Payments** | Razorpay Order Creation | `VERIFIED_COMPLETE` | `/api/checkout/razorpay/create-order`, `payment-service.ts` | Server-side gateway order generation in paise, linked to Payment record. |
-| **Payments** | HMAC Signature Verification | `VERIFIED_COMPLETE` | `/api/checkout/razorpay/verify`, `payment-service.ts` | Timing-safe HMAC-SHA256 signature verification advancing order to CONFIRMED and deducting stock. |
+| **Security** | Role-Based Authentication & Session Security | `VERIFIED_COMPLETE` | `src/lib/auth.ts`, `src/proxy.ts`, `/api/auth/*` | HS256 signed JWT session tokens, HttpOnly SameSite=Lax cookies, admin proxy guards, session fixation prevention, and instant tokenVersion session invalidation. |
+| **Security** | Rate Limiting Engine | `VERIFIED_COMPLETE` | `src/lib/rate-limit.ts` | In-memory sliding-window & distributed Upstash Redis rate limiter protecting login (15/min), register (10/min), forgot-password (5/15min), reset-password (10/15min), and order creation (10/min). |
+| **Security** | Authoritative Server Pricing & Stock Checking | `VERIFIED_COMPLETE` | `src/lib/services/pricing-service.ts` | Client prices ignored; all line item costs and stock availability recalculated authoritatively against database. |
+| **Payments** | Razorpay Order Creation | `VERIFIED_COMPLETE` | `/api/checkout/razorpay/create-order`, `payment-service.ts` | Server-side gateway order generation in paise, strictly checking order ownership against session (`403 Forbidden` if cross-account attempt). |
+| **Payments** | HMAC Signature Verification | `VERIFIED_COMPLETE` | `/api/checkout/razorpay/verify`, `payment-service.ts` | Constant-time `crypto.timingSafeEqual` HMAC-SHA256 signature verification. Rejects fraudulent signatures, advances order to CONFIRMED, and idempotently decrements stock. |
 | **Payments** | Webhook Processing | `VERIFIED_COMPLETE` | `/api/webhooks/razorpay`, `payment-service.ts` | Raw-body HMAC verification, idempotent handling of `payment.captured` and `payment.failed`. |
 | **Fulfillment** | Public Customer Tracking Route | `VERIFIED_COMPLETE` | `src/app/track/[token]/page.tsx`, `/api/track/[token]` | Token-based botanical journey lookup (`/track/[token]`) with 4-step progressive timeline and carrier links. |
-| **Testing** | Automated Regression Suite | `VERIFIED_COMPLETE` | `tests/phase02` through `phase07` | 79 automated tests covering auth, cart recalculation, catalog, CMS, media, orders, Razorpay HMAC, and tracking. |
-| **Build & Lint** | Clean Linter & Build | `VERIFIED_COMPLETE` | `npx tsc --noEmit` (0 errors), `npx eslint --quiet` (0 errors), `npm run build` (73 routes pass) | Next.js 16.4 Turbopack build passing cleanly with Partial Prerendering. |
+| **Testing** | Automated Regression & Security Suite | `VERIFIED_COMPLETE` | `tests/phase02` through `phase07`, `tests/audit-checkout-auth.test.ts`, `tests/password-reset.test.ts`, `tests/e2e-customer-journey.test.ts` | **157 automated tests passing across 9 test suites** covering auth, IDOR, session revocation, password reset cryptography, anti-enumeration, cart pricing, CMS, orders, Razorpay HMAC, webhooks, and full E2E customer journey. |
+| **Testing** | Playwright Browser E2E Automation | `VERIFIED_COMPLETE` | `e2e/admin-dynamic-product.spec.ts`, `e2e/customer-checkout.spec.ts`, `playwright.config.ts` | **13/13 Playwright browser tests passing** across real Chromium: guest authentication gating, registration, order creation, payment verification, order history, IDOR protection, and complete 12-step dynamic product lifecycle (₹500 → ₹450 → offer ₹399 → stock 0 blocked → restore 10). |
+| **Testing** | Unified Verification Command (`npm run test:full`) | `VERIFIED_COMPLETE` | `package.json` (`npm run test:full`) | Single repeatable master verification command executing all 9 unit/integration test suites, 13 Playwright browser E2E tests, TypeScript compilation, ESLint, and Next.js 16.4 production build. |
+| **Build & Lint** | Clean Linter & Build | `VERIFIED_COMPLETE` | `npx tsc --noEmit` (0 errors), `npm run lint -- --quiet` (0 errors), Next.js 16.4 Turbopack build | Zero compiler warnings, zero lint errors, 79/79 routes generated cleanly. |

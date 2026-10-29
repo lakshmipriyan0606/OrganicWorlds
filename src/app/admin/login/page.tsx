@@ -118,12 +118,14 @@ export default function AdminLoginPage() {
           </button>
         </form>
 
-        {/* Demo Credentials Badge */}
-        <div className="mt-8 pt-6 border-t border-[#ECE7DC] text-center">
-          <p className="text-[11px] text-[#6E7B73]">
-            Default Seed Admin: <span className="font-mono text-[#0D281E] font-medium">admin@pavishnaorganicworlds.com</span>
-          </p>
-        </div>
+        {/* Demo Credentials Badge (Development & Testing only) */}
+        {process.env.NODE_ENV !== "production" && (
+          <div className="mt-8 pt-6 border-t border-[#ECE7DC] text-center">
+            <p className="text-[11px] text-[#6E7B73]">
+              Default Seed Admin: <span className="font-mono text-[#0D281E] font-medium">admin@pavishnaorganicworlds.com</span>
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );

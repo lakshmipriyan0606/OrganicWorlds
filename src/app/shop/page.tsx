@@ -124,7 +124,7 @@ export default function ShopPage() {
     }
 
     return result;
-  }, [selectedCategory, maxPrice, inStockOnly, selectedKeynotes, sortBy]);
+  }, [selectedCategory, maxPrice, inStockOnly, selectedKeynotes, sortBy, dbProducts]);
 
   const clearAllFilters = () => {
     setSelectedCategory("all");

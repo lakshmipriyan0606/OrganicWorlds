@@ -24,6 +24,9 @@ import {
   LogOut,
   RefreshCw,
   UserCheck,
+  MapPin,
+  CreditCard,
+  Check,
 } from "lucide-react";
 
 export default function CheckoutPage() {
@@ -62,6 +65,61 @@ export default function CheckoutPage() {
 
   const [submittingOrder, setSubmittingOrder] = useState(false);
   const [orderError, setOrderError] = useState<string | null>(null);
+
+  // Sandbox Test Payment state (Local & Test environment)
+  const [sandboxModalOpen, setSandboxModalOpen] = useState(false);
+  const [sandboxData, setSandboxData] = useState<{
+    orderId: string;
+    orderNumber: string;
+    amount: number;
+    currency: string;
+    gatewayOrderId: string;
+    simulatedPaymentId?: string;
+    simulatedSignature?: string;
+  } | null>(null);
+  const [verifyingSandbox, setVerifyingSandbox] = useState(false);
+
+  const handleCompleteSandboxPayment = async () => {
+    if (!sandboxData) return;
+    setVerifyingSandbox(true);
+    setOrderError(null);
+
+    try {
+      const verifyRes = await fetch("/api/checkout/razorpay/verify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          orderId: sandboxData.orderId,
+          razorpayOrderId: sandboxData.gatewayOrderId,
+          razorpayPaymentId: sandboxData.simulatedPaymentId,
+          razorpaySignature: sandboxData.simulatedSignature,
+        }),
+      });
+
+      const verifyData = await verifyRes.json();
+      if (verifyRes.ok && verifyData.success) {
+        clearCart();
+        setSandboxModalOpen(false);
+        router.push(`/order-confirmation/${sandboxData.orderId}`);
+      } else {
+        setOrderError(verifyData.error || "Simulated payment verification failed.");
+        setVerifyingSandbox(false);
+      }
+    } catch (err) {
+      console.error("Sandbox verification error:", err);
+      setOrderError("Network error during simulated payment verification.");
+      setVerifyingSandbox(false);
+    }
+  };
+
+  const handleFailSandboxPayment = () => {
+    setSandboxModalOpen(false);
+    setOrderError("Payment simulation failed: The transaction was cancelled or declined. Your items remain in your cart.");
+  };
+
+  const handleCloseSandboxModal = () => {
+    setSandboxModalOpen(false);
+  };
 
   // 1. Check if user is already logged in on initial render
   useEffect(() => {
@@ -288,6 +346,29 @@ export default function CheckoutPage() {
         return;
       }
 
+      const isPlaceholderKey =
+        !rzpData.keyId ||
+        rzpData.keyId.includes("placeholder") ||
+        rzpData.keyId === "rzp_test_dummy" ||
+        Boolean(rzpData.isSimulated);
+
+      if (isPlaceholderKey) {
+        setSandboxData({
+          orderId,
+          orderNumber: rzpData.orderNumber,
+          amount: rzpData.amount,
+          currency: rzpData.currency,
+          gatewayOrderId: rzpData.gatewayOrderId,
+          simulatedPaymentId:
+            rzpData.simulatedSignature?.razorpayPaymentId ||
+            `pay_rzp_mock_${Date.now()}`,
+          simulatedSignature: rzpData.simulatedSignature?.razorpaySignature,
+        });
+        setSandboxModalOpen(true);
+        setSubmittingOrder(false);
+        return;
+      }
+
       // Load Razorpay Checkout SDK
       const loadRazorpayScript = (): Promise<boolean> => {
         return new Promise((resolve) => {
@@ -404,52 +485,145 @@ export default function CheckoutPage() {
   return (
     <div className="min-h-screen bg-[#FAF8F5] py-10 px-4 sm:px-6 lg:px-12 selection:bg-[#CEE9D9] selection:text-[#0D281E]">
       <div className="max-w-6xl mx-auto space-y-8">
-        {/* Header & Stepper */}
-        <div className="pb-4 border-b border-[#E3DDD1] flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-          <div>
-            <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#82947B] block mb-1">
-              Authoritative Secure Checkout
-            </span>
-            <h1 className="font-display text-2xl sm:text-3xl font-bold text-[#0D281E]">
-              {isLoggedIn ? "Delivery Details & Order Review" : "Sign In Required for Checkout"}
-            </h1>
-            <p className="text-xs text-[#525A55] mt-1">
-              100% Plastic-free dispatch from our Tamil Nadu botanical apothecary
-            </p>
-          </div>
-
-          {/* Checkout Steps Progress */}
-          <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider">
-            <div
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border ${
-                isLoggedIn
-                  ? "bg-emerald-50 text-emerald-800 border-emerald-200"
-                  : "bg-[#0D281E] text-white border-[#0D281E]"
-              }`}
-            >
-              {isLoggedIn ? (
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-              ) : (
-                <span className="w-3.5 h-3.5 rounded-full bg-white text-[#0D281E] text-[9px] flex items-center justify-center font-bold">
-                  1
+        {/* LUXURY BOTANICAL ANIMATED STEPPER HEADER */}
+        <div className="bg-white/95 backdrop-blur-md rounded-3xl p-6 sm:p-8 border border-[#E3DDD1] shadow-[0_8px_30px_rgb(0,0,0,0.03)] space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-[#F0ECE1]">
+            <div>
+              <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#82947B] flex items-center gap-1.5 mb-1">
+                <Sparkles className="w-3.5 h-3.5 text-[#C9A227] animate-pulse" />
+                Authoritative Secure Checkout
+              </span>
+              <h1 className="font-display text-2xl sm:text-3xl font-bold text-[#0D281E] tracking-tight">
+                {isLoggedIn ? "Delivery Details & Order Review" : "Sign In Required for Checkout"}
+              </h1>
+              <p className="text-xs text-[#525A55] mt-1 flex flex-wrap items-center gap-2">
+                <span>100% Plastic-free dispatch from our Tamil Nadu botanical apothecary</span>
+                <span className="hidden sm:inline text-[#DCE3DB]">•</span>
+                <span className="inline-flex items-center gap-1 text-emerald-700 font-semibold">
+                  <Leaf className="w-3 h-3 text-emerald-600" />
+                  Eco-Certified Sanctuary Dispatch
                 </span>
-              )}
-              <span>1. Sign In</span>
+              </p>
             </div>
 
-            <span className="text-[#82947B]">→</span>
-
-            <div
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border ${
-                isLoggedIn
-                  ? "bg-[#0D281E] text-white border-[#0D281E]"
-                  : "bg-[#FAFBF9] text-[#82947B] border-[#DCE3DB]"
-              }`}
-            >
-              <span className="w-3.5 h-3.5 rounded-full bg-white/20 text-current text-[9px] flex items-center justify-center font-bold">
-                2
+            {/* Overall Progress Badge */}
+            <div className="flex items-center gap-2 self-start sm:self-auto shrink-0">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-[#82947B]">
+                Checkout Flow:
               </span>
-              <span>2. Delivery</span>
+              <span className="px-3.5 py-1.5 rounded-full bg-[#FAFBF9] border border-[#DCE3DB] text-xs font-bold font-mono text-[#0D281E] shadow-2xs flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
+                {isLoggedIn ? "Step 2 of 3 (66%)" : "Step 1 of 3 (33%)"}
+              </span>
+            </div>
+          </div>
+
+          {/* Stepper Timeline & Smooth Animated Track */}
+          <div className="relative pt-1 sm:pt-3">
+            {/* Background Connector Bar (desktop) */}
+            <div className="absolute top-7 left-12 right-12 h-1 bg-[#EBE7DE] rounded-full -translate-y-1/2 z-0 hidden sm:block" />
+
+            {/* Animated Active Connector Bar with emerald gradient */}
+            <div
+              className="absolute top-7 left-12 h-1 bg-gradient-to-r from-emerald-600 via-emerald-700 to-[#0D281E] rounded-full -translate-y-1/2 z-0 hidden sm:block transition-all duration-700 ease-out shadow-xs"
+              style={{ width: isLoggedIn ? "50%" : "0%" }}
+            />
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 relative z-10">
+              {/* STEP 1: PATRON SIGN IN */}
+              <div
+                className={`flex items-center sm:flex-col sm:items-center gap-3.5 sm:gap-2 p-3 sm:p-2.5 rounded-2xl transition-all duration-300 ${
+                  isLoggedIn
+                    ? "bg-emerald-50/70 sm:bg-transparent"
+                    : "bg-[#0D281E]/5 sm:bg-transparent"
+                }`}
+              >
+                <div
+                  className={`w-12 h-12 rounded-2xl flex items-center justify-center font-bold text-xs shadow-sm transition-all duration-500 shrink-0 ${
+                    isLoggedIn
+                      ? "bg-emerald-700 text-white ring-4 ring-emerald-600/15 scale-105"
+                      : "bg-[#0D281E] text-white ring-4 ring-[#0D281E]/20"
+                  }`}
+                >
+                  {isLoggedIn ? (
+                    <CheckCircle2 className="w-5 h-5 text-emerald-200" />
+                  ) : (
+                    <User className="w-5 h-5 text-white" />
+                  )}
+                </div>
+                <div className="sm:text-center">
+                  <div className="flex items-center sm:justify-center gap-1.5">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#0D281E]">
+                      1. Sign In
+                    </span>
+                    {isLoggedIn && (
+                      <span className="text-[9px] font-bold text-emerald-700 uppercase bg-emerald-100/90 px-1.5 py-0.5 rounded-md">
+                        Done
+                      </span>
+                    )}
+                  </div>
+                  <span className="text-[10px] text-[#718076] block">
+                    {isLoggedIn ? "Verified Patron Access" : "Patron Verification"}
+                  </span>
+                </div>
+              </div>
+
+              {/* STEP 2: DELIVERY DETAILS */}
+              <div
+                className={`flex items-center sm:flex-col sm:items-center gap-3.5 sm:gap-2 p-3 sm:p-2.5 rounded-2xl transition-all duration-300 ${
+                  isLoggedIn
+                    ? "bg-emerald-50/80 sm:bg-transparent"
+                    : "opacity-60 sm:opacity-75"
+                }`}
+              >
+                <div
+                  className={`w-12 h-12 rounded-2xl flex items-center justify-center font-bold text-xs shadow-sm transition-all duration-500 shrink-0 ${
+                    isLoggedIn
+                      ? "bg-[#0D281E] text-white ring-4 ring-[#0D281E]/20 scale-105"
+                      : "bg-[#F0ECE1] text-[#82947B] border border-[#DCE3DB]"
+                  }`}
+                >
+                  <Truck
+                    className={`w-5 h-5 ${
+                      isLoggedIn ? "text-emerald-300" : "text-[#82947B]"
+                    }`}
+                  />
+                </div>
+                <div className="sm:text-center">
+                  <div className="flex items-center sm:justify-center gap-1.5">
+                    <span
+                      className={`text-[11px] font-bold uppercase tracking-wider ${
+                        isLoggedIn ? "text-[#0D281E]" : "text-[#82947B]"
+                      }`}
+                    >
+                      2. Delivery
+                    </span>
+                    {isLoggedIn && (
+                      <span className="text-[9px] font-bold text-[#0D281E] uppercase bg-emerald-200/60 px-1.5 py-0.5 rounded-md animate-pulse">
+                        Active Step
+                      </span>
+                    )}
+                  </div>
+                  <span className="text-[10px] text-[#718076] block">
+                    Dispatch Destination
+                  </span>
+                </div>
+              </div>
+
+              {/* STEP 3: SACRED PAYMENT */}
+              <div className="flex items-center sm:flex-col sm:items-center gap-3.5 sm:gap-2 p-3 sm:p-2.5 rounded-2xl opacity-60 sm:opacity-75 transition-all duration-300">
+                <div className="w-12 h-12 rounded-2xl bg-[#F0ECE1] text-[#82947B] border border-[#DCE3DB] flex items-center justify-center font-bold text-xs shadow-sm shrink-0">
+                  <CreditCard className="w-5 h-5 text-[#82947B]" />
+                </div>
+                <div className="sm:text-center">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#82947B] block">
+                    3. Payment
+                  </span>
+                  <span className="text-[10px] text-[#718076] block">
+                    Razorpay & Dispatch
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -530,28 +704,30 @@ export default function CheckoutPage() {
                 {/* TAB 1: SIGN IN FORM */}
                 {authTab === "signin" && (
                   <div className="space-y-4">
-                    {/* Quick Demo Helper */}
-                    <div className="p-3 rounded-2xl bg-[#FAF8F5] border border-[#E3DDD1] flex items-center justify-between gap-3">
-                      <div className="flex items-center gap-2">
-                        <Sparkles className="w-4 h-4 text-[#C9A227]" />
-                        <div>
-                          <span className="text-[11px] font-bold text-[#0D281E] block">
-                            Have test credentials?
-                          </span>
-                          <span className="text-[10px] text-[#718076]">
-                            customer@example.com / CustomerPavishna2026!Secure
-                          </span>
+                    {/* Quick Demo Helper (Development & Testing only) */}
+                    {process.env.NODE_ENV !== "production" && (
+                      <div className="p-3 rounded-2xl bg-[#FAF8F5] border border-[#E3DDD1] flex items-center justify-between gap-3">
+                        <div className="flex items-center gap-2">
+                          <Sparkles className="w-4 h-4 text-[#C9A227]" />
+                          <div>
+                            <span className="text-[11px] font-bold text-[#0D281E] block">
+                              Have test credentials?
+                            </span>
+                            <span className="text-[10px] text-[#718076]">
+                              customer@example.com / CustomerPavishna2026!Secure
+                            </span>
+                          </div>
                         </div>
+                        <button
+                          type="button"
+                          onClick={handleQuickFillCustomer}
+                          className="px-3 py-1.5 rounded-xl bg-white border border-[#DCE3DB] hover:border-[#0D281E] text-[11px] font-bold text-[#0D281E] shrink-0 transition-colors cursor-pointer shadow-2xs flex items-center gap-1"
+                        >
+                          <UserCheck className="w-3 h-3 text-emerald-700" />
+                          <span>Fill Demo</span>
+                        </button>
                       </div>
-                      <button
-                        type="button"
-                        onClick={handleQuickFillCustomer}
-                        className="px-3 py-1.5 rounded-xl bg-white border border-[#DCE3DB] hover:border-[#0D281E] text-[11px] font-bold text-[#0D281E] shrink-0 transition-colors cursor-pointer shadow-2xs flex items-center gap-1"
-                      >
-                        <UserCheck className="w-3 h-3 text-emerald-700" />
-                        <span>Fill Demo</span>
-                      </button>
-                    </div>
+                    )}
 
                     <form onSubmit={handleInlineLogin} className="space-y-4">
                       <div>
@@ -714,16 +890,19 @@ export default function CheckoutPage() {
               /* STEP 2: LOGGED-IN DELIVERY & ORDER SUBMISSION FORM */
               <form onSubmit={handleSubmitOrder} className="space-y-6">
                 {/* Verified Patron Member Banner */}
-                <div className="p-4 rounded-2xl bg-white border border-[#E3DDD1] shadow-2xs flex items-center justify-between gap-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-700 shrink-0">
-                      <ShieldCheck className="w-5 h-5" />
+                <div className="p-5 rounded-3xl bg-white border border-[#E3DDD1] shadow-xs flex items-center justify-between gap-4 transition-all">
+                  <div className="flex items-center gap-3.5">
+                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-600 to-[#0D281E] flex items-center justify-center text-white font-bold text-base shadow-sm shrink-0">
+                      {customerName ? customerName.charAt(0).toUpperCase() : "P"}
                     </div>
                     <div>
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800 block">
-                        Authenticated Patron Member
-                      </span>
-                      <p className="text-xs font-bold text-[#0D281E]">
+                      <div className="flex items-center gap-1.5">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800 block">
+                          Authenticated Patron Member
+                        </span>
+                      </div>
+                      <p className="text-xs font-bold text-[#0D281E] mt-0.5">
                         {customerName || "Member"} •{" "}
                         <span className="font-normal text-[#525A55]">{customerEmail}</span>
                       </p>
@@ -732,7 +911,7 @@ export default function CheckoutPage() {
                   <button
                     type="button"
                     onClick={handleSignOut}
-                    className="px-3 py-1.5 rounded-full border border-rose-200 text-rose-700 hover:bg-rose-50 text-[11px] font-bold uppercase tracking-wider flex items-center gap-1.5 transition-colors cursor-pointer shrink-0"
+                    className="px-3.5 py-1.5 rounded-full border border-rose-200 text-rose-700 hover:bg-rose-50 text-[11px] font-bold uppercase tracking-wider flex items-center gap-1.5 transition-colors cursor-pointer shrink-0"
                   >
                     <LogOut className="w-3 h-3" />
                     <span>Switch</span>
@@ -740,10 +919,13 @@ export default function CheckoutPage() {
                 </div>
 
                 {/* Contact Confirmation */}
-                <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#E3DDD1] shadow-2xs space-y-4">
-                  <h3 className="font-display text-sm font-bold text-[#0D281E] pb-3 border-b border-[#F0ECE1]">
-                    Patron Contact
-                  </h3>
+                <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#E3DDD1] shadow-xs space-y-4">
+                  <div className="flex items-center gap-2 pb-3 border-b border-[#F0ECE1]">
+                    <UserCheck className="w-4 h-4 text-[#82947B]" />
+                    <h3 className="font-display text-sm font-bold text-[#0D281E]">
+                      Patron Contact
+                    </h3>
+                  </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
@@ -756,7 +938,7 @@ export default function CheckoutPage() {
                         value={customerName}
                         onChange={(e) => setCustomerName(e.target.value)}
                         placeholder="Sundari Natarajan"
-                        className="w-full px-3.5 py-2.5 bg-[#FAFBF9] border border-[#DCE3DB] rounded-xl text-xs text-[#12281D] focus:outline-none focus:border-[#0D281E]"
+                        className="w-full px-4 py-2.5 bg-[#FAFBF9] border border-[#DCE3DB] rounded-xl text-xs text-[#12281D] focus:outline-none focus:border-[#0D281E] focus:bg-white focus:ring-2 focus:ring-[#0D281E]/10 transition-all"
                       />
                     </div>
                     <div>
@@ -769,7 +951,7 @@ export default function CheckoutPage() {
                         value={customerEmail}
                         onChange={(e) => setCustomerEmail(e.target.value)}
                         placeholder="sundari@example.com"
-                        className="w-full px-3.5 py-2.5 bg-[#FAFBF9] border border-[#DCE3DB] rounded-xl text-xs text-[#12281D] focus:outline-none focus:border-[#0D281E]"
+                        className="w-full px-4 py-2.5 bg-[#FAFBF9] border border-[#DCE3DB] rounded-xl text-xs text-[#12281D] focus:outline-none focus:border-[#0D281E] focus:bg-white focus:ring-2 focus:ring-[#0D281E]/10 transition-all"
                       />
                     </div>
                   </div>
@@ -784,16 +966,24 @@ export default function CheckoutPage() {
                       value={customerPhone}
                       onChange={(e) => setCustomerPhone(e.target.value)}
                       placeholder="+91 98765 43210"
-                      className="w-full px-3.5 py-2.5 bg-[#FAFBF9] border border-[#DCE3DB] rounded-xl text-xs text-[#12281D] focus:outline-none focus:border-[#0D281E]"
+                      className="w-full px-4 py-2.5 bg-[#FAFBF9] border border-[#DCE3DB] rounded-xl text-xs text-[#12281D] focus:outline-none focus:border-[#0D281E] focus:bg-white focus:ring-2 focus:ring-[#0D281E]/10 transition-all"
                     />
                   </div>
                 </div>
 
                 {/* Shipping Address */}
-                <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#E3DDD1] shadow-2xs space-y-4">
-                  <h3 className="font-display text-sm font-bold text-[#0D281E] pb-3 border-b border-[#F0ECE1]">
-                    Shipping & Delivery Address
-                  </h3>
+                <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#E3DDD1] shadow-xs space-y-4">
+                  <div className="flex items-center justify-between pb-3 border-b border-[#F0ECE1]">
+                    <div className="flex items-center gap-2">
+                      <MapPin className="w-4 h-4 text-[#82947B]" />
+                      <h3 className="font-display text-sm font-bold text-[#0D281E]">
+                        Shipping & Delivery Address
+                      </h3>
+                    </div>
+                    <span className="text-[10px] text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full font-bold border border-emerald-200 hidden sm:inline">
+                      🌿 100% Eco-Packaging
+                    </span>
+                  </div>
 
                   <div>
                     <label className="block text-[11px] font-bold uppercase tracking-wider text-[#525A55] mb-1.5">
@@ -805,7 +995,7 @@ export default function CheckoutPage() {
                       value={street}
                       onChange={(e) => setStreet(e.target.value)}
                       placeholder="Door No, Street Name, Cross, Layout"
-                      className="w-full px-3.5 py-2.5 bg-[#FAFBF9] border border-[#DCE3DB] rounded-xl text-xs text-[#12281D] focus:outline-none focus:border-[#0D281E]"
+                      className="w-full px-4 py-2.5 bg-[#FAFBF9] border border-[#DCE3DB] rounded-xl text-xs text-[#12281D] focus:outline-none focus:border-[#0D281E] focus:bg-white focus:ring-2 focus:ring-[#0D281E]/10 transition-all"
                     />
                   </div>
 
@@ -818,7 +1008,7 @@ export default function CheckoutPage() {
                       value={apartment}
                       onChange={(e) => setApartment(e.target.value)}
                       placeholder="Flat 4B, Lotus Apartments"
-                      className="w-full px-3.5 py-2.5 bg-[#FAFBF9] border border-[#DCE3DB] rounded-xl text-xs text-[#12281D] focus:outline-none focus:border-[#0D281E]"
+                      className="w-full px-4 py-2.5 bg-[#FAFBF9] border border-[#DCE3DB] rounded-xl text-xs text-[#12281D] focus:outline-none focus:border-[#0D281E] focus:bg-white focus:ring-2 focus:ring-[#0D281E]/10 transition-all"
                     />
                   </div>
 
@@ -833,7 +1023,7 @@ export default function CheckoutPage() {
                         value={city}
                         onChange={(e) => setCity(e.target.value)}
                         placeholder="Chennai"
-                        className="w-full px-3.5 py-2.5 bg-[#FAFBF9] border border-[#DCE3DB] rounded-xl text-xs text-[#12281D] focus:outline-none focus:border-[#0D281E]"
+                        className="w-full px-4 py-2.5 bg-[#FAFBF9] border border-[#DCE3DB] rounded-xl text-xs text-[#12281D] focus:outline-none focus:border-[#0D281E] focus:bg-white focus:ring-2 focus:ring-[#0D281E]/10 transition-all"
                       />
                     </div>
                     <div>
@@ -846,7 +1036,7 @@ export default function CheckoutPage() {
                         value={state}
                         onChange={(e) => setState(e.target.value)}
                         placeholder="Tamil Nadu"
-                        className="w-full px-3.5 py-2.5 bg-[#FAFBF9] border border-[#DCE3DB] rounded-xl text-xs text-[#12281D] focus:outline-none focus:border-[#0D281E]"
+                        className="w-full px-4 py-2.5 bg-[#FAFBF9] border border-[#DCE3DB] rounded-xl text-xs text-[#12281D] focus:outline-none focus:border-[#0D281E] focus:bg-white focus:ring-2 focus:ring-[#0D281E]/10 transition-all"
                       />
                     </div>
                     <div>
@@ -859,16 +1049,16 @@ export default function CheckoutPage() {
                         value={postalCode}
                         onChange={(e) => setPostalCode(e.target.value)}
                         placeholder="600001"
-                        className="w-full px-3.5 py-2.5 bg-[#FAFBF9] border border-[#DCE3DB] rounded-xl text-xs text-[#12281D] focus:outline-none focus:border-[#0D281E]"
+                        className="w-full px-4 py-2.5 bg-[#FAFBF9] border border-[#DCE3DB] rounded-xl text-xs text-[#12281D] focus:outline-none focus:border-[#0D281E] focus:bg-white focus:ring-2 focus:ring-[#0D281E]/10 transition-all"
                       />
                     </div>
                   </div>
                 </div>
 
                 {/* Gift Note */}
-                <div className="bg-white rounded-3xl p-6 border border-[#E3DDD1] shadow-2xs space-y-3">
+                <div className="bg-white rounded-3xl p-6 border border-[#E3DDD1] shadow-xs space-y-3">
                   <div className="flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-[#82947B]" />
+                    <Sparkles className="w-4 h-4 text-[#C9A227]" />
                     <h3 className="font-display text-sm font-bold text-[#0D281E]">
                       Handwritten Botanical Gift Message (Optional)
                     </h3>
@@ -878,7 +1068,7 @@ export default function CheckoutPage() {
                     value={giftNote}
                     onChange={(e) => setGiftNote(e.target.value)}
                     placeholder="Inscribe a sacred botanical blessing or personalized note to the recipient..."
-                    className="w-full p-3 bg-[#FAFBF9] border border-[#DCE3DB] rounded-xl text-xs text-[#12281D] focus:outline-none focus:border-[#0D281E] resize-none"
+                    className="w-full p-3 bg-[#FAFBF9] border border-[#DCE3DB] rounded-xl text-xs text-[#12281D] focus:outline-none focus:border-[#0D281E] focus:bg-white focus:ring-2 focus:ring-[#0D281E]/10 transition-all resize-none"
                   />
                 </div>
 
@@ -886,36 +1076,41 @@ export default function CheckoutPage() {
                 <button
                   type="submit"
                   disabled={submittingOrder}
-                  className="w-full py-4 px-6 rounded-full bg-[#0D281E] hover:bg-[#1A4533] text-white text-xs font-bold uppercase tracking-wider transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                  className="group relative overflow-hidden w-full py-4 px-8 rounded-2xl bg-gradient-to-r from-[#0D281E] via-[#163B2C] to-[#0D281E] hover:from-[#163B2C] hover:to-[#0D281E] text-white text-xs font-bold uppercase tracking-widest transition-all duration-300 shadow-[0_10px_25px_-5px_rgba(13,40,30,0.4)] hover:shadow-[0_15px_35px_-5px_rgba(13,40,30,0.5)] hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
                 >
-                  <span>
+                  <span className="relative z-10 flex items-center gap-2">
                     {submittingOrder
                       ? "Verifying Inventory & Authorizing Payment..."
                       : `Confirm Order & Proceed to Pay ${formatCurrency(estimatedTotal)}`}
                   </span>
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5" />
                 </button>
               </form>
             )}
           </div>
 
           {/* Right Column (5 cols): Order Items Summary */}
-          <div className="lg:col-span-5 bg-white rounded-3xl p-6 sm:p-8 border border-[#E3DDD1] shadow-2xs space-y-6 sticky top-28">
-            <h3 className="font-display text-sm font-bold text-[#0D281E] pb-3 border-b border-[#F0ECE1]">
-              Order Items ({items.length})
-            </h3>
+          <div className="lg:col-span-5 bg-white/95 backdrop-blur-md rounded-3xl p-6 sm:p-8 border border-[#E3DDD1] shadow-[0_8px_30px_rgb(0,0,0,0.03)] space-y-6 sticky top-28">
+            <div className="flex items-center justify-between pb-3 border-b border-[#F0ECE1]">
+              <h3 className="font-display text-sm font-bold text-[#0D281E]">
+                Order Items ({items.length})
+              </h3>
+              <span className="text-[10px] text-[#82947B] font-mono font-bold">
+                Direct Dispatch
+              </span>
+            </div>
 
             {/* Item list */}
             <div className="space-y-4 max-h-72 overflow-y-auto pr-1">
               {items.map((item) => (
-                <div key={item.id} className="flex items-center justify-between gap-3 text-xs">
+                <div key={item.id} className="group flex items-center justify-between gap-3 text-xs p-1.5 rounded-xl hover:bg-[#FAFBF9] transition-colors">
                   <div className="flex items-center gap-3">
                     <div className="w-12 h-12 rounded-xl bg-[#FAFBF9] border border-[#E3DDD1] overflow-hidden shrink-0 flex items-center justify-center">
                       {item.product.featuredImage ? (
                         <img
                           src={item.product.featuredImage}
                           alt={item.product.title}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         />
                       ) : (
                         <Package className="w-5 h-5 text-[#82947B]" />
@@ -930,7 +1125,7 @@ export default function CheckoutPage() {
                       </p>
                     </div>
                   </div>
-                  <span className="font-semibold text-[#0D281E] shrink-0">
+                  <span className="font-semibold text-[#0D281E] shrink-0 font-mono">
                     {formatCurrency(item.unitPrice * item.quantity)}
                   </span>
                 </div>
@@ -941,22 +1136,24 @@ export default function CheckoutPage() {
             <div className="pt-4 border-t border-[#F0ECE1] space-y-2.5 text-xs">
               <div className="flex justify-between text-[#525A55]">
                 <span>Subtotal</span>
-                <span className="font-semibold text-[#0D281E]">{formatCurrency(subtotal)}</span>
+                <span className="font-semibold text-[#0D281E] font-mono">{formatCurrency(subtotal)}</span>
               </div>
               <div className="flex justify-between text-[#525A55]">
                 <span>Standard Botanical Dispatch</span>
                 <span className="font-semibold text-[#0D281E]">
                   {shippingFee === 0 ? (
-                    <span className="text-emerald-700 uppercase font-bold">Free</span>
+                    <span className="text-emerald-700 uppercase font-bold text-[11px] bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">
+                      Free Shipping
+                    </span>
                   ) : (
-                    formatCurrency(shippingFee)
+                    <span className="font-mono">{formatCurrency(shippingFee)}</span>
                   )}
                 </span>
               </div>
 
               {shippingFee > 0 && (
-                <div className="p-2.5 rounded-xl bg-[#FAF8F5] border border-[#E3DDD1] text-[10px] text-[#82947B] flex items-center gap-2">
-                  <Leaf className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                <div className="p-3 rounded-2xl bg-[#FAF8F5] border border-[#E3DDD1] text-[10px] text-[#82947B] flex items-center gap-2">
+                  <Leaf className="w-4 h-4 text-emerald-600 shrink-0" />
                   <span>
                     Add {formatCurrency(1500 - subtotal)} more to qualify for complimentary shipping
                   </span>
@@ -972,19 +1169,130 @@ export default function CheckoutPage() {
               </span>
             </div>
 
-            {/* Pricing Guarantee */}
-            <div className="p-3.5 rounded-2xl bg-[#FAFBF9] border border-[#DCE3DB] text-[11px] text-[#525A55] space-y-1">
-              <div className="flex items-center gap-1.5 font-bold text-[#0D281E]">
+            {/* Pricing Guarantee & Trust Badges */}
+            <div className="p-4 rounded-2xl bg-[#FAFBF9] border border-[#DCE3DB] space-y-2.5">
+              <div className="flex items-center gap-1.5 font-bold text-[#0D281E] text-[11px]">
                 <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
                 <span>Authoritative Server Pricing Guarantee</span>
               </div>
               <p className="text-[10px] text-[#718076] leading-relaxed">
                 Grand totals and inventory availability are verified authoritatively on the server.
               </p>
+              <div className="pt-2 border-t border-[#E8E4DA] grid grid-cols-2 gap-2 text-[10px] text-[#525A55]">
+                <span className="flex items-center gap-1">
+                  <Lock className="w-3 h-3 text-emerald-700" />
+                  256-Bit SSL Secured
+                </span>
+                <span className="flex items-center gap-1">
+                  <Leaf className="w-3 h-3 text-emerald-700" />
+                  100% Plastic-Free
+                </span>
+              </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Sandbox Payment Simulator Modal (Active when using test/placeholder Razorpay keys) */}
+      {sandboxModalOpen && sandboxData && (
+        <div
+          data-testid="sandbox-payment-modal"
+          className="fixed inset-0 z-50 bg-[#0D281E]/75 backdrop-blur-sm flex items-center justify-center p-4"
+        >
+          <div className="max-w-md w-full bg-[#FAF8F5] rounded-3xl p-6 sm:p-8 border border-[#DCE3DB] shadow-2xl relative space-y-6 text-center animate-in fade-in zoom-in-95 duration-200">
+            {/* Header Tag */}
+            <div className="flex justify-center">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-900 text-[11px] font-bold tracking-wider uppercase border border-emerald-200">
+                <Sparkles className="w-3.5 h-3.5 text-emerald-700" />
+                Sanctuary Payment Sandbox
+              </span>
+            </div>
+
+            {/* Emblem / Icon */}
+            <div className="w-16 h-16 rounded-2xl bg-[#0D281E] text-[#CEE9D9] flex items-center justify-center mx-auto shadow-md">
+              <ShieldCheck className="w-8 h-8" />
+            </div>
+
+            {/* Title & Description */}
+            <div className="space-y-1">
+              <h3 className="font-display text-xl sm:text-2xl font-bold text-[#0D281E]">
+                Test Gateway Simulation
+              </h3>
+              <p className="text-xs text-[#525A55] leading-relaxed">
+                Development environment detected with placeholder Razorpay keys. No actual bank account or credit card will be charged.
+              </p>
+            </div>
+
+            {/* Order Details Card */}
+            <div className="p-4 rounded-2xl bg-white border border-[#E3DDD1] text-left space-y-2 text-xs">
+              <div className="flex justify-between items-center text-[#525A55]">
+                <span>Order Reference</span>
+                <span className="font-mono font-bold text-[#0D281E]">{sandboxData.orderNumber}</span>
+              </div>
+              <div className="flex justify-between items-center text-[#525A55]">
+                <span>Customer</span>
+                <span className="font-semibold text-[#0D281E]">{customerName || "Patron Member"}</span>
+              </div>
+              <div className="flex justify-between items-center text-[#525A55]">
+                <span>Payment Amount</span>
+                <span className="font-display font-bold text-base text-[#0D281E]">
+                  {formatCurrency(sandboxData.amount / 100)}
+                </span>
+              </div>
+              <div className="pt-2 border-t border-[#F0ECE1] flex items-center gap-1.5 text-[10px] text-[#82947B]">
+                <Lock className="w-3 h-3 text-emerald-700 shrink-0" />
+                <span>HMAC-SHA256 signature verified server-side</span>
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="space-y-2.5 pt-2">
+              <button
+                type="button"
+                data-testid="confirm-sandbox-payment"
+                onClick={handleCompleteSandboxPayment}
+                disabled={verifyingSandbox}
+                className="w-full py-3.5 px-6 rounded-2xl bg-[#0D281E] text-white hover:bg-[#1A4533] font-bold text-xs uppercase tracking-wider shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+              >
+                {verifyingSandbox ? (
+                  <>
+                    <RefreshCw className="w-4 h-4 animate-spin" />
+                    <span>Verifying Sacred Transaction...</span>
+                  </>
+                ) : (
+                  <>
+                    <Leaf className="w-4 h-4 text-emerald-400" />
+                    <span>Complete Sacred Test Payment (Instant UPI / Cards)</span>
+                  </>
+                )}
+              </button>
+
+              <button
+                type="button"
+                onClick={handleFailSandboxPayment}
+                disabled={verifyingSandbox}
+                className="w-full py-2.5 px-4 rounded-xl border border-red-200 text-red-700 hover:bg-red-50 text-[11px] font-bold uppercase tracking-wider transition-colors cursor-pointer disabled:opacity-50"
+              >
+                Simulate Payment Failure (Test Error Recovery)
+              </button>
+
+              <button
+                type="button"
+                onClick={handleCloseSandboxModal}
+                disabled={verifyingSandbox}
+                className="text-xs text-[#82947B] hover:text-[#0D281E] font-medium transition-colors cursor-pointer pt-1"
+              >
+                Return to Checkout
+              </button>
+            </div>
+
+            {/* Dev hint */}
+            <p className="text-[10px] text-[#82947B] border-t border-[#E3DDD1] pt-3">
+              💡 To enable the live Razorpay modal, set valid <code className="font-mono text-[#0D281E]">RAZORPAY_KEY_ID</code> and <code className="font-mono text-[#0D281E]">RAZORPAY_KEY_SECRET</code> in <code className="font-mono text-[#0D281E]">.env</code>.
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

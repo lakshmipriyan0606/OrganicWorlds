@@ -91,31 +91,33 @@ export default function CustomerLoginPage() {
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md px-4">
         <div className="bg-white py-8 px-6 sm:px-10 rounded-3xl border border-[#E3DDD1] shadow-md space-y-6">
-          {/* Quick-Fill Demo Helpers */}
-          <div className="p-3.5 rounded-2xl bg-[#F6F4EF] border border-[#E3DDD1] space-y-2">
-            <div className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-[#0D281E]">
-              <Sparkles className="w-3.5 h-3.5 text-[#C9A227]" />
-              <span>Quick Demo Access</span>
+          {/* Quick-Fill Demo Helpers (Development & Testing only) */}
+          {process.env.NODE_ENV !== "production" && (
+            <div className="p-3.5 rounded-2xl bg-[#F6F4EF] border border-[#E3DDD1] space-y-2">
+              <div className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-[#0D281E]">
+                <Sparkles className="w-3.5 h-3.5 text-[#C9A227]" />
+                <span>Quick Demo Access</span>
+              </div>
+              <div className="grid grid-cols-2 gap-2 pt-1">
+                <button
+                  type="button"
+                  onClick={fillCustomerCredentials}
+                  className="px-2.5 py-1.5 rounded-xl bg-white border border-[#DCE3DB] hover:border-[#0D281E] text-[11px] font-semibold text-[#0D281E] flex items-center justify-center gap-1.5 transition-colors cursor-pointer shadow-2xs"
+                >
+                  <UserCheck className="w-3 h-3 text-emerald-700" />
+                  <span>Fill Patron</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={fillAdminCredentials}
+                  className="px-2.5 py-1.5 rounded-xl bg-white border border-[#DCE3DB] hover:border-[#0D281E] text-[11px] font-semibold text-[#0D281E] flex items-center justify-center gap-1.5 transition-colors cursor-pointer shadow-2xs"
+                >
+                  <ShieldCheck className="w-3 h-3 text-emerald-700" />
+                  <span>Fill Admin</span>
+                </button>
+              </div>
             </div>
-            <div className="grid grid-cols-2 gap-2 pt-1">
-              <button
-                type="button"
-                onClick={fillCustomerCredentials}
-                className="px-2.5 py-1.5 rounded-xl bg-white border border-[#DCE3DB] hover:border-[#0D281E] text-[11px] font-semibold text-[#0D281E] flex items-center justify-center gap-1.5 transition-colors cursor-pointer shadow-2xs"
-              >
-                <UserCheck className="w-3 h-3 text-emerald-700" />
-                <span>Fill Patron</span>
-              </button>
-              <button
-                type="button"
-                onClick={fillAdminCredentials}
-                className="px-2.5 py-1.5 rounded-xl bg-white border border-[#DCE3DB] hover:border-[#0D281E] text-[11px] font-semibold text-[#0D281E] flex items-center justify-center gap-1.5 transition-colors cursor-pointer shadow-2xs"
-              >
-                <ShieldCheck className="w-3 h-3 text-emerald-700" />
-                <span>Fill Admin</span>
-              </button>
-            </div>
-          </div>
+          )}
 
           {error && (
             <div className="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-900 text-xs flex flex-col gap-1.5">
@@ -123,9 +125,11 @@ export default function CustomerLoginPage() {
                 <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
                 <span className="font-semibold">{error}</span>
               </div>
-              <p className="text-[11px] text-rose-700 pl-6">
-                Click &quot;Fill Patron&quot; above to autofill the default test credentials.
-              </p>
+              {process.env.NODE_ENV !== "production" && (
+                <p className="text-[11px] text-rose-700 pl-6">
+                  Click &quot;Fill Patron&quot; above to autofill the default test credentials.
+                </p>
+              )}
             </div>
           )}
 
@@ -152,6 +156,12 @@ export default function CustomerLoginPage() {
                 <label className="text-[11px] font-bold uppercase tracking-wider text-[#525A55]">
                   Password
                 </label>
+                <Link
+                  href="/forgot-password"
+                  className="text-[11px] text-[#0D281E] hover:underline font-medium"
+                >
+                  Forgot password?
+                </Link>
               </div>
               <div className="relative">
                 <Lock className="w-4 h-4 text-[#82947B] absolute left-3.5 top-3" />

@@ -10,7 +10,7 @@ export async function GET(req: NextRequest, { params }: RouteParams) {
     const { slug } = await params;
     const product = await getProductBySlug(slug);
 
-    if (!product) {
+    if (!product || !product.isPublished) {
       return NextResponse.json({ error: "Product not found" }, { status: 404 });
     }
 

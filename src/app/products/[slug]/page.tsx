@@ -27,6 +27,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
   try {
     const dbProduct = await getDbProductBySlug(slug);
     if (dbProduct) {
+      if (!dbProduct.isPublished) {
+        notFound();
+      }
       product = dbProduct as unknown as Product;
     }
   } catch (err) {

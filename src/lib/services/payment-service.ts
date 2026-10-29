@@ -9,6 +9,12 @@ export interface CreateGatewayOrderResult {
   amount: number; // in paise
   currency: string;
   keyId: string;
+  isSimulated?: boolean;
+  simulatedSignature?: {
+    razorpayOrderId: string;
+    razorpayPaymentId: string;
+    razorpaySignature: string;
+  };
 }
 
 export interface VerifyPaymentParams {
@@ -119,6 +125,25 @@ export async function createRazorpayGatewayOrder(
     });
   }
 
+  const isSimulated = isPlaceholder || gatewayOrderId.startsWith("order_rzp_mock_");
+  let simulatedSignature:
+    | {
+        razorpayOrderId: string;
+        razorpayPaymentId: string;
+        razorpaySignature: string;
+      }
+    | undefined;
+
+  if (isSimulated) {
+    const mockPaymentId = `pay_rzp_mock_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
+    const mockSig = computeRazorpaySignature(gatewayOrderId, mockPaymentId, keySecret);
+    simulatedSignature = {
+      razorpayOrderId: gatewayOrderId,
+      razorpayPaymentId: mockPaymentId,
+      razorpaySignature: mockSig,
+    };
+  }
+
   return {
     orderId: order.id,
     orderNumber: order.orderNumber,
@@ -126,6 +151,8 @@ export async function createRazorpayGatewayOrder(
     amount: amountInPaise,
     currency: "INR",
     keyId: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || keyId,
+    isSimulated,
+    simulatedSignature,
   };
 }
 
@@ -204,6 +231,12 @@ export async function verifyRazorpayPayment(
 
   // Signature is authentic: execute atomic confirmation transaction
   await prisma.$transaction(async (tx) => {
+    // Re-verify order state inside the atomic transaction boundary
+    const freshOrder = await tx.order.findUnique({ where: { id: order.id } });
+    if (freshOrder?.status === "CONFIRMED" && freshOrder?.paymentStatus === "PAID") {
+      return; // Already finalized by concurrent webhook
+    }
+
     // 1. Update Payment record to SUCCESS
     const targetPayment = order.payments.find((p) => p.gatewayOrderId === gatewayOrderId) || order.payments[0];
     if (targetPayment) {
@@ -347,6 +380,12 @@ export async function handleRazorpayWebhookEvent(payload: {
     }
 
     await prisma.$transaction(async (tx) => {
+      // Re-verify order state inside the atomic transaction boundary
+      const freshOrder = await tx.order.findUnique({ where: { id: payment.orderId } });
+      if (freshOrder?.status === "CONFIRMED" && freshOrder?.paymentStatus === "PAID") {
+        return; // Already finalized by concurrent client verification
+      }
+
       await tx.payment.update({
         where: { id: payment.id },
         data: {
