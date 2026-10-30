@@ -1,4 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
+﻿import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { requireAdmin } from "@/lib/auth";
 import { getAdminProductList, createAdminProduct } from "@/lib/services/product-service";
 
@@ -30,6 +31,15 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
 
     const product = await createAdminProduct(body, session.email);
+
+    revalidatePath("/shop");
+    revalidatePath("/");
+    revalidatePath("/categories");
+    if (product.categorySlug) {
+      revalidatePath(`/categories/${product.categorySlug}`);
+    }
+    revalidatePath(`/products/${product.slug}`);
+
     return NextResponse.json({ success: true, product }, { status: 201 });
   } catch (error: unknown) {
     const msg = error instanceof Error ? error.message : "Error";

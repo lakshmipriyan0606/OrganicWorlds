@@ -9,15 +9,12 @@ const bodoni = Bodoni_Moda({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
-  weight: ["400", "500", "600", "700"],
-  style: ["normal", "italic"]
 });
 
 const manrope = Manrope({
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",
-  weight: ["300", "400", "500", "600", "700"]
 });
 
 export const metadata: Metadata = {

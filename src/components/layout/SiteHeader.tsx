@@ -5,7 +5,6 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { siteConfig } from "@/config/site";
 import { useCart } from "@/components/cart/CartContext";
-import { mockProducts } from "@/config/products";
 import {
   ShoppingBag,
   Search,
@@ -101,13 +100,14 @@ export function SiteHeader() {
     }
   }, [searchOpen]);
 
-  const searchResults = searchQuery.trim()
-    ? mockProducts.filter((p) =>
-        p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        p.subtitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        p.categoryLabel.toLowerCase().includes(searchQuery.toLowerCase())
-      ).slice(0, 4)
-    : [];
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      router.push(`/shop?search=${encodeURIComponent(searchQuery.trim())}`);
+      setSearchOpen(false);
+      setSearchQuery("");
+    }
+  };
 
   return (
     <>
@@ -344,62 +344,35 @@ export function SiteHeader() {
         {searchOpen && (
           <div className="border-t border-[#E2DDD2] bg-white shadow-lg animate-in slide-in-from-top-2 duration-200">
             <div className="max-w-[800px] mx-auto px-5 py-5">
-              <div className="relative flex items-center">
-                <Search className="w-5 h-5 text-forest-700 absolute left-3.5" />
+              <form onSubmit={handleSearchSubmit} className="relative flex items-center">
+                <Search className="w-5 h-5 text-[#0D281E] absolute left-3.5" />
                 <input
                   ref={searchInputRef}
                   type="text"
-                  placeholder="Search hair oils, cold-process soaps, ingredients..."
+                  placeholder="Search hair oils, cold-process soaps, ingredients... (Press Enter to search)"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-11 pr-10 py-3 bg-ivory-50 border border-[#E2DDD2] rounded-[3px] text-sm text-[#1B1C19] focus:outline-none focus:border-forest-900 focus:ring-1 focus:ring-forest-900"
+                  className="w-full pl-11 pr-24 py-3 bg-[#FAF8F5] border border-[#E2DDD2] rounded-xl text-sm text-[#1B1C19] focus:outline-none focus:border-[#0D281E]"
                 />
-                <button
-                  onClick={() => {
-                    setSearchOpen(false);
-                    setSearchQuery("");
-                  }}
-                  className="absolute right-3 text-charcoal-600 hover:text-forest-900 p-1 cursor-pointer"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              </div>
-
-              {/* Instant Search Results */}
-              {searchQuery && (
-                <div className="mt-4 pt-3 border-t border-[#E2DDD2]">
-                  {searchResults.length > 0 ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      {searchResults.map((p) => (
-                        <Link
-                          key={p.id}
-                          href={`/products/${p.slug}`}
-                          onClick={() => {
-                            setSearchOpen(false);
-                            setSearchQuery("");
-                          }}
-                          className="flex items-center gap-3 p-2 rounded hover:bg-ivory-100 transition-colors"
-                        >
-                          <img
-                            src={p.featuredImage}
-                            alt={p.title}
-                            className="w-12 h-12 object-cover rounded-[2px] bg-ivory-100"
-                          />
-                          <div className="flex-1 min-w-0">
-                            <h4 className="text-xs font-bold text-forest-900 truncate">{p.title}</h4>
-                            <p className="text-[11px] text-[#3E4640] truncate">{p.categoryLabel}</p>
-                            <span className="text-xs font-bold text-forest-700">{formatCurrency(p.price)}</span>
-                          </div>
-                        </Link>
-                      ))}
-                    </div>
-                  ) : (
-                    <p className="text-xs text-[#3E4640] text-center py-4 font-normal">
-                      No botanical offerings found matching &ldquo;{searchQuery}&rdquo;. Try searching &ldquo;hair oil&rdquo; or &ldquo;soap&rdquo;.
-                    </p>
-                  )}
+                <div className="absolute right-3 flex items-center gap-2">
+                  <button
+                    type="submit"
+                    className="px-3 py-1 rounded-lg bg-[#0D281E] text-white text-xs font-semibold uppercase tracking-wider hover:bg-[#1A4533] cursor-pointer"
+                  >
+                    Search
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSearchOpen(false);
+                      setSearchQuery("");
+                    }}
+                    className="text-[#6E7B73] hover:text-[#0D281E] p-1 cursor-pointer"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
                 </div>
-              )}
+              </form>
             </div>
           </div>
         )}

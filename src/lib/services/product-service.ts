@@ -14,10 +14,12 @@ export interface CatalogFilterOptions {
   inStockOnly?: boolean;
   search?: string;
   sortBy?: "featured" | "price-low" | "price-high" | "rating";
+  page?: number;
+  limit?: number;
 }
 
 /**
- * Public catalog query returning active, published products.
+ * Public catalog query returning active, published products array.
  */
 export async function getPublishedCatalog(options: CatalogFilterOptions = {}) {
   const where: Prisma.ProductWhereInput = {
@@ -41,6 +43,7 @@ export async function getPublishedCatalog(options: CatalogFilterOptions = {}) {
       { title: { contains: options.search } },
       { subtitle: { contains: options.search } },
       { description: { contains: options.search } },
+      { slug: { contains: options.search } },
     ];
   }
 
@@ -62,6 +65,146 @@ export async function getPublishedCatalog(options: CatalogFilterOptions = {}) {
     },
   });
 
+  return products.map(formatProductResponse);
+}
+
+/**
+ * Public catalog query returning paginated active, published products.
+ */
+export async function getPaginatedCatalog(options: CatalogFilterOptions = {}) {
+  const page = Math.max(1, options.page || 1);
+  const limit = Math.max(1, options.limit || 12);
+  const skip = (page - 1) * limit;
+
+  const where: Prisma.ProductWhereInput = {
+    isPublished: true,
+  };
+
+  if (options.categorySlug && options.categorySlug !== "all") {
+    where.categorySlug = options.categorySlug;
+  }
+
+  if (options.maxPrice) {
+    where.price = { lte: options.maxPrice };
+  }
+
+  if (options.inStockOnly) {
+    where.inStock = true;
+  }
+
+  if (options.search) {
+    where.OR = [
+      { title: { contains: options.search } },
+      { subtitle: { contains: options.search } },
+      { description: { contains: options.search } },
+      { slug: { contains: options.search } },
+    ];
+  }
+
+  let orderBy: Prisma.ProductOrderByWithRelationInput = { createdAt: "desc" };
+  if (options.sortBy === "price-low") {
+    orderBy = { price: "asc" };
+  } else if (options.sortBy === "price-high") {
+    orderBy = { price: "desc" };
+  } else if (options.sortBy === "rating") {
+    orderBy = { rating: "desc" };
+  }
+
+  const [total, products] = await Promise.all([
+    prisma.product.count({ where }),
+    prisma.product.findMany({
+      where,
+      orderBy,
+      skip,
+      take: limit,
+      include: {
+        variants: true,
+        category: true,
+      },
+    }),
+  ]);
+
+  return {
+    products: products.map(formatProductResponse),
+    total,
+    page,
+    totalPages: Math.ceil(total / limit) || 1,
+  };
+}
+
+/**
+ * Query genuine best-selling products based on actual paid order quantities.
+ * Strictly excludes cancelled, refunded, or failed orders.
+ * Returns empty array if no paid orders exist.
+ */
+export async function getBestSellingProducts(limit = 4) {
+  const topItems = await prisma.orderItem.groupBy({
+    by: ["productId"],
+    _sum: {
+      quantity: true,
+    },
+    where: {
+      productId: { not: null },
+      order: {
+        paymentStatus: "PAID",
+        status: {
+          in: ["CONFIRMED", "PROCESSING", "PACKED", "SHIPPED", "OUT_FOR_DELIVERY", "DELIVERED"],
+        },
+      },
+    },
+    orderBy: {
+      _sum: {
+        quantity: "desc",
+      },
+    },
+    take: limit,
+  });
+
+  if (!topItems || topItems.length === 0) {
+    return [];
+  }
+
+  const productIds = topItems
+    .map((item) => item.productId as string)
+    .filter(Boolean);
+
+  const products = await prisma.product.findMany({
+    where: {
+      id: { in: productIds },
+      isPublished: true,
+    },
+    include: {
+      variants: true,
+      category: true,
+    },
+  });
+
+  const productMap = new Map(products.map((p) => [p.id, p]));
+  const orderedProducts = [];
+  for (const item of topItems) {
+    if (item.productId && productMap.has(item.productId)) {
+      orderedProducts.push(formatProductResponse(productMap.get(item.productId)!));
+    }
+  }
+
+  return orderedProducts;
+}
+
+/**
+ * Fetch related products from the same category, excluding the current product.
+ */
+export async function getRelatedProducts(categorySlug: string | null, excludeId: string, limit = 4) {
+  const products = await prisma.product.findMany({
+    where: {
+      isPublished: true,
+      inStock: true,
+      id: { not: excludeId },
+      ...(categorySlug ? { categorySlug } : {}),
+    },
+    take: limit,
+    orderBy: { rating: "desc" },
+    include: { variants: true, category: true },
+  });
   return products.map(formatProductResponse);
 }
 

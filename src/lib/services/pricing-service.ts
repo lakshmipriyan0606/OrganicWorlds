@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { getStoreSettings } from "@/lib/services/settings-service";
 
 export interface CartCalculationItem {
   productId: string;
@@ -83,12 +84,15 @@ export async function calculateAuthoritativeCart(
     }
   }
 
-  // 2. Query free shipping threshold from homepage CMS if configured
+  // 2. Query free shipping threshold from store settings or homepage CMS if configured
+  const storeSettings = await getStoreSettings();
+  let freeShippingThreshold = storeSettings.freeShippingThreshold || DEFAULT_FREE_SHIPPING_THRESHOLD;
+  const standardShippingFee = storeSettings.standardShippingFee || STANDARD_SHIPPING_FEE;
+
   const announcementContent = await prisma.homepageContent.findUnique({
     where: { key: "announcement" },
   });
 
-  let freeShippingThreshold = DEFAULT_FREE_SHIPPING_THRESHOLD;
   if (announcementContent?.data) {
     try {
       const parsed = JSON.parse(announcementContent.data);
@@ -96,7 +100,7 @@ export async function calculateAuthoritativeCart(
         freeShippingThreshold = parsed.freeShippingThreshold;
       }
     } catch {
-      // Fallback to default
+      // Fallback to settings
     }
   }
 
@@ -171,7 +175,7 @@ export async function calculateAuthoritativeCart(
 
   // 4. Calculate Shipping & Taxes
   const freeShippingQualified = subtotal >= freeShippingThreshold;
-  const shippingAmount = freeShippingQualified ? 0 : STANDARD_SHIPPING_FEE;
+  const shippingAmount = freeShippingQualified ? 0 : standardShippingFee;
   const discountAmount = 0; // Coupons can be extended here
   const taxAmount = 0; // Prices in INR are all-inclusive of GST
   const totalAmount = subtotal - discountAmount + shippingAmount + taxAmount;

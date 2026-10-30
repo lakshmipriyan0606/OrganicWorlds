@@ -68,6 +68,8 @@ export interface Product {
   images: string[];
   featuredImage: string;
   inStock: boolean;
+  stockQuantity?: number;
+  categorySlug?: string;
   rating: number;
   reviewCount: number;
   ingredientsSummary?: string;

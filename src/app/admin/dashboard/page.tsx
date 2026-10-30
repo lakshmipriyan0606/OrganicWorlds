@@ -301,8 +301,10 @@ export default function AdminDashboardPage() {
                 <span className="font-mono font-bold text-[#0D281E]">SQLite (dev.db)</span>
               </div>
               <div className="flex justify-between py-1 border-b border-[#ECE7DC]">
-                <span>Seeded Products</span>
-                <span className="font-mono font-bold text-[#0D281E]">19 formulations</span>
+                <span>Active Formulations</span>
+                <span className="font-mono font-bold text-[#0D281E]">
+                  {loading ? "..." : `${metrics?.totalProducts || 0} formulations`}
+                </span>
               </div>
               <div className="flex justify-between py-1 border-b border-[#ECE7DC]">
                 <span>Auth System</span>

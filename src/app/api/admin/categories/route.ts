@@ -1,4 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
+﻿import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/auth";
 
@@ -51,6 +52,11 @@ export async function POST(req: NextRequest) {
         order: typeof order === "number" ? order : 0,
       },
     });
+
+    revalidatePath("/categories");
+    revalidatePath("/shop");
+    revalidatePath("/");
+    revalidatePath(`/categories/${category.slug}`);
 
     return NextResponse.json({ success: true, category });
   } catch (error: unknown) {

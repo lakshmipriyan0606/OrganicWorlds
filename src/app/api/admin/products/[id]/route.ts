@@ -1,4 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
+﻿import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { requireAdmin } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { updateAdminProduct } from "@/lib/services/product-service";
@@ -56,6 +57,14 @@ export async function PUT(req: NextRequest, { params }: RouteParams) {
     const body = await req.json();
 
     const product = await updateAdminProduct(id, body, session.email);
+
+    revalidatePath(`/products/${product.slug}`);
+    revalidatePath("/shop");
+    revalidatePath("/");
+    if (product.categorySlug) {
+      revalidatePath(`/categories/${product.categorySlug}`);
+    }
+
     return NextResponse.json({ success: true, product });
   } catch (error: unknown) {
     const msg = error instanceof Error ? error.message : "Error";
@@ -76,6 +85,13 @@ export async function DELETE(req: NextRequest, { params }: RouteParams) {
       where: { id },
       data: { isPublished: false },
     });
+
+    revalidatePath(`/products/${updated.slug}`);
+    revalidatePath("/shop");
+    revalidatePath("/");
+    if (updated.categorySlug) {
+      revalidatePath(`/categories/${updated.categorySlug}`);
+    }
 
     return NextResponse.json({
       success: true,

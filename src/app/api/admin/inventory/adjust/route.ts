@@ -1,4 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
+﻿import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { requireAdmin } from "@/lib/auth";
 import { adjustProductStock } from "@/lib/services/product-service";
 
@@ -16,6 +17,11 @@ export async function POST(req: NextRequest) {
     }
 
     const updated = await adjustProductStock(productId, delta, reason, session.email);
+
+    revalidatePath(`/products/${updated.slug}`);
+    revalidatePath("/shop");
+    revalidatePath("/");
+
     return NextResponse.json({
       success: true,
       stockQuantity: updated.stockQuantity,

@@ -1,151 +1,161 @@
-# Pavishna Organic Worlds — Environment & Deployment Configuration
+# Pavishna Organic Worlds — Environment Setup
 
-This document specifies the required environment variables, configuration settings, and deployment procedures for Pavishna Organic Worlds. **Never commit actual production secrets, API keys, or private credentials to version control.**
+**Stack:** Next.js 16.4.2 • React 19.3.0 • TypeScript 5 • Prisma 6.19.3 • SQLite • Tailwind CSS 4 • Framer Motion 14 • Razorpay (test/simulated)
 
 ---
 
-## 1. Environment Variables Specification
+## Prerequisites
 
-Create a local environment file `.env.local` based on `.env.example`:
+- Node.js 20+
+- npm 10+
+
+---
+
+## 1. Clone and Install
 
 ```bash
-cp .env.example .env.local
+git clone <repo-url>
+cd OrganicWorlds
+npm install
 ```
 
-### 1.1 Core Application Settings
-| Variable Name | Required | Default / Example Value | Description |
-|---|---|---|---|
-| `NEXT_PUBLIC_SITE_URL` | Yes | `http://localhost:3000` | Canonical site URL for OpenGraph and API callbacks. |
-| `NEXT_PUBLIC_APP_NAME` | Yes | `Pavishna Organic Worlds` | Application brand name for UI and emails. |
-| `NEXT_PUBLIC_CURRENCY` | Yes | `INR` | Default ISO currency code. |
+---
 
-### 1.2 Database Configuration (Phase 02)
-| Variable Name | Required | Example Value | Description |
-|---|---|---|---|
-| `DATABASE_URL` | Yes | `file:./dev.db` (Local SQLite) or `postgresql://user:pass@host:5432/db` (Prod PostgreSQL) | Connection string for Prisma ORM. |
+## 2. Environment Variables
 
-### 1.3 Authentication & Session Security (Phase 02)
-| Variable Name | Required | Example Value | Description |
-|---|---|---|---|
-| `AUTH_SECRET` | Yes | `your-secure-random-32-char-secret` | Encryption key for signing session tokens and cookies. |
-| `ADMIN_INITIAL_EMAIL` | Optional | `admin@pavishnaorganicworlds.com` | Default email for bootstrapping the initial administrator account. |
-| `ADMIN_INITIAL_PASSWORD` | Optional | `your-secure-bootstrap-pass` | Initial bootstrap password (must be rotated upon first login). |
+Create `.env` in the project root:
 
-### 1.4 Payment Gateway: Razorpay (Phase 06)
-| Variable Name | Required | Example Value | Description |
-|---|---|---|---|
-| `RAZORPAY_KEY_ID` | Yes (Commerce) | `rzp_test_...` | Razorpay public/client key ID for checkout handoff. |
-| `RAZORPAY_KEY_SECRET` | Yes (Server) | `secret_...` | Razorpay private secret for order creation & signature verification (SERVER ONLY). |
-| `RAZORPAY_WEBHOOK_SECRET` | Yes (Webhooks) | `whsec_...` | Webhook secret for verifying incoming raw request signatures (SERVER ONLY). |
+```env
+DATABASE_URL="file:./prisma/dev.db"
+SESSION_SECRET="your-super-secret-key-min-32-chars"
+NEXTAUTH_SECRET="another-secret-min-32-chars"
 
-### 1.5 Media & Storage (Phase 04)
-| Variable Name | Required | Example Value | Description |
-|---|---|---|---|
-| `STORAGE_PROVIDER` | No | `local` (default) or `cloudinary` / `s3` | Storage backend for product and CMS image uploads. |
+# Razorpay (test mode — simulated checkout works without real keys in dev)
+RAZORPAY_KEY_ID="rzp_test_..."
+RAZORPAY_KEY_SECRET="your_razorpay_secret"
 
-### 1.6 Email Service & Password Recovery Configuration
-| Variable Name | Required | Example Value | Description |
-|---|---|---|---|
-| `EMAIL_PROVIDER` | No | `resend`, `smtp`, or `auto` (default) | Email transport driver. Defaults to `resend` if `RESEND_API_KEY` is present, or local memory driver in dev/test. |
-| `RESEND_API_KEY` | Optional (Prod) | `re_123456789...` | API key from Resend (https://resend.com) for dispatching recovery emails. |
-| `EMAIL_FROM` | Optional | `Pavishna Organic Worlds <security@pavishnaorganicworlds.com>` | Verified sender address for transactional security emails. |
-| `SMTP_HOST` | Optional | `smtp.mailgun.org` | SMTP server hostname if using standard SMTP transport. |
-| `SMTP_PORT` | Optional | `587` | SMTP port (587 for TLS, 465 for SSL). |
-| `SMTP_USER` | Optional | `postmaster@domain.com` | SMTP authentication username. |
-| `SMTP_PASS` | Optional | `smtp-secret-password` | SMTP authentication password. |
+# Email (optional for password reset in dev)
+SMTP_HOST="smtp.example.com"
+SMTP_PORT="587"
+SMTP_USER="noreply@example.com"
+SMTP_PASS="smtp-password"
+```
+
+> **Note:** The application runs in simulated payment mode when Razorpay keys are absent or in test mode. All checkout flows work without real payment credentials in development.
 
 ---
 
-## 2. Database Schema Changes & Migration Instructions
+## 3. Database Setup
 
-### 2.1 Password Recovery & Session Revocation Schema
-The schema includes the following security primitives in `prisma/schema.prisma`:
-1. **`User.tokenVersion`**: Integer defaulting to `1`. Every issued session JWT contains `tokenVersion`. When a password reset occurs, `tokenVersion` is atomically incremented. All existing sessions with older versions are immediately rejected server-side without waiting for JWT expiration.
-2. **`PasswordResetToken` Model**:
-   - `id`: Unique identifier (`cuid`).
-   - `userId`: Relation to `User` with cascade delete.
-   - `tokenHash`: SHA-256 hash of the 64-character raw hex token (cryptographically generated with `crypto.randomBytes(32)`). Plaintext tokens are NEVER stored in the database.
-   - `expiresAt`: Time-limited expiration (60 minutes).
-   - `usedAt`: Nullable timestamp recording single-use consumption.
+```bash
+# Apply Prisma migrations
+npx prisma migrate dev
 
-### 2.2 Migration Instructions
-- **Local Development (SQLite):**
-  ```bash
-  npx prisma db push
-  ```
-- **Production Deployment (PostgreSQL):**
-  When targeting production PostgreSQL:
-  1. Ensure `prisma/schema.prisma` datasource provider is set to `"postgresql"`:
-     ```prisma
-     datasource db {
-       provider = "postgresql"
-       url      = env("DATABASE_URL")
-     }
-     ```
-  2. Generate and apply migration:
-     ```bash
-     npx prisma migrate dev --name add_password_recovery_and_session_revocation
-     # Or in CI/CD pipeline:
-     npx prisma migrate deploy
-     ```
+# Seed the database with botanical catalog data
+npx prisma db seed
+```
+
+The database lives at `prisma/dev.db` (SQLite). To inspect it:
+
+```bash
+npx prisma studio
+```
 
 ---
 
-## 3. Local Development Setup
+## 4. Development Server
 
-1. **Install Dependencies:**
-   ```bash
-   npm install
-   ```
+```bash
+npm run dev
+```
 
-2. **Setup Database & Run Migrations:**
-   ```bash
-   npx prisma db push
-   npx prisma db seed
-   ```
+The app is available at `http://localhost:3000`.
 
-3. **Start Development Server:**
-   ```bash
-   npm run dev
-   ```
-   Open `http://localhost:3000` to access the storefront.
-   Access `http://localhost:3000/admin` to log into the administrative control panel.
-
-4. **Run Verification Commands:**
-   ```bash
-   npm run test         # Unit & integration regression test runner (9 suites, 157 tests)
-   npm run test:e2e     # Playwright browser end-to-end automation (13 tests across 2 specs)
-   npm run test:full    # Unified full verification: unit tests + E2E + tsc + lint + build
-   npx tsc --noEmit     # TypeScript type checking (strict mode)
-   npm run lint         # ESLint code quality inspection
-   npm run build        # Production Next.js 16 build verification
-   ```
-
-5. **Test Accounts & Seed Credentials (Development & Test Environments Only):**
-   | Role | Email | Password |
-   |---|---|---|
-   | Administrator | `admin@pavishnaorganicworlds.com` | `AdminPavishna2026!Secure` |
-   | Customer | `customer@example.com` | `CustomerPavishna2026!Secure` |
+> **Windows / Turbopack note:** On Windows, if Turbopack enters a fast-refresh loop, stop the server and restart with `npm run dev`. This is a known issue with Turbopack watching its own cache directory on Windows. Production builds are unaffected.
 
 ---
 
-## 4. Production Deployment (Vercel)
+## 5. Admin Access
 
-1. Connect the Git repository to the Vercel project dashboard.
-2. In the Vercel Project Settings > Environment Variables, configure:
-   - `DATABASE_URL` (pointing to a hosted PostgreSQL database, e.g. Neon, Supabase, or Railway)
-   - `AUTH_SECRET` (fatal error if omitted in production)
-   - `NEXT_PUBLIC_SITE_URL` (`https://pavishnaorganicworlds.vercel.app`)
-   - `RAZORPAY_KEY_ID` & `RAZORPAY_KEY_SECRET`
-   - `RAZORPAY_WEBHOOK_SECRET`
-   - `RESEND_API_KEY` & `EMAIL_FROM` (for transactional emails and password recovery)
-   - `UPSTASH_REDIS_REST_URL` & `UPSTASH_REDIS_REST_TOKEN` (optional, for distributed multi-instance rate limiting)
-3. Configure build command:
-   ```bash
-   npx prisma generate && next build
-   ```
-4. Configure Razorpay webhook endpoint in the Razorpay Dashboard:
-   - Webhook URL: `https://pavishnaorganicworlds.vercel.app/api/webhooks/razorpay`
-   - Secret: Matches `RAZORPAY_WEBHOOK_SECRET`
-   - Events: `payment.captured`, `payment.failed`, `order.paid`
+After seeding:
+- Navigate to `http://localhost:3000/admin/login`
+- Default admin credentials are set by the seed script (see `prisma/seed.ts`)
 
+---
+
+## 6. Running Tests
+
+```bash
+# TypeScript type check
+npx tsc --noEmit
+
+# ESLint
+npm run lint -- --quiet
+
+# Unit + integration test suites (requires dev server at :3000)
+npm run dev &   # start dev server first
+npx tsx tests/run-all-tests.ts
+
+# Playwright E2E tests (requires dev server at :3000)
+npx playwright test
+
+# Production build verification
+npm run build
+```
+
+**Expected results (all green):**
+- TypeScript: 0 errors
+- ESLint: 0 errors
+- Unit tests: 9/9 suites PASSED
+- Playwright: 13/13 tests PASSED
+- Build: exit code 0
+
+---
+
+## 7. Production Build
+
+```bash
+npm run build
+npm run start
+```
+
+### Known build-time output
+
+During `npm run build`, you will see warnings like:
+
+```
+Admin metrics error: Error: During prerendering, `cookies()` rejects...
+```
+
+These are **expected and harmless**. Next.js 16 with `cacheComponents: true` probes all route handlers during static generation. Auth routes that call `cookies()` correctly reject during prerender and are served dynamically at runtime. The build succeeds with exit code 0 and all such routes are classified `ƒ (Dynamic)`.
+
+> **Do not** add `export const dynamic = 'force-dynamic'` to these routes — it is incompatible with `nextConfig.cacheComponents` in Next.js 16 and will cause a build failure.
+
+---
+
+## 8. Production Deployment Checklist
+
+Before deploying to production:
+
+- [ ] Switch `DATABASE_URL` to a PostgreSQL connection string and run `npx prisma migrate deploy`
+- [ ] Set strong, unique `SESSION_SECRET` and `NEXTAUTH_SECRET`
+- [ ] Configure real Razorpay live keys
+- [ ] Replace `/public/uploads` file storage with S3, GCS, or Cloudinary
+- [ ] Configure SMTP for transactional email (password reset)
+- [ ] Set `NEXT_PUBLIC_APP_URL` to the production domain
+- [ ] Enable HTTPS and configure HSTS headers
+- [ ] Set up a CDN for the `/_next/static` and `/images` paths
+
+---
+
+## 9. Key Next.js 16 Constraints
+
+This project uses Next.js 16 with `cacheComponents: true` and `partialPrefetching: true`. The following **cannot** be used in route segment configs:
+
+- `export const dynamicParams` — incompatible with `cacheComponents`
+- `export const dynamic = 'force-dynamic'` — incompatible with `cacheComponents`
+- `export const revalidate` — incompatible with `cacheComponents` in some contexts
+
+Use `revalidatePath()` or `revalidateTag()` from `next/cache` for on-demand cache invalidation instead.
+
+The proxy file follows Next.js 16 convention: `src/proxy.ts` (not `middleware.ts`).

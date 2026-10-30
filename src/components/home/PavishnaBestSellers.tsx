@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { ArrowRight, Check, Plus } from "lucide-react";
 import { formatCurrency } from "@/lib/utils";
@@ -10,64 +10,37 @@ interface PavishnaBestSellersProps {
   onQuickAdd: (product: Product) => void;
 }
 
-const bestSellerItems = [
-  {
-    id: "pav-soap-03",
-    title: "Neem Soap",
-    subtitle: "Purifying & Refreshing",
-    price: 390,
-    image: "/images/img4.jpeg",
-    slug: "neem-bath-soap",
-    categoryLabel: "Artisanal Soap",
-  },
-  {
-    id: "pav-soap-02",
-    title: "Hibiscus Soap",
-    subtitle: "Brightening & Nourishing",
-    price: 450,
-    image: "/images/img3.jpeg",
-    slug: "hibiscus-rosa-bath-soap",
-    categoryLabel: "Artisanal Soap",
-  },
-  {
-    id: "pav-soap-01",
-    title: "Turmeric Soap",
-    subtitle: "Glow & Protection",
-    price: 420,
-    image: "/images/turmeric-soap-bar.jpg",
-    slug: "vetti-veru-bath-soap",
-    categoryLabel: "Artisanal Soap",
-  },
-  {
-    id: "pav-soap-05",
-    title: "Coconut Soap",
-    subtitle: "Gentle & Moisturizing",
-    price: 380,
-    image: "/images/img2.jpeg",
-    slug: "coconut-bath-soap",
-    categoryLabel: "Artisanal Soap",
-  },
-];
-
 export function PavishnaBestSellers({ onQuickAdd }: PavishnaBestSellersProps) {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
   const [addedId, setAddedId] = useState<string | null>(null);
 
-  const handleAdd = (item: typeof bestSellerItems[0], e: React.MouseEvent) => {
+  useEffect(() => {
+    let ignore = false;
+    async function loadBestSellers() {
+      try {
+        const res = await fetch("/api/products?bestSellers=true&limit=4");
+        const data = await res.json();
+        if (!ignore && data.success && Array.isArray(data.products)) {
+          setProducts(data.products);
+        }
+      } catch (err) {
+        console.error("Failed to load best sellers:", err);
+      } finally {
+        if (!ignore) setLoading(false);
+      }
+    }
+    loadBestSellers();
+    return () => {
+      ignore = true;
+    };
+  }, []);
+
+  const handleAdd = (product: Product, e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    onQuickAdd({
-      id: item.id,
-      title: item.title,
-      subtitle: item.subtitle,
-      price: item.price,
-      featuredImage: item.image,
-      images: [item.image],
-      slug: item.slug,
-      categoryLabel: item.categoryLabel,
-      rating: 5.0,
-      reviewCount: 48,
-    } as Product);
-    setAddedId(item.id);
+    onQuickAdd(product);
+    setAddedId(product.id);
     setTimeout(() => setAddedId(null), 1800);
   };
 
@@ -98,22 +71,40 @@ export function PavishnaBestSellers({ onQuickAdd }: PavishnaBestSellersProps) {
           </Link>
         </div>
 
-        {/* 4 Cards Row (Responsive Horizontal Scroll on mobile, 4-col on desktop) */}
+        {/* 4 Cards Row */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-          {bestSellerItems.map((item) => {
-            const isAdded = addedId === item.id;
+          {loading && Array.from({ length: 4 }).map((_, i) => (
+            <div key={i} className="animate-pulse bg-white rounded-2xl p-4 border border-[#E5DFD4]">
+              <div className="aspect-square w-full rounded-xl bg-[#ECE7DC] mb-3" />
+              <div className="h-4 bg-[#ECE7DC] rounded w-3/4 mb-2" />
+              <div className="h-3 bg-[#ECE7DC] rounded w-1/2 mb-4" />
+              <div className="h-8 bg-[#ECE7DC] rounded-full w-full" />
+            </div>
+          ))}
+
+          {!loading && products.length === 0 && (
+            <div className="col-span-2 md:col-span-4 flex flex-col items-center justify-center py-16 text-center">
+              <span className="text-[#4E5B52] text-sm">No best sellers available right now. Check back soon.</span>
+              <Link href="/shop" className="mt-4 text-xs font-bold uppercase tracking-wider text-[#0D281E] underline underline-offset-4">
+                Browse All Products
+              </Link>
+            </div>
+          )}
+
+          {!loading && products.map((product) => {
+            const isAdded = addedId === product.id;
             return (
               <div
-                key={item.id}
+                key={product.id}
                 className="group flex flex-col justify-between bg-white rounded-2xl p-3 sm:p-4 border border-[#E5DFD4] shadow-xs hover:shadow-xl hover:shadow-[#0D281E]/8 hover:border-[#0D281E]/30 hover:-translate-y-1.5 transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)]"
               >
                 <div>
                   {/* Photo with Smooth Scale */}
                   <div className="relative aspect-square w-full rounded-xl overflow-hidden bg-[#F5F2EA] mb-3">
-                    <Link href={`/products/${item.slug}`} className="block w-full h-full">
+                    <Link href={`/products/${product.slug}`} className="block w-full h-full">
                       <img
-                        src={item.image}
-                        alt={item.title}
+                        src={product.featuredImage}
+                        alt={product.title}
                         className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-108"
                         loading="lazy"
                       />
@@ -121,26 +112,26 @@ export function PavishnaBestSellers({ onQuickAdd }: PavishnaBestSellersProps) {
                   </div>
 
                   {/* Title */}
-                  <Link href={`/products/${item.slug}`}>
+                  <Link href={`/products/${product.slug}`}>
                     <h3 className="font-display text-base sm:text-lg font-medium text-[#0D281E] group-hover:text-[#1A4533] transition-colors leading-snug line-clamp-1 mb-0.5">
-                      {item.title}
+                      {product.title}
                     </h3>
                   </Link>
 
                   {/* Subtitle */}
                   <p className="text-[11px] sm:text-xs text-[#55635B] line-clamp-1 mb-3">
-                    {item.subtitle}
+                    {product.subtitle}
                   </p>
                 </div>
 
                 {/* Price & Add to Bag */}
                 <div className="pt-2 border-t border-[#EAE3D6]/70 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <span className="font-body text-sm sm:text-base font-bold text-[#0D281E]">
-                    {formatCurrency(item.price)}
+                    {formatCurrency(product.price)}
                   </span>
 
                   <button
-                    onClick={(e) => handleAdd(item, e)}
+                    onClick={(e) => handleAdd(product, e)}
                     className={`text-[11px] font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full flex items-center justify-center gap-1.5 transition-all duration-200 cursor-pointer shadow-xs ${
                       isAdded
                         ? "bg-[#356348] text-white"
@@ -155,7 +146,7 @@ export function PavishnaBestSellers({ onQuickAdd }: PavishnaBestSellersProps) {
                     ) : (
                       <>
                         <span>Add to Bag</span>
-                        <ArrowRight className="w-3 h-3" />
+                        <Plus className="w-3 h-3" />
                       </>
                     )}
                   </button>
