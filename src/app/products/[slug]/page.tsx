@@ -22,13 +22,17 @@ export async function generateStaticParams() {
       select: { slug: true },
       take: 100,
     });
-    return products.map((p) => ({
-      slug: p.slug,
-    }));
+    if (products.length > 0) {
+      return products.map((p) => ({
+        slug: p.slug,
+      }));
+    }
   } catch (err) {
     console.error("generateStaticParams DB error:", err);
-    return [];
   }
+
+  // Next.js 16 cacheComponents requires at least one parameter for build-time validation
+  return [{ slug: "vetti-veru-bath-soap" }];
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
