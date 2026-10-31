@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
 import { siteConfig } from "@/config/site";
 import { useCart } from "@/components/cart/CartContext";
 import {
@@ -209,8 +210,16 @@ export function SiteHeader() {
               </button>
 
               {/* Profile Dropdown Card */}
-              {userMenuOpen && (
-                <div className="absolute right-0 top-full mt-3 w-72 bg-white rounded-3xl border border-[#E3DDD1] shadow-xl p-5 z-50 animate-in fade-in slide-in-from-top-2 duration-150 space-y-4">
+              <AnimatePresence>
+                {userMenuOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.96, y: -6 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.96, y: -6 }}
+                    transition={{ duration: 0.15, ease: [0.16, 1, 0.3, 1] }}
+                    style={{ transformOrigin: "top right" }}
+                    className="absolute right-0 top-full mt-3 w-72 bg-white rounded-3xl border border-[#E3DDD1] shadow-xl p-5 z-50 space-y-4"
+                  >
                   {currentUser ? (
                     // Logged in user view
                     <div className="space-y-3">
@@ -320,8 +329,9 @@ export function SiteHeader() {
                       </div>
                     </div>
                   )}
-                </div>
-              )}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
             {/* Shopping Bag Trigger */}
@@ -332,60 +342,85 @@ export function SiteHeader() {
             >
               <ShoppingBag className="w-4.5 h-4.5 stroke-[1.8]" />
               {mounted && (
-                <span className="absolute -top-1 -right-1 bg-[#0D281E] text-white text-[9.5px] font-bold w-4.5 h-4.5 rounded-full flex items-center justify-center shadow-xs">
+                <motion.span
+                  key={totalItems}
+                  initial={{ scale: 0.8 }}
+                  animate={{ scale: 1 }}
+                  transition={{ type: "spring", damping: 15, stiffness: 400 }}
+                  className="absolute -top-1 -right-1 bg-[#0D281E] text-white text-[9.5px] font-bold w-4.5 h-4.5 rounded-full flex items-center justify-center shadow-xs"
+                >
                   {totalItems}
-                </span>
+                </motion.span>
               )}
             </button>
           </div>
         </div>
 
         {/* Live Search Drawer / Dropdown */}
-        {searchOpen && (
-          <div className="border-t border-[#E2DDD2] bg-white shadow-lg animate-in slide-in-from-top-2 duration-200">
-            <div className="max-w-[800px] mx-auto px-5 py-5">
-              <form onSubmit={handleSearchSubmit} className="relative flex items-center">
-                <Search className="w-5 h-5 text-[#0D281E] absolute left-3.5" />
-                <input
-                  ref={searchInputRef}
-                  type="text"
-                  placeholder="Search hair oils, cold-process soaps, ingredients... (Press Enter to search)"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-11 pr-24 py-3 bg-[#FAF8F5] border border-[#E2DDD2] rounded-xl text-sm text-[#1B1C19] focus:outline-none focus:border-[#0D281E]"
-                />
-                <div className="absolute right-3 flex items-center gap-2">
-                  <button
-                    type="submit"
-                    className="px-3 py-1 rounded-lg bg-[#0D281E] text-white text-xs font-semibold uppercase tracking-wider hover:bg-[#1A4533] cursor-pointer"
-                  >
-                    Search
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setSearchOpen(false);
-                      setSearchQuery("");
-                    }}
-                    className="text-[#6E7B73] hover:text-[#0D281E] p-1 cursor-pointer"
-                  >
-                    <X className="w-4 h-4" />
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        )}
+        <AnimatePresence>
+          {searchOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+              className="border-t border-[#E2DDD2] bg-white shadow-lg"
+            >
+              <div className="max-w-[800px] mx-auto px-5 py-5">
+                <form onSubmit={handleSearchSubmit} className="relative flex items-center">
+                  <Search className="w-5 h-5 text-[#0D281E] absolute left-3.5" />
+                  <input
+                    ref={searchInputRef}
+                    type="text"
+                    placeholder="Search hair oils, cold-process soaps, ingredients... (Press Enter to search)"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full pl-11 pr-24 py-3 bg-[#FAF8F5] border border-[#E2DDD2] rounded-xl text-sm text-[#1B1C19] focus:outline-none focus:border-[#0D281E]"
+                  />
+                  <div className="absolute right-3 flex items-center gap-2">
+                    <button
+                      type="submit"
+                      className="px-3 py-1 rounded-lg bg-[#0D281E] text-white text-xs font-semibold uppercase tracking-wider hover:bg-[#1A4533] cursor-pointer"
+                    >
+                      Search
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSearchOpen(false);
+                        setSearchQuery("");
+                      }}
+                      className="text-[#6E7B73] hover:text-[#0D281E] p-1 cursor-pointer"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
 
       {/* Mobile Drawer Navigation */}
-      {mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 lg:hidden">
-          <div
-            className="fixed inset-0 bg-charcoal-900/40 backdrop-blur-xs transition-opacity"
-            onClick={() => setMobileMenuOpen(false)}
-          />
-          <div className="fixed inset-y-0 left-0 w-4/5 max-w-sm bg-[#FBF9F3] p-6 shadow-xl flex flex-col justify-between">
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <div className="fixed inset-0 z-50 lg:hidden">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              className="fixed inset-0 bg-charcoal-900/40 backdrop-blur-xs"
+              onClick={() => setMobileMenuOpen(false)}
+            />
+            <motion.div
+              initial={{ x: "-100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
+              transition={{ type: "spring", damping: 28, stiffness: 280 }}
+              className="fixed inset-y-0 left-0 w-4/5 max-w-sm bg-[#FBF9F3] p-6 shadow-xl flex flex-col justify-between"
+            >
             <div>
               <div className="flex items-center justify-between pb-6 border-b border-[#E2DDD2]">
                 <Link
@@ -512,17 +547,18 @@ export function SiteHeader() {
               </div>
             </div>
 
-            <div className="pt-6 border-t border-[#E2DDD2]">
-              <p className="text-xs text-[#3E4640] leading-relaxed font-normal">
-                Cold-pressed scalp elixirs and 6-week cured cold-process soaps handcrafted for mindful daily rituals.
-              </p>
-              <p className="text-[11px] text-forest-700 mt-2 font-bold">
-                Free shipping across India on orders over ₹1,500
-              </p>
-            </div>
+              <div className="pt-6 border-t border-[#E2DDD2]">
+                <p className="text-xs text-[#3E4640] leading-relaxed font-normal">
+                  Cold-pressed scalp elixirs and 6-week cured cold-process soaps handcrafted for mindful daily rituals.
+                </p>
+                <p className="text-[11px] text-forest-700 mt-2 font-bold">
+                  Free shipping across India on orders over ₹1,500
+                </p>
+              </div>
+            </motion.div>
           </div>
-        </div>
-      )}
+        )}
+      </AnimatePresence>
     </>
   );
 }

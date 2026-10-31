@@ -58,10 +58,7 @@ test.describe("Admin Extended Governance & Security", () => {
       {
         name: "pow_session",
         value: adminToken,
-        domain: "localhost",
-        path: "/",
-        httpOnly: true,
-        sameSite: "Lax",
+        url: "http://localhost:3000",
       },
     ]);
     const page = await context.newPage();
@@ -170,10 +167,7 @@ test.describe("Admin Extended Governance & Security", () => {
       {
         name: "pow_session",
         value: adminToken,
-        domain: "localhost",
-        path: "/",
-        httpOnly: true,
-        sameSite: "Lax",
+        url: "http://localhost:3000",
       },
     ]);
     const page = await context.newPage();

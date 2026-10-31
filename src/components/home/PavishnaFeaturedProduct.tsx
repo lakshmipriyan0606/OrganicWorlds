@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { motion, useInView } from "framer-motion";
 import { Leaf, Sparkles, Droplets, ArrowRight } from "lucide-react";
 
 interface FeaturedProductData {
@@ -19,6 +20,8 @@ interface FeaturedProductData {
 export function PavishnaFeaturedProduct() {
   const [product, setProduct] = useState<FeaturedProductData | null>(null);
   const [loading, setLoading] = useState(true);
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-60px" });
 
   useEffect(() => {
     let ignore = false;
@@ -61,7 +64,7 @@ export function PavishnaFeaturedProduct() {
   if (!product) return null;
 
   return (
-    <section className="w-full bg-[#0D281E] text-white py-18 lg:py-24 relative overflow-hidden">
+    <section ref={sectionRef} className="w-full bg-[#0D281E] text-white py-18 lg:py-24 relative overflow-hidden">
       {/* Ambient background glow */}
       <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#26533D]/20 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-10 w-80 h-80 bg-[#1E3F2E]/30 rounded-full blur-3xl pointer-events-none" />
@@ -69,7 +72,12 @@ export function PavishnaFeaturedProduct() {
       <div className="max-w-[1360px] mx-auto px-5 sm:px-8 lg:px-12 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
           {/* Left Column: Product Story & CTA */}
-          <div className="lg:col-span-4 flex flex-col items-start pr-0 lg:pr-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-4 flex flex-col items-start pr-0 lg:pr-4"
+          >
             <span className="text-[10.5px] font-bold uppercase tracking-[0.2em] text-[#86B398] block mb-2">
               {product.badge ? `${product.badge.toUpperCase()} SPOTLIGHT` : "FEATURED FORMULATION"}
             </span>
@@ -86,10 +94,15 @@ export function PavishnaFeaturedProduct() {
               <span>Explore Formulation</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
-          </div>
+          </motion.div>
 
           {/* Center Column: Hero Product Shot */}
-          <div className="lg:col-span-4 flex justify-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.65, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-4 flex justify-center"
+          >
             <div className="relative w-full max-w-[380px] aspect-square rounded-3xl overflow-hidden shadow-2xl border border-white/10 group bg-[#091D15]">
               <img
                 src={product.featuredImage}
@@ -97,10 +110,15 @@ export function PavishnaFeaturedProduct() {
                 className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-106"
               />
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Column: 3 Feature Badges */}
-          <div className="lg:col-span-4 flex flex-col gap-5 lg:pl-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-4 flex flex-col gap-5 lg:pl-6"
+          >
             <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xs hover:bg-white/8 transition-colors">
               <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-[#B4D6C1] shrink-0">
                 <Leaf className="w-5 h-5" />
@@ -132,7 +150,7 @@ export function PavishnaFeaturedProduct() {
                 <p className="text-xs text-[#C5D6CC] mt-0.5 font-normal">0% synthetic fragrance, palm oil, or sulfates</p>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

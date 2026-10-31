@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "@/components/cart/CartContext";
 import { Button } from "@/components/ui/Button";
 import { formatCurrency } from "@/lib/utils";
@@ -20,20 +21,30 @@ export function CartDrawer() {
     isFreeShipping,
   } = useCart();
 
-  if (!isOpen) return null;
-
   const remainingForFreeShipping = Math.max(0, freeShippingThreshold - subtotal);
 
   return (
-    <div className="fixed inset-0 z-50 overflow-hidden">
-      {/* Backdrop */}
-      <div
-        className="fixed inset-0 bg-charcoal-900/40 backdrop-blur-xs transition-opacity duration-300"
-        onClick={closeCart}
-      />
+    <AnimatePresence>
+      {isOpen && (
+        <div className="fixed inset-0 z-50 overflow-hidden">
+          {/* Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="fixed inset-0 bg-charcoal-900/40 backdrop-blur-xs"
+            onClick={closeCart}
+          />
 
-      <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
-        <div className="w-screen max-w-md bg-white shadow-2xl flex flex-col justify-between border-l border-border animate-in slide-in-from-right duration-300">
+          <div className="fixed inset-y-0 right-0 max-w-full flex pl-10 pointer-events-none">
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 30, stiffness: 300 }}
+              className="w-screen max-w-md bg-white shadow-2xl flex flex-col justify-between border-l border-border pointer-events-auto"
+            >
           
           {/* Header */}
           <div className="p-6 border-b border-border flex items-center justify-between bg-ivory-50">
@@ -64,7 +75,7 @@ export function CartDrawer() {
             </div>
             <div className="w-full bg-[#d5e0cf] h-1.5 rounded-full overflow-hidden">
               <div
-                className="bg-forest-900 h-full rounded-full transition-all duration-300"
+                className="bg-forest-900 h-full rounded-full transition-[width] duration-300 ease-out"
                 style={{ width: `${freeShippingProgress}%` }}
               />
             </div>
@@ -191,8 +202,10 @@ export function CartDrawer() {
               </p>
             </div>
           )}
+            </motion.div>
+          </div>
         </div>
-      </div>
-    </div>
+      )}
+    </AnimatePresence>
   );
 }

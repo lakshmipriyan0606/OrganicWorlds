@@ -186,3 +186,12 @@ img {
 .animate-marquee-reverse:hover {
   animation-play-state: paused;
 }
+
+/* Accessibility: Emil Kowalski prefers-reduced-motion gate */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-marquee-fast,
+  .animate-marquee-reverse {
+    animation: none !important;
+  }
+}

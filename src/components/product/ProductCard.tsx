@@ -2,10 +2,11 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 import { Product } from "@/types/product";
 import { useCart } from "@/components/cart/CartContext";
 import { formatCurrency } from "@/lib/utils";
-import { Star, Plus, Check, Heart } from "lucide-react";
+import { Plus, Check, Heart } from "lucide-react";
 
 interface ProductCardProps {
   product: Product;
@@ -32,7 +33,7 @@ export function ProductCard({ product, aspectRatio = "portrait" }: ProductCardPr
   };
 
   return (
-    <div className="group flex flex-col justify-between bg-white rounded-2xl sm:rounded-3xl p-3.5 sm:p-4 border border-[#E6E1D7] transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-2 hover:shadow-2xl hover:shadow-[#263D32]/12 hover:border-[#263D32]/50 cursor-pointer">
+    <div className="group flex flex-col justify-between bg-white rounded-2xl sm:rounded-3xl p-3.5 sm:p-4 border border-[#E6E1D7] transition-[transform,box-shadow,border-color] duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-2 hover:shadow-2xl hover:shadow-[#263D32]/12 hover:border-[#263D32]/50 cursor-pointer">
       <div>
         {/* Compact Arched Top Image Container */}
         <div className={`relative w-full overflow-hidden bg-[#F4F4ED] rounded-t-2xl sm:rounded-t-[2.25rem] rounded-b-xl mb-3 border border-[#E6E1D7]/60 ${
@@ -56,14 +57,21 @@ export function ProductCard({ product, aspectRatio = "portrait" }: ProductCardPr
             </div>
           )}
 
-          {/* Wishlist Button with Backdrop Blur & Spring Hover */}
-          <button
+          {/* Wishlist Button with Backdrop Blur & Spring Scale Pop */}
+          <motion.button
             onClick={toggleWishlist}
+            whileTap={{ scale: 0.85 }}
             aria-label="Add to wishlist"
-            className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-white/90 backdrop-blur-md flex items-center justify-center text-[#1A1C18] hover:bg-white transition-all duration-200 hover:scale-110 active:scale-90 shadow-sm cursor-pointer"
+            className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-white/90 backdrop-blur-md flex items-center justify-center text-[#1A1C18] hover:bg-white shadow-sm cursor-pointer"
           >
-            <Heart className={`w-3.5 h-3.5 ${isWishlisted ? "fill-[#A4423B] text-[#A4423B]" : "text-[#1A1C18]"}`} />
-          </button>
+            <motion.span
+              animate={isWishlisted ? { scale: [1, 1.35, 1] } : { scale: 1 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+              className="flex items-center justify-center"
+            >
+              <Heart className={`w-3.5 h-3.5 ${isWishlisted ? "fill-[#A4423B] text-[#A4423B]" : "text-[#1A1C18]"}`} />
+            </motion.span>
+          </motion.button>
         </div>
 
         {/* Category Label */}
@@ -90,26 +98,43 @@ export function ProductCard({ product, aspectRatio = "portrait" }: ProductCardPr
           {formatCurrency(product.price)}
         </span>
 
-        <button
+        <motion.button
           onClick={handleQuickAdd}
-          className={`text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full flex items-center gap-1 transition-all duration-200 cursor-pointer shadow-xs ${
+          whileTap={{ scale: 0.94 }}
+          className={`text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full flex items-center gap-1 transition-colors duration-200 cursor-pointer shadow-xs ${
             isAdded
-              ? "bg-[#426B50] text-white scale-102"
-              : "bg-[#263D32] hover:bg-[#1A2C23] text-white hover:scale-104 active:scale-95"
+              ? "bg-[#426B50] text-white"
+              : "bg-[#263D32] hover:bg-[#1A2C23] text-white hover:shadow-md"
           }`}
         >
-          {isAdded ? (
-            <>
-              <Check className="w-3.5 h-3.5" />
-              <span>Added</span>
-            </>
-          ) : (
-            <>
-              <Plus className="w-3.5 h-3.5" />
-              <span>Add</span>
-            </>
-          )}
-        </button>
+          <AnimatePresence mode="wait" initial={false}>
+            {isAdded ? (
+              <motion.span
+                key="added"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{ duration: 0.15, ease: "easeOut" }}
+                className="flex items-center gap-1"
+              >
+                <Check className="w-3.5 h-3.5" />
+                <span>Added</span>
+              </motion.span>
+            ) : (
+              <motion.span
+                key="add"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{ duration: 0.15, ease: "easeOut" }}
+                className="flex items-center gap-1"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                <span>Add</span>
+              </motion.span>
+            )}
+          </AnimatePresence>
+        </motion.button>
       </div>
 
     </div>

@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { motion, useInView } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 interface CategoryItem {
@@ -15,6 +16,8 @@ interface CategoryItem {
 
 export function PavishnaShopByRitual() {
   const [categories, setCategories] = useState<CategoryItem[]>([]);
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-60px" });
 
   useEffect(() => {
     let ignore = false;
@@ -59,11 +62,16 @@ export function PavishnaShopByRitual() {
   };
 
   return (
-    <section className="w-full bg-[#FAF8F5] py-16 lg:py-22 border-b border-[#EAE3D6]">
+    <section ref={sectionRef} className="w-full bg-[#FAF8F5] py-16 lg:py-22 border-b border-[#EAE3D6]">
       <div className="max-w-[1360px] mx-auto px-5 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           {/* Left Column: Editorial Headline & Philosophy */}
-          <div className="lg:col-span-4 flex flex-col items-start pr-0 lg:pr-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-4 flex flex-col items-start pr-0 lg:pr-4"
+          >
             <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#0D281E] block mb-2">
               SHOP BY RITUAL
             </span>
@@ -81,12 +89,17 @@ export function PavishnaShopByRitual() {
               <span>Explore All</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
             </Link>
-          </div>
+          </motion.div>
 
           {/* Right Column: Dynamic Bento Mosaic */}
           <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-12 gap-5 sm:gap-6">
             {/* Card 1: Large Vertical Card */}
-            <div className="sm:col-span-6 group relative rounded-3xl overflow-hidden aspect-[4/5] sm:aspect-[3/4] shadow-lg border border-[#E3DDD2] cursor-pointer">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+              transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="sm:col-span-6 group relative rounded-3xl overflow-hidden aspect-[4/5] sm:aspect-[3/4] shadow-lg border border-[#E3DDD2] cursor-pointer"
+            >
               <Link href={`/categories/${primaryCategory.slug}`} className="block w-full h-full">
                 <img
                   src={primaryCategory.image || "/images/ritual-glow-woman.jpg"}
@@ -103,12 +116,17 @@ export function PavishnaShopByRitual() {
                   </span>
                 </div>
               </Link>
-            </div>
+            </motion.div>
 
             {/* Right Stack: 2 Horizontal Cards */}
             <div className="sm:col-span-6 flex flex-col gap-5 sm:gap-6">
               {/* Card 2: Top Right */}
-              <div className="group relative rounded-3xl overflow-hidden aspect-[16/10] sm:aspect-[16/9.5] shadow-lg border border-[#E3DDD2] cursor-pointer">
+              <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+                transition={{ duration: 0.5, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                className="group relative rounded-3xl overflow-hidden aspect-[16/10] sm:aspect-[16/9.5] shadow-lg border border-[#E3DDD2] cursor-pointer"
+              >
                 <Link href={`/categories/${secondaryCategory.slug}`} className="block w-full h-full">
                   <img
                     src={secondaryCategory.image || "/images/hair-oil-hero.jpg"}
@@ -125,10 +143,15 @@ export function PavishnaShopByRitual() {
                     </span>
                   </div>
                 </Link>
-              </div>
+              </motion.div>
 
               {/* Card 3: Bottom Right */}
-              <div className="group relative rounded-3xl overflow-hidden aspect-[16/10] sm:aspect-[16/9.5] shadow-lg border border-[#E3DDD2] cursor-pointer">
+              <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+                transition={{ duration: 0.5, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                className="group relative rounded-3xl overflow-hidden aspect-[16/10] sm:aspect-[16/9.5] shadow-lg border border-[#E3DDD2] cursor-pointer"
+              >
                 <Link href={`/categories/${tertiaryCategory.slug}`} className="block w-full h-full">
                   <img
                     src={tertiaryCategory.image || "/images/img3.jpeg"}
@@ -145,7 +168,7 @@ export function PavishnaShopByRitual() {
                     </span>
                   </div>
                 </Link>
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>

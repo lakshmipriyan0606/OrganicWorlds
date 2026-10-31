@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { motion, useInView } from "framer-motion";
 import { ArrowRight, Check, Plus } from "lucide-react";
 import { formatCurrency } from "@/lib/utils";
 import { Product } from "@/types/product";
@@ -14,6 +15,8 @@ export function PavishnaBestSellers({ onQuickAdd }: PavishnaBestSellersProps) {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [addedId, setAddedId] = useState<string | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-60px" });
 
   useEffect(() => {
     let ignore = false;
@@ -45,11 +48,16 @@ export function PavishnaBestSellers({ onQuickAdd }: PavishnaBestSellersProps) {
   };
 
   return (
-    <section className="w-full bg-[#FAF8F5] py-16 lg:py-22 border-b border-[#EAE3D6]">
+    <section ref={sectionRef} className="w-full bg-[#FAF8F5] py-16 lg:py-22 border-b border-[#EAE3D6]">
       <div className="max-w-[1360px] mx-auto px-5 sm:px-8 lg:px-12">
         
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 sm:mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 sm:mb-12"
+        >
           <div>
             <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#0D281E] block mb-2">
               BEST SELLERS
@@ -69,7 +77,7 @@ export function PavishnaBestSellers({ onQuickAdd }: PavishnaBestSellersProps) {
             <span>View All</span>
             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
           </Link>
-        </div>
+        </motion.div>
 
         {/* 4 Cards Row */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
@@ -91,11 +99,14 @@ export function PavishnaBestSellers({ onQuickAdd }: PavishnaBestSellersProps) {
             </div>
           )}
 
-          {!loading && products.map((product) => {
+          {!loading && products.map((product, idx) => {
             const isAdded = addedId === product.id;
             return (
-              <div
+              <motion.div
                 key={product.id}
+                initial={{ opacity: 0, y: 24 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+                transition={{ duration: 0.45, delay: idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
                 className="group flex flex-col justify-between bg-white rounded-2xl p-3 sm:p-4 border border-[#E5DFD4] shadow-xs hover:shadow-xl hover:shadow-[#0D281E]/8 hover:border-[#0D281E]/30 hover:-translate-y-1.5 transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)]"
               >
                 <div>
@@ -151,7 +162,7 @@ export function PavishnaBestSellers({ onQuickAdd }: PavishnaBestSellersProps) {
                     )}
                   </button>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>
