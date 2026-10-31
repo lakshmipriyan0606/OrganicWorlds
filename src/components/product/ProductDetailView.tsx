@@ -84,7 +84,7 @@ export function ProductDetailView({ product }: { product: Product }) {
                 initial={{ opacity: 0, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.4 }}
+                transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103"
               />
             </AnimatePresence>
@@ -116,7 +116,7 @@ export function ProductDetailView({ product }: { product: Product }) {
                 key={idx}
                 type="button"
                 onClick={() => setActiveImageIdx(idx)}
-                className={`relative aspect-square rounded-2xl overflow-hidden bg-[#EEEEE8] p-0.5 transition-all outline-none cursor-pointer border ${
+                className={`relative aspect-square rounded-2xl overflow-hidden bg-[#EEEEE8] p-0.5 transition-[border-color,box-shadow,opacity,transform] duration-150 ease-out active:scale-95 outline-none cursor-pointer border ${
                   activeImageIdx === idx
                     ? "border-[#263D32] ring-2 ring-[#263D32]/30 shadow-xs"
                     : "border-[#E6E1D7] opacity-75 hover:opacity-100"
@@ -234,7 +234,7 @@ export function ProductDetailView({ product }: { product: Product }) {
                   <label
                     key={variant.id}
                     onClick={() => setSelectedVariant(variant)}
-                    className={`cursor-pointer relative flex items-center justify-between p-3.5 rounded-2xl transition-all border ${
+                    className={`cursor-pointer relative flex items-center justify-between p-3.5 rounded-2xl transition-[background-color,border-color,box-shadow,transform] duration-150 ease-out active:scale-[0.99] border ${
                       isSelected
                         ? "bg-[#FAFAF3] border-[#263D32] ring-1 ring-[#263D32] shadow-xs"
                         : "bg-[#F4F4ED] hover:bg-[#EEEEE8] border-[#E6E1D7]"
@@ -282,7 +282,7 @@ export function ProductDetailView({ product }: { product: Product }) {
               <button
                 type="button"
                 onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                className="w-8 h-8 rounded-full flex items-center justify-center text-[#1A1C18] hover:bg-white transition-colors cursor-pointer"
+                className="w-8 h-8 rounded-full flex items-center justify-center text-[#1A1C18] hover:bg-white transition-[background-color,transform] duration-150 ease-out active:scale-90 cursor-pointer"
               >
                 <Minus className="w-3.5 h-3.5" />
               </button>
@@ -292,7 +292,7 @@ export function ProductDetailView({ product }: { product: Product }) {
               <button
                 type="button"
                 onClick={() => setQuantity(quantity + 1)}
-                className="w-8 h-8 rounded-full flex items-center justify-center text-[#1A1C18] hover:bg-white transition-colors cursor-pointer"
+                className="w-8 h-8 rounded-full flex items-center justify-center text-[#1A1C18] hover:bg-white transition-[background-color,transform] duration-150 ease-out active:scale-90 cursor-pointer"
               >
                 <Plus className="w-3.5 h-3.5" />
               </button>
@@ -302,7 +302,7 @@ export function ProductDetailView({ product }: { product: Product }) {
             <button
               type="button"
               onClick={handleAddToCart}
-              className="flex-1 bg-[#263D32] hover:bg-[#1A2C23] text-white text-xs font-bold uppercase tracking-wider px-6 py-4 rounded-full flex items-center justify-center gap-2 shadow-sm transition-all duration-200 active:scale-98 cursor-pointer"
+              className="flex-1 bg-[#263D32] hover:bg-[#1A2C23] text-white text-xs font-bold uppercase tracking-wider px-6 py-4 rounded-full flex items-center justify-center gap-2 shadow-sm transition-[transform,background-color,box-shadow] duration-160 ease-out active:scale-[0.97] cursor-pointer"
             >
               <ShoppingBag className="w-4 h-4" />
               <span>ADD TO BAG — {formatCurrency(selectedVariant.price * quantity)}</span>
@@ -313,7 +313,7 @@ export function ProductDetailView({ product }: { product: Product }) {
               type="button"
               onClick={() => setIsWishlisted(!isWishlisted)}
               aria-label="Save to Wishlist"
-              className="w-13 h-13 rounded-full bg-[#EEEEE8] hover:bg-[#E5E5DE] border border-[#E6E1D7] flex items-center justify-center text-[#1A1C18] transition-colors shrink-0 cursor-pointer shadow-xs"
+              className="w-13 h-13 rounded-full bg-[#EEEEE8] hover:bg-[#E5E5DE] border border-[#E6E1D7] flex items-center justify-center text-[#1A1C18] transition-[transform,background-color] duration-150 ease-out active:scale-90 shrink-0 cursor-pointer shadow-xs"
             >
               <Heart className={`w-5 h-5 ${isWishlisted ? "fill-[#A4423B] text-[#A4423B]" : "text-[#1A1C18]"}`} />
             </button>

@@ -231,7 +231,7 @@ function ShopContent() {
                 setSelectedCategory(cat.id);
                 setPage(1);
               }}
-              className={`px-4.5 py-2 rounded-full font-semibold text-xs uppercase tracking-wider transition-all duration-200 whitespace-nowrap cursor-pointer ${
+              className={`px-4.5 py-2 rounded-full font-semibold text-xs uppercase tracking-wider transition-[background-color,color,box-shadow,transform] duration-150 ease-out active:scale-95 whitespace-nowrap cursor-pointer ${
                 effectiveCategory === cat.id
                   ? "bg-[#263D32] text-white shadow-xs"
                   : "bg-[#EEEEE8] hover:bg-[#E5E5DE] text-[#424844]"
@@ -434,7 +434,7 @@ function ShopContent() {
                       <button
                         key={chip}
                         onClick={() => toggleKeynote(chip)}
-                        className={`px-3 py-1 rounded-full text-[11px] font-semibold transition-colors cursor-pointer ${
+                        className={`px-3 py-1 rounded-full text-[11px] font-semibold transition-[background-color,color,transform] duration-150 ease-out active:scale-95 cursor-pointer ${
                           isSelected
                             ? "bg-[#263D32] text-white shadow-xs"
                             : "bg-[#F4F4ED] text-[#424844] hover:bg-[#EEEEE8]"
@@ -556,7 +556,7 @@ function ShopContent() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.95 }}
                         transition={{ duration: 0.4, delay: idx * 0.03 }}
-                        className="group flex flex-col justify-between bg-white rounded-2xl sm:rounded-3xl p-3.5 sm:p-4 border border-[#E6E1D7] transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-2 hover:shadow-2xl hover:shadow-[#263D32]/12 hover:border-[#263D32]/50 cursor-pointer"
+                        className="group flex flex-col justify-between bg-white rounded-2xl sm:rounded-3xl p-3.5 sm:p-4 border border-[#E6E1D7] transition-[transform,box-shadow,border-color] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-[#263D32]/12 hover:border-[#263D32]/50 cursor-pointer"
                       >
                         <div>
                           <div className="relative w-full aspect-[4/3] rounded-t-2xl sm:rounded-t-[2.25rem] rounded-b-xl overflow-hidden bg-[#F4F4ED] mb-3">
@@ -580,7 +580,7 @@ function ShopContent() {
                             <button
                               onClick={(e) => toggleWishlist(p.slug, e)}
                               aria-label="Add to wishlist"
-                              className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-white/90 backdrop-blur-md flex items-center justify-center text-[#1A1C18] hover:bg-white transition-all duration-200 hover:scale-110 active:scale-90 shadow-sm cursor-pointer"
+                              className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-white/90 backdrop-blur-md flex items-center justify-center text-[#1A1C18] hover:bg-white transition-[transform,background-color] duration-150 ease-out hover:scale-110 active:scale-90 shadow-sm cursor-pointer"
                             >
                               <Heart className={`w-3.5 h-3.5 ${isFav ? "fill-[#A4423B] text-[#A4423B]" : "text-[#1A1C18]"}`} />
                             </button>
@@ -623,12 +623,12 @@ function ShopContent() {
                           <button
                             disabled={!p.inStock || p.stockQuantity === 0}
                             onClick={(e) => handleQuickAdd(p, e)}
-                            className={`text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full flex items-center gap-1 transition-all duration-200 cursor-pointer shadow-xs disabled:opacity-40 disabled:cursor-not-allowed ${
+                            className={`text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full flex items-center gap-1 transition-[transform,background-color,color] duration-160 ease-out cursor-pointer shadow-xs disabled:opacity-40 disabled:cursor-not-allowed ${
                               !p.inStock || p.stockQuantity === 0
                                 ? "bg-neutral-300 text-neutral-600"
                                 : isAdded
-                                ? "bg-[#426B50] text-white scale-102"
-                                : "bg-[#263D32] hover:bg-[#1A2C23] text-white hover:scale-104 active:scale-95"
+                                ? "bg-[#426B50] text-white active:scale-95"
+                                : "bg-[#263D32] hover:bg-[#1A2C23] text-white active:scale-95"
                             }`}
                           >
                             {!p.inStock || p.stockQuantity === 0 ? (

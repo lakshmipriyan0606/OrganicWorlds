@@ -38,10 +38,10 @@ export function PavishnaSustainabilityBanner() {
 
             <Link
               href="/our-story"
-              className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-white pb-1 border-b border-white hover:text-[#FFD6BA] hover:border-[#FFD6BA] transition-colors"
+              className="group inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-white pb-1 border-b border-white hover:text-[#FFD6BA] hover:border-[#FFD6BA] transition-colors"
             >
               <span>Our Sustainability</span>
-              <ArrowRight className="w-3.5 h-3.5" />
+              <ArrowRight className="w-3.5 h-3.5 transition-transform duration-160 ease-out group-hover:translate-x-1" />
             </Link>
           </div>
 

@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { useCart } from "@/components/cart/CartContext";
@@ -72,7 +73,7 @@ export default function CartPage() {
           </div>
           <div className="w-full sm:w-48 bg-[#d0dcce] h-2 rounded-full overflow-hidden">
             <div
-              className="bg-forest-900 h-full rounded-full transition-all duration-300"
+              className="bg-forest-900 h-full rounded-full transition-[width] duration-300 ease-out"
               style={{ width: `${freeShippingProgress}%` }}
             />
           </div>
@@ -82,73 +83,83 @@ export default function CartPage() {
           
           {/* Cart Item Rows */}
           <div className="lg:col-span-7 space-y-6">
-            <div className="border border-border rounded-[3px] bg-white divide-y divide-border">
-              {items.map((item) => (
-                <div key={item.id} className="p-6 flex flex-col sm:flex-row gap-5 items-start sm:items-center">
-                  <div className="w-24 h-28 bg-ivory-100 rounded-[3px] overflow-hidden flex-shrink-0 border border-border">
-                    <img
-                      src={item.product.featuredImage}
-                      alt={item.product.title}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
+            <div className="border border-border rounded-[3px] bg-white divide-y divide-border overflow-hidden">
+              <AnimatePresence mode="popLayout">
+                {items.map((item) => (
+                  <motion.div
+                    key={item.id}
+                    layout
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, x: -24, transition: { duration: 0.2, ease: "easeOut" } }}
+                    transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                    className="p-6 flex flex-col sm:flex-row gap-5 items-start sm:items-center"
+                  >
+                    <div className="w-24 h-28 bg-ivory-100 rounded-[3px] overflow-hidden flex-shrink-0 border border-border">
+                      <img
+                        src={item.product.featuredImage}
+                        alt={item.product.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
 
-                  <div className="flex-1">
-                    <span className="text-[10px] uppercase tracking-wider text-sage-500 font-semibold block mb-0.5">
-                      {item.product.categoryLabel}
-                    </span>
-                    <Link
-                      href={`/products/${item.product.slug}`}
-                      className="font-display text-lg font-medium text-forest-900 hover:text-forest-700 transition-colors block leading-tight"
-                    >
-                      {item.product.title}
-                    </Link>
-                    {item.variant && (
-                      <p className="text-xs text-charcoal-600 mt-1">
-                        Size: <span className="font-medium text-charcoal-900">{item.variant.name}</span>
+                    <div className="flex-1">
+                      <span className="text-[10px] uppercase tracking-wider text-sage-500 font-semibold block mb-0.5">
+                        {item.product.categoryLabel}
+                      </span>
+                      <Link
+                        href={`/products/${item.product.slug}`}
+                        className="font-display text-lg font-medium text-forest-900 hover:text-forest-700 transition-colors block leading-tight"
+                      >
+                        {item.product.title}
+                      </Link>
+                      {item.variant && (
+                        <p className="text-xs text-charcoal-600 mt-1">
+                          Size: <span className="font-medium text-charcoal-900">{item.variant.name}</span>
+                        </p>
+                      )}
+                      <p className="text-xs text-neutral-400 mt-1 font-mono">
+                        Unit: {formatCurrency(item.unitPrice)}
                       </p>
-                    )}
-                    <p className="text-xs text-neutral-400 mt-1 font-mono">
-                      Unit: {formatCurrency(item.unitPrice)}
-                    </p>
-                  </div>
-
-                  <div className="flex sm:flex-col items-center sm:items-end justify-between w-full sm:w-auto gap-3">
-                    <div className="flex items-center border border-border rounded-[2px] bg-ivory-50">
-                      <button
-                        onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                        className="px-2.5 py-1 text-charcoal-600 hover:text-forest-900"
-                        aria-label="Decrease quantity"
-                      >
-                        <Minus className="w-3 h-3" />
-                      </button>
-                      <span className="px-2 text-xs font-semibold text-charcoal-900 min-w-6 text-center">
-                        {item.quantity}
-                      </span>
-                      <button
-                        onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                        className="px-2.5 py-1 text-charcoal-600 hover:text-forest-900"
-                        aria-label="Increase quantity"
-                      >
-                        <Plus className="w-3 h-3" />
-                      </button>
                     </div>
 
-                    <div className="flex items-center gap-3">
-                      <span className="font-body font-semibold text-base text-forest-900">
-                        {formatCurrency(item.unitPrice * item.quantity)}
-                      </span>
-                      <button
-                        onClick={() => removeItem(item.id)}
-                        className="text-neutral-400 hover:text-error transition-colors p-1"
-                        aria-label="Remove item"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
+                    <div className="flex sm:flex-col items-center sm:items-end justify-between w-full sm:w-auto gap-3">
+                      <div className="flex items-center border border-border rounded-[2px] bg-ivory-50">
+                        <button
+                          onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                          className="px-2.5 py-1 text-charcoal-600 hover:text-forest-900 active:scale-90 transition-transform duration-100"
+                          aria-label="Decrease quantity"
+                        >
+                          <Minus className="w-3 h-3" />
+                        </button>
+                        <span className="px-2 text-xs font-semibold text-charcoal-900 min-w-6 text-center">
+                          {item.quantity}
+                        </span>
+                        <button
+                          onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                          className="px-2.5 py-1 text-charcoal-600 hover:text-forest-900 active:scale-90 transition-transform duration-100"
+                          aria-label="Increase quantity"
+                        >
+                          <Plus className="w-3 h-3" />
+                        </button>
+                      </div>
+
+                      <div className="flex items-center gap-3">
+                        <span className="font-body font-semibold text-base text-forest-900">
+                          {formatCurrency(item.unitPrice * item.quantity)}
+                        </span>
+                        <button
+                          onClick={() => removeItem(item.id)}
+                          className="text-neutral-400 hover:text-error active:scale-90 transition-[transform,color] duration-100 p-1 cursor-pointer"
+                          aria-label="Remove item"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              ))}
+                  </motion.div>
+                ))}
+              </AnimatePresence>
             </div>
 
             {/* Gift Note Accordion */}

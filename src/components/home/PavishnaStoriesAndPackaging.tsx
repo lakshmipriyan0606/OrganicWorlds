@@ -1,17 +1,26 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import Link from "next/link";
-import { Star, ArrowRight, ShieldCheck, Heart } from "lucide-react";
+import { motion, useInView } from "framer-motion";
+import { Star, ArrowRight, ShieldCheck } from "lucide-react";
 
 export function PavishnaStoriesAndPackaging() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
+
   return (
-    <section className="w-full bg-[#FAF8F5] py-18 lg:py-22 border-b border-[#EAE3D6]">
+    <section ref={sectionRef} className="w-full bg-[#FAF8F5] py-18 lg:py-22 border-b border-[#EAE3D6]">
       <div className="max-w-[1360px] mx-auto px-5 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           
           {/* Left Card: Real Stories Testimonial */}
-          <div className="lg:col-span-6 bg-white rounded-3xl p-6 sm:p-8 border border-[#E3DDD2] shadow-xs flex flex-col sm:flex-row items-center gap-6 group hover:shadow-xl hover:shadow-[#0D281E]/8 hover:border-[#0D281E]/30 transition-all duration-400">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-6 bg-white rounded-3xl p-6 sm:p-8 border border-[#E3DDD2] shadow-xs flex flex-col sm:flex-row items-center gap-6 group hover:shadow-xl hover:shadow-[#0D281E]/8 hover:border-[#0D281E]/30 transition-[transform,box-shadow,border-color] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
+          >
             {/* Customer Photo */}
             <div className="w-32 h-32 sm:w-36 sm:h-36 rounded-2xl overflow-hidden shrink-0 shadow-md border border-[#E5DFD4]">
               <img
@@ -46,10 +55,15 @@ export function PavishnaStoriesAndPackaging() {
                 <span>Verified Herbal Routine</span>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Card: Conscious Packaging */}
-          <div className="lg:col-span-6 bg-white rounded-3xl p-6 sm:p-8 border border-[#E3DDD2] shadow-xs flex flex-col sm:flex-row items-center gap-6 group hover:shadow-xl hover:shadow-[#0D281E]/8 hover:border-[#0D281E]/30 transition-all duration-400">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+            transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-6 bg-white rounded-3xl p-6 sm:p-8 border border-[#E3DDD2] shadow-xs flex flex-col sm:flex-row items-center gap-6 group hover:shadow-xl hover:shadow-[#0D281E]/8 hover:border-[#0D281E]/30 transition-[transform,box-shadow,border-color] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
+          >
             {/* Packaging Photo */}
             <div className="w-32 h-32 sm:w-36 sm:h-36 rounded-2xl overflow-hidden shrink-0 shadow-md border border-[#E5DFD4]">
               <img
@@ -79,7 +93,7 @@ export function PavishnaStoriesAndPackaging() {
                 <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
-          </div>
+          </motion.div>
 
         </div>
       </div>

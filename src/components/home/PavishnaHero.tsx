@@ -56,14 +56,14 @@ export function PavishnaHero({ content }: PavishnaHeroProps) {
             <div className="flex flex-wrap items-center gap-4 sm:gap-5 mb-10 sm:mb-12">
               <Link
                 href={data.ctaPrimaryLink || "/categories/soaps"}
-                className="px-7 py-3.5 rounded-full bg-[#0D281E] text-white hover:bg-[#081B13] text-xs font-semibold uppercase tracking-wider transition-all duration-300 hover:scale-102 shadow-md hover:shadow-lg flex items-center gap-2 cursor-pointer"
+                className="px-7 py-3.5 rounded-full bg-[#0D281E] text-white hover:bg-[#081B13] text-xs font-semibold uppercase tracking-wider transition-[transform,background-color,box-shadow] duration-160 ease-out hover:-translate-y-0.5 active:scale-[0.97] shadow-md hover:shadow-lg flex items-center gap-2 cursor-pointer"
               >
                 <span>{data.ctaPrimaryText}</span>
-                <span>→</span>
+                <span className="transition-transform duration-160 ease-out group-hover:translate-x-0.5">→</span>
               </Link>
               <Link
                 href={data.ctaSecondaryLink || "/categories/hair-care"}
-                className="px-7 py-3.5 rounded-full border border-[#0D281E]/40 text-[#0D281E] hover:bg-[#0D281E]/5 text-xs font-semibold uppercase tracking-wider transition-all duration-300 hover:scale-102 cursor-pointer"
+                className="px-7 py-3.5 rounded-full border border-[#0D281E]/40 text-[#0D281E] hover:bg-[#0D281E]/5 text-xs font-semibold uppercase tracking-wider transition-[transform,background-color,border-color] duration-160 ease-out hover:-translate-y-0.5 active:scale-[0.97] cursor-pointer"
               >
                 {data.ctaSecondaryText}
               </Link>
@@ -93,7 +93,7 @@ export function PavishnaHero({ content }: PavishnaHeroProps) {
 
               {/* Circular Rotating Stamp Badge */}
               <div className="absolute top-6 right-6 w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-white/90 backdrop-blur-md p-1 shadow-lg border border-[#0D281E]/15 flex items-center justify-center pointer-events-none select-none">
-                <div className="relative w-full h-full flex items-center justify-center animate-spin" style={{ animationDuration: "25s" }}>
+                <div className="relative w-full h-full flex items-center justify-center animate-spin motion-reduce:animate-none" style={{ animationDuration: "25s" }}>
                   <svg className="w-full h-full text-[#0D281E]" viewBox="0 0 100 100">
                     <path
                       id="heroBadgePath"
@@ -115,8 +115,12 @@ export function PavishnaHero({ content }: PavishnaHeroProps) {
         </div>
 
         {/* Section 2: Slim Trust & Brand Benefit Strip (Integrated seamlessly at bottom of Hero) */}
-        <div className="mt-14 sm:mt-18 pt-6 pb-6 border-t border-[#EAE3D6] grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 items-center text-center sm:text-left">
-          
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-14 sm:mt-18 pt-6 pb-6 border-t border-[#EAE3D6] grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 items-center text-center sm:text-left"
+        >
           {/* Trust 1 */}
           <div className="flex items-center justify-center sm:justify-start gap-3">
             <div className="w-10 h-10 rounded-full bg-[#0D281E]/8 flex items-center justify-center text-[#0D281E] shrink-0">
@@ -161,7 +165,7 @@ export function PavishnaHero({ content }: PavishnaHeroProps) {
             </div>
           </div>
 
-        </div>
+        </motion.div>
 
       </div>
     </section>

@@ -63,11 +63,11 @@ export function SiteFooter() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full px-4 py-2.5 rounded-full bg-white/10 border border-white/20 text-white placeholder-white/50 text-xs focus:outline-none focus:border-[#86B398] focus:bg-white/15 transition-all"
+                className="w-full px-4 py-2.5 rounded-full bg-white/10 border border-white/20 text-white placeholder-white/50 text-xs focus:outline-none focus:border-[#86B398] focus:bg-white/15 transition-[border-color,background-color] duration-160 ease-out"
               />
               <button
                 type="submit"
-                className="px-5 py-2.5 rounded-full bg-white text-[#0D281E] hover:bg-[#F2EEE4] text-xs font-bold uppercase tracking-wider transition-all duration-200 shrink-0 flex items-center gap-1.5 cursor-pointer"
+                className="px-5 py-2.5 rounded-full bg-white text-[#0D281E] hover:bg-[#F2EEE4] active:scale-[0.97] text-xs font-bold uppercase tracking-wider transition-[transform,background-color] duration-160 ease-out shrink-0 flex items-center gap-1.5 cursor-pointer shadow-xs"
               >
                 {subscribed ? (
                   <>
@@ -90,7 +90,7 @@ export function SiteFooter() {
               href="https://instagram.com"
               target="_blank"
               rel="noreferrer"
-              className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 hover:text-white transition-all cursor-pointer"
+              className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 hover:text-white hover:scale-110 active:scale-95 transition-[transform,background-color,color] duration-160 ease-out cursor-pointer shadow-2xs"
               aria-label="Instagram"
             >
               <svg className="w-4 h-4 fill-none stroke-currentColor stroke-2" viewBox="0 0 24 24">
@@ -103,7 +103,7 @@ export function SiteFooter() {
               href="https://facebook.com"
               target="_blank"
               rel="noreferrer"
-              className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 hover:text-white transition-all cursor-pointer"
+              className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 hover:text-white hover:scale-110 active:scale-95 transition-[transform,background-color,color] duration-160 ease-out cursor-pointer shadow-2xs"
               aria-label="Facebook"
             >
               <svg className="w-4 h-4 fill-currentColor" viewBox="0 0 24 24">
@@ -114,7 +114,7 @@ export function SiteFooter() {
               href="https://youtube.com"
               target="_blank"
               rel="noreferrer"
-              className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 hover:text-white transition-all cursor-pointer"
+              className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 hover:text-white hover:scale-110 active:scale-95 transition-[transform,background-color,color] duration-160 ease-out cursor-pointer shadow-2xs"
               aria-label="YouTube"
             >
               <svg className="w-4 h-4 fill-currentColor" viewBox="0 0 24 24">

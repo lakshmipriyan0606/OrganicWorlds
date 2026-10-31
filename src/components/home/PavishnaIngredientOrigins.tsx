@@ -1,7 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import Link from "next/link";
+import { motion, useInView } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 const ingredients = [
@@ -36,13 +37,21 @@ const ingredients = [
 ];
 
 export function PavishnaIngredientOrigins() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
+
   return (
-    <section id="ingredients" className="w-full bg-[#FAF8F5] py-18 lg:py-24 border-b border-[#EAE3D6]">
+    <section ref={sectionRef} id="ingredients" className="w-full bg-[#FAF8F5] py-18 lg:py-24 border-b border-[#EAE3D6]">
       <div className="max-w-[1360px] mx-auto px-5 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           
           {/* Left Column: Heading & Philosophy */}
-          <div className="lg:col-span-4 flex flex-col items-start pr-0 lg:pr-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-4 flex flex-col items-start pr-0 lg:pr-4"
+          >
             <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#0D281E] block mb-2">
               THE POWER OF NATURE
             </span>
@@ -60,14 +69,17 @@ export function PavishnaIngredientOrigins() {
               <span>Our Ingredients</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
             </Link>
-          </div>
+          </motion.div>
 
           {/* Right Column: 4 Botanical Ingredient Tiles */}
           <div className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
-            {ingredients.map((ing) => (
-              <div
+            {ingredients.map((ing, idx) => (
+              <motion.div
                 key={ing.name}
-                className="group flex flex-col items-center text-center p-4 rounded-2xl bg-white border border-[#E5DFD4] shadow-xs hover:shadow-lg hover:shadow-[#0D281E]/8 hover:border-[#0D281E]/30 hover:-translate-y-1.5 transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] cursor-pointer"
+                initial={{ opacity: 0, y: 24 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+                transition={{ duration: 0.5, delay: 0.1 + idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                className="group flex flex-col items-center text-center p-4 rounded-2xl bg-white border border-[#E5DFD4] shadow-xs hover:shadow-lg hover:shadow-[#0D281E]/8 hover:border-[#0D281E]/30 hover:-translate-y-1.5 active:scale-[0.98] transition-[transform,box-shadow,border-color] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] cursor-pointer"
               >
                 {/* Botanical Image */}
                 <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden bg-[#F5F2EA] mb-3.5 p-1">
@@ -93,7 +105,7 @@ export function PavishnaIngredientOrigins() {
                 <span className="text-[10px] uppercase font-bold tracking-wider text-[#0D281E] bg-[#EAF0E6] px-2.5 py-0.5 rounded-full mt-auto">
                   {ing.benefit}
                 </span>
-              </div>
+              </motion.div>
             ))}
           </div>
 

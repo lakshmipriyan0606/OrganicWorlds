@@ -59,9 +59,9 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
           <div className="mb-6">
             <Link
               href="/categories"
-              className="inline-flex items-center gap-1.5 text-xs uppercase tracking-wider font-bold text-[#3E4640] hover:text-forest-900 transition-colors"
+              className="group inline-flex items-center gap-1.5 text-xs uppercase tracking-wider font-bold text-[#3E4640] hover:text-forest-900 transition-colors"
             >
-              <ArrowLeft className="w-3.5 h-3.5" />
+              <ArrowLeft className="w-3.5 h-3.5 transition-transform duration-160 ease-out group-hover:-translate-x-1" />
               <span>All Categories</span>
             </Link>
           </div>

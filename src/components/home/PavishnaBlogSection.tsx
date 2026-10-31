@@ -61,7 +61,7 @@ export function PavishnaBlogSection() {
           {articles.map((art) => (
             <article
               key={art.title}
-              className="group bg-white rounded-2xl overflow-hidden border border-[#E5DFD4] shadow-xs hover:shadow-xl hover:shadow-[#0D281E]/8 hover:border-[#0D281E]/30 hover:-translate-y-1.5 transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col justify-between cursor-pointer"
+              className="group bg-white rounded-2xl overflow-hidden border border-[#E5DFD4] shadow-xs hover:shadow-xl hover:shadow-[#0D281E]/8 hover:border-[#0D281E]/30 hover:-translate-y-1.5 active:scale-[0.99] transition-[transform,box-shadow,border-color] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col justify-between cursor-pointer"
             >
               <div>
                 {/* Photo */}
